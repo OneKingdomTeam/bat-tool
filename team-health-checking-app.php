@@ -18,3 +18,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
