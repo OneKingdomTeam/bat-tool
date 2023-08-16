@@ -20,12 +20,13 @@ function thet_register_applications() {
 
     $args = array(
 
-        'label'   => $labels,
+        'labels'   => $labels,
         'description' => 'Form applications of the teams.',
         'public' => false,
         'exclude_from_search' => true,
         'show_ui' => true,
-        'show_in_rest' => current_user_can('edit_posts'),
+        'capability_type' => array( 'application', 'applications'),
+        'show_in_rest' => true,
         'menu_icon' => 'dashicons-format-aside',
         'supports' => array('title', 'revisions', 'author', 'custom-fields'),
 
@@ -35,6 +36,8 @@ function thet_register_applications() {
     register_post_type( 'applications', $args );
 
 }
+
+// #####################################################################################
 
 add_action( 'init', 'thet_register_questions' );
 
@@ -51,17 +54,17 @@ function thet_register_questions(){
 
     $args = array(
 
-        'label'   => $labels,
+        'labels'   => $labels,
         'description' => 'Question that teams will asnwer',
         'public' => false,
         'exclude_from_search' => true,
         'show_ui' => true,
-        'show_in_rest' => current_user_can('edit_pages'),
+        'capability_type' => array( 'question', 'questions'),
+        'show_in_rest' => true,
         'menu_icon' => 'dashicons-format-quote',
         'supports' => array('title', 'revisions', 'author', 'custom-fields', 'editor'),
 
     );
-
 
     register_post_type( 'questions', $args );
 
