@@ -17,5 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Activation and deactivation hooks
+require_once plugin_dir_path( __FILE__ ) . 'admin/register-user-roles.php';
 
+
+register_activation_hook( __FILE__, 'thet_register_new_user_roles' );
+register_deactivation_hook( __FILE__, 'thet_remove_new_user_roles' );
+
+
+
+// Register post types and set rules// Register post types and set rules
 require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
