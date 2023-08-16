@@ -14,14 +14,14 @@ add_filter( 'rest_authentication_errors', function( $result ) {
 
 
     $restricted_routes = array(
-        '/wp-json/wp/v2/applications',
-        '/wp-json/wp/v2/questions',
+        '/wp/v2/applications',
+        '/wp/v2/questions',
     );
 
     $current_rest_route = $GLOBALS['wp']->query_vars['rest_route'];
 
     $is_restricted = false;
-
+	
     foreach ( $restricted_routes as $route ) {
         if ( str_contains( $current_rest_route, $route )) {
             $is_restricted = true;
@@ -44,3 +44,4 @@ add_filter( 'rest_authentication_errors', function( $result ) {
     // on logged-in requests
     return $result;
 });
+
