@@ -13,6 +13,9 @@ add_filter( 'rest_authentication_errors', function( $result ) {
     }
 
 
+    // Would be better to generate these routes dynamically, rather than hardcoded,
+    // but I wasn't able to make the rest_get_route_for_post_type_items() work. But
+    // it should be solution for that.
     $restricted_routes = array(
         '/wp/v2/applications',
         '/wp/v2/questions',

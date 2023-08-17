@@ -8,8 +8,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function thet_register_new_user_roles() {
 
-    thet_register_question_admin_role();
-    thet_register_form_user_role();
+    $user_roles_capabilities = array(
+
+        'form_admin_capabilities' => array(
+                'edit_question', 
+                'read_question', 
+                'delete_question', 
+                'edit_questions', 
+                'edit_others_questions', 
+                'publish_questions',       
+                'read_private_questions', 
+                'create_questions',
+                'edit_application', 
+                'read_application', 
+                'delete_application', 
+                'edit_applications', 
+                'edit_others_applications', 
+                'publish_applications',       
+                'read_private_applications', 
+                'create_applications'
+            ),
+        'form_user_capabilities' => array(
+                'edit_application', 
+                'read_application',
+                'create_applications'
+            )
+    );
+
+    thet_register_question_admin_role( $user_roles_capabilities );
+    thet_register_form_user_role( $user_roles_capabilities );
 
 }
 
@@ -20,73 +47,65 @@ function thet_remove_new_user_roles() {
 
 }
 
-function thet_register_question_admin_role() {
+function thet_add_capabilities_to_admin(){
 
-    $role = 'form_admin';
-    $display_name = 'Form Admin';
+}
 
-    $capabilities = get_role('editor')->capabilities;
+function thet_register_question_admin_role( $user_roles_capabilities ) {
 
-    $manage_questions = array(
-        'edit_question', 
-        'read_question', 
-        'delete_question', 
-        'edit_questions', 
-        'edit_others_questions', 
-        'publish_questions',       
-        'read_private_questions', 
-        'edit_questions'
-    );
+    $form_admin_role_name = 'form_admin';
+    $form_admin_role_display_name = 'Form Admin';
 
-    $manage_applications = array(
-        'edit_application', 
-        'read_application', 
-        'delete_application', 
-        'edit_applications', 
-        'edit_others_applications', 
-        'publish_applications',       
-        'read_private_applications', 
-        'edit_applications'
-    );
-
-    array_push( $capabilities, $manage_questions );
-    array_push( $capabilities, $manage_applications );
+    $editor_role = get_role('editor');
+    $editor_capabilities = $editor_role->capabilities;
 
     add_role(
-        $role,
-        $display_name,
-        $capabilities
+        $form_admin_role_name,
+        $form_admin_role_display_name,
+        $editor_capabilities
     );
+
+    $form_admin_role = get_role( $form_admin_role_name );
+    $form_admin_additional_capabilities = $user_roles_capabilities['form_admin_capabilities'];
+
+    foreach ($form_admin_additional_capabilities as $capability) {
+
+        $form_admin_role->add_cap( $capability, true );
+
+    }
 
 }
 
 
-function thet_register_form_user_role() {
+function thet_register_form_user_role( $user_roles_capabilities ) {
 
-    $role = 'form_user';
-    $display_name = 'Form User';
+    $form_user_role_name = 'form_user';
+    $form_user_role_display_name = 'Form User';
 
-    $manage_applications = array(
-        'edit_application', 
-        'read_application', 
-        'edit_applications'
-    );
-
-    $capabilities = get_role('author')->capabilities;
-    array_push( $capabilities, $manage_applications );
+    $author_role = get_role('author');
+    $author_role_capabilities = $author_role->capabilities;
 
     add_role(
-        $role,
-        $display_name,
-        $capabilities
+        $form_user_role_name,
+        $form_user_role_display_name,
+        $author_role_capabilities
     );
+
+    $form_user_role = get_role( $form_user_role_name );
+    $form_user_role_extra_capabilitites = $user_roles_capabilities['form_user_capabilities'];
+
+    foreach ($form_user_role_extra_capabilitites as $capability) {
+
+        $form_user_role->add_cap( $capability, true );
+        
+    }
 
 }
 
 
 function thet_remove_question_admin_role(){
 
-    remove_role('form_admin');
+    remove_role('question_admin');
 
 }
 
