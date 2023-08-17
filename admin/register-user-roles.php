@@ -5,8 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-
-function thet_register_new_user_roles() {
+function thet_return_user_roles_capabilities(){
 
     $user_roles_capabilities = array(
 
@@ -18,7 +17,7 @@ function thet_register_new_user_roles() {
                 'edit_others_questions', 
                 'publish_questions',       
                 'read_private_questions', 
-                'create_questions',
+                'edit_questions',
                 'edit_application', 
                 'read_application', 
                 'delete_application', 
@@ -26,29 +25,51 @@ function thet_register_new_user_roles() {
                 'edit_others_applications', 
                 'publish_applications',       
                 'read_private_applications', 
-                'create_applications'
+                'edit_applications'
             ),
         'form_user_capabilities' => array(
                 'edit_application', 
                 'read_application',
-                'create_applications'
+                'edit_applications'
             )
     );
+    
+    return $user_roles_capabilities;
+
+}
+
+function thet_register_new_user_roles() {
+
+    $user_roles_capabilities = thet_return_user_roles_capabilities();
 
     thet_register_question_admin_role( $user_roles_capabilities );
     thet_register_form_user_role( $user_roles_capabilities );
+    thet_add_capabilities_to_admin( $user_roles_capabilities );
 
 }
 
 function thet_remove_new_user_roles() {
 
+    $user_roles_capabilities = thet_return_user_roles_capabilities();
+
     thet_remove_question_admin_role();
     thet_remove_form_user_role();
+    thet_remove_capabilities_from_admin( $user_roles_capabilities );
 
 }
 
-function thet_add_capabilities_to_admin(){
+// ############################################################################################
 
+function thet_add_capabilities_to_admin( $user_roles_capabilities ){
+
+    $admin_role = get_role( 'administrator' );
+
+    $admin_extra_capabilities = $user_roles_capabilities['form_admin_capabilities'];
+    foreach( $admin_extra_capabilities as $capability) {
+
+        $admin_role->add_cap( $capability, true );
+
+    }
 }
 
 function thet_register_question_admin_role( $user_roles_capabilities ) {
@@ -113,5 +134,19 @@ function thet_remove_question_admin_role(){
 function thet_remove_form_user_role(){
 
     remove_role('form_user');
+
+}
+
+
+function thet_remove_capabilities_from_admin( $user_roles_capabilities ){
+
+    $admin_role = get_role( 'administrator' );
+
+    $admin_extra_capabilities = $user_roles_capabilities['form_admin_capabilities'];
+    foreach( $admin_extra_capabilities as $capability) {
+
+        $admin_role->remove_cap( $capability );
+
+    }
 
 }
