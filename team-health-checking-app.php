@@ -34,3 +34,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
 
 // Enq necessary JS
 require_once plugin_dir_path( __FILE__ ) . 'admin/enqueue-scripts.php';
+
+
+// Enq templates
+require_once plugin_dir_path( __FILE__ ) . 'public/register-templates.php';
