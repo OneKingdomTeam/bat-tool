@@ -28,4 +28,9 @@ register_deactivation_hook( __FILE__, 'thet_remove_new_user_roles' );
 
 // Register post types and set rules// Register post types and set rules
 require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/query-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
+
+
+// Enq necessary JS
+require_once plugin_dir_path( __FILE__ ) . 'admin/enqueue-scripts.php';
