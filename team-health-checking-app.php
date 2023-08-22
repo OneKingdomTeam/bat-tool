@@ -18,11 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Activation and deactivation hooks
-require_once plugin_dir_path( __FILE__ ) . 'admin/register-user-roles.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/de-activation.php';
 
-
-register_activation_hook( __FILE__, 'thet_register_new_user_roles' );
-register_deactivation_hook( __FILE__, 'thet_remove_new_user_roles' );
+register_activation_hook( __FILE__, 'thet_activation' );
+register_deactivation_hook( __FILE__, 'thet_deactivation' );
 
 
 
@@ -35,6 +34,5 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
 // Enq necessary JS
 require_once plugin_dir_path( __FILE__ ) . 'admin/enqueue-scripts.php';
 
-
-// Enq templates
-require_once plugin_dir_path( __FILE__ ) . 'public/register-templates.php';
+// Enq UI shortcodes
+require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';
