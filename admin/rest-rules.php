@@ -53,5 +53,3 @@ add_filter( 'rest_authentication_errors', function( $result ) {
 });
 
 
-
-
