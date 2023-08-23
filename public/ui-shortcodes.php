@@ -88,7 +88,14 @@ add_shortcode( 'thet_testing', 'thet_testing' );
 
 function thet_testing(){
 
-    return "";
+    $questions = get_posts( array( 'post_type' => 'questions' ) );
+
+    ob_start();
+    var_dump( $questions );
+    $output = ob_get_contents();
+    ob_end_clean();
+    
+    return $output;
 
 }
 

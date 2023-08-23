@@ -1,0 +1,536 @@
+{
+    "beam0": {
+        "title": "Vision and Mission",
+        "segment1" : {
+            "question1": {
+                "title": "Do you have a clearly defined vision and mission for your MTM initiative?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training about vision and mission?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Can other members of your MTM coalition articulate the vision and mission?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied that your current vision and mission accurately reflect your present MTM strategy?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam1": {
+        "title": "Prayer",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM initiative have a prayer strategy?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received prayer strategy coaching/training?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are members of your MTM coalition regularly praying together and/or engaging others to pray for your people group/target audience?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with your current prayer strategy and the level of active engagement in it?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam2": {
+        "title": "Marketing",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM initiative have a marketing plan?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training in Marketing?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Is your MTM initiative marketing content to your target audience on at least one digital platform (Facebook, Instagram, etc) on a consistent basis?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with the results you are receiving from your current marketing efforts?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam3": {
+        "title": "Content Development & Planning",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM initiative have a process for creating, organizing, and planning content?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received content development & planning coaching/training?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Is your MTM coalition strategically creating original or sourcing existing content and planning campaigns?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with your current content development and planning process?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam4": {
+        "title": "Digital Filtering",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM coalition have a Digital Responder/Filterer?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received Digital Responder/Filterer coaching/training?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Is your Digital Responder regularly engaging in conversations and filtering for spiritual seekers?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Is your current digital filtering process yielding the desired results?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam5": {
+        "title": "Follow-up Data Management",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM initiative have a follow-up management system (like Disciple.Tools) in place for keeping up with contacts/spiritual seekers?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received follow-up data management coaching/training?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are members of your MTM coalition regularly assigning, receiving, and providing updates about contacts in a follow-up data management system?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with your process/system for following up with spiritual seekers?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam6": {
+        "title": "Reporting",
+        "segment1" : {
+            "question1": {
+                "title": "Have digital assets (GA4, Disciple.Tools, etc) been set up for your MTM initiative to participate in the Global Movement Metrics?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Is your coalition aware of the MTM quarterly reporting update?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Have you received coaching/training about digital assets and their role in reporting?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Is your MTM coalition completing quarterly MTM updates?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam7": {
+        "title": "Funding",
+        "segment1" : {
+            "question1": {
+                "title": "Have you set an annual budget for your MTM initiative?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training around the topic of funding?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Do you have access to funding to cover your budgeted MTM costs?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Is your source of funding sufficient to sustain your MTM initiative going forward?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam8": {
+        "title": "Multiplication Strategies",
+        "segment1" : {
+            "question1": {
+                "title": "Is your MTM coalition committed to multiplicative disciple making (i.e. DMM, CPM)",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training in multiplicative disciple making?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Do your digital responders/filterers and multipliers invite seekers to invite others to learn/discover together with them and to share with others?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied that your offline disciple making strategy is designed to lead to multiplication?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam9": {
+        "title": "Coalition Development",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM coalition have a plan for communicating partnership requirements and onboarding new partners?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coalition development coaching/training?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are you regularly identifying, referring and mobilizing potential Multipliers and partners?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with the current makeup and growth opportunities for your MTM coalition?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam10": {
+        "title": "Reach",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM coalition have a plan for reaching seekers in the cities where multipliers live?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training about how to determine and expand your reach?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are you actively sharing content and targeting ads to identify seekers in the cities where your multipliers live?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with the fruit you are seeing with your current targeted reach?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam11": {
+        "title": "Outreach Platforms",
+        "segment1" : {
+            "question1": {
+                "title": "Has your MTM coalition set-up at least two outreach platforms (i.e. Website, Facebook, YouTube)",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training about various outreach platforms and how to use them?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are your outreach platforms currently up to date, functioning, and being used?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are you satisfied with the results you are getting from your current outreach platforms?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    },
+    "beam12": {
+        "title": "Accountability Structures",
+        "segment1" : {
+            "question1": {
+                "title": "Does your MTM coalition have coalition documents that outline vision, mission, and values?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question2": {
+                "title": "Have you received coaching/training about accountability structures?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question3": {
+                "title": "Are members of your MTM coalition abiding by the things outlined in your coalition documents?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            },
+            "question4": {
+                "title": "Are your current coalition documents providing the accountability structure that your MTM needs?",
+                "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+                "radio": {
+                    "option1": "0 %",
+                    "option2": "50 %",
+                    "option3": "100 %"
+                }
+            }
+        },
+    }
+
+}

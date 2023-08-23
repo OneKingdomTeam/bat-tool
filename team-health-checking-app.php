@@ -30,6 +30,8 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/query-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
 
+// Force Classic Editor for Quesions
+require_once plugin_dir_path( __FILE__ ) . 'admin/force-classic-editor.php';
 
 // Enq necessary JS
 require_once plugin_dir_path( __FILE__ ) . 'admin/enqueue-scripts.php';

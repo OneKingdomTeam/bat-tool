@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function thet_activation(){
 
     require_once plugin_dir_path( __FILE__ ) . 'de-register-user-roles.php';
-    require_once plugin_dir_path( __FILE__ ) . 'manage-pages.php';
+    require_once plugin_dir_path( __FILE__ ) . 'manage-posts.php';
 
     thet_register_new_user_roles();
     thet_create_pages();
@@ -19,7 +19,7 @@ function thet_activation(){
 function thet_deactivation(){
 
     require_once plugin_dir_path( __FILE__ ) . 'de-register-user-roles.php';
-    require_once plugin_dir_path( __FILE__ ) . 'manage-pages.php';
+    require_once plugin_dir_path( __FILE__ ) . 'manage-posts.php';
     
     thet_remove_new_user_roles();
     thet_remove_pages();

@@ -26,6 +26,7 @@ function thet_create_pages(){
 
     );
 
+
     $applications_page_id = wp_insert_post( $applications_page_attr );
     $interactive_form_page_id = wp_insert_post( $interactive_form_page_attr );
 
@@ -35,6 +36,12 @@ function thet_create_pages(){
         'interactive_form_page_id' => $interactive_form_page_id,
 
     );
+
+    if ( empty( get_posts( array( 'post_type' => 'questions'  ) ) ) ){
+
+        thet_create_questions();   
+
+    }
 
     $thet_options = get_option( 'thet_options');
     if ( $thet_options == false ){
@@ -51,5 +58,28 @@ function thet_remove_pages(){
     
     wp_delete_post( $thet_options['applications_page_id'] , true );
     wp_delete_post( $thet_options['interactive_form_page_id'] , true );
+
+}
+
+
+function thet_create_questions(){
+
+    
+    $questions_attr = array(
+
+        # post title is inserted dynamically
+        'post_type' => 'questions',
+        'post_status' => 'publish',
+        'post_content' => 'lovely stringified json'       
+
+    );
+
+    for ( $i = 0; $i < 13; $i++ ) {
+
+        
+        $questions_attr['post_title'] = 'Beam - ' . strval( $i );
+        wp_insert_post( $questions_attr );
+
+    }
 
 }
