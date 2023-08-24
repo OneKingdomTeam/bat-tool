@@ -4,7 +4,7 @@ class Answers {
 
         this.answers = {
 
-            'set0' : {
+            'beam0' : {
 
                 'segment1': {
 
@@ -24,28 +24,7 @@ class Answers {
 
 
             },
-            'set1' : {
-
-                'segment1': {
-
-                    'answers' : {
-                        'answer1' : null,
-                        'answer2' : null,
-                        'answer3' : null,
-                        'answer4' : null,
-                    },
-                    'comments' : {
-                        'comment1' : null,
-                        'comment2' : null,
-                        'comment3' : null,
-                        'comment4' : null,
-                    }
-                },
-
-
-            },
-
-            'set2' : {
+            'beam1' : {
 
                 'segment1': {
 
@@ -66,7 +45,7 @@ class Answers {
 
             },
 
-            'set3' : {
+            'beam2' : {
 
                 'segment1': {
 
@@ -87,7 +66,7 @@ class Answers {
 
             },
 
-            'set4' : {
+            'beam3' : {
 
                 'segment1': {
 
@@ -108,7 +87,7 @@ class Answers {
 
             },
 
-            'set5' : {
+            'beam4' : {
 
                 'segment1': {
 
@@ -129,7 +108,7 @@ class Answers {
 
             },
 
-            'set6' : {
+            'beam5' : {
 
                 'segment1': {
 
@@ -150,7 +129,7 @@ class Answers {
 
             },
 
-            'set7' : {
+            'beam6' : {
 
                 'segment1': {
 
@@ -171,7 +150,7 @@ class Answers {
 
             },
 
-            'set8' : {
+            'beam7' : {
 
                 'segment1': {
 
@@ -192,7 +171,7 @@ class Answers {
 
             },
 
-            'set9' : {
+            'beam8' : {
 
                 'segment1': {
 
@@ -213,7 +192,7 @@ class Answers {
 
             },
 
-            'set10' : {
+            'beam9' : {
 
                 'segment1': {
 
@@ -234,7 +213,7 @@ class Answers {
 
             },
 
-            'set11' : {
+            'beam10' : {
 
                 'segment1': {
 
@@ -255,7 +234,28 @@ class Answers {
 
             },
 
-            'set12' : {
+            'beam11' : {
+
+                'segment1': {
+
+                    'answers' : {
+                        'answer1' : null,
+                        'answer2' : null,
+                        'answer3' : null,
+                        'answer4' : null,
+                    },
+                    'comments' : {
+                        'comment1' : null,
+                        'comment2' : null,
+                        'comment3' : null,
+                        'comment4' : null,
+                    }
+                },
+
+
+            },
+
+            'beam12' : {
 
                 'segment1': {
 
@@ -277,8 +277,6 @@ class Answers {
             }
 
         }
-
-        this.initLoad();
 
     }
 
@@ -314,7 +312,6 @@ class Answers {
     clearAnswersFromBrowser(){
 
         window.localStorage.removeItem( 'thetAnswers' );
-        location.reload();
 
     }
 
@@ -327,8 +324,8 @@ class Answers {
         let answerValue = this.extractAnswerValue( activeAnswer );
         let commentValue = textarea.value;
 
-        this.answers['set' + beamNumber]['segment' + segmentNumber]['answers']['answer' + questionNumber] = answerValue;
-        this.answers['set' + beamNumber]['segment' + segmentNumber]['comments']['comment' + questionNumber] = commentValue;
+        this.answers['beam' + beamNumber]['segment' + segmentNumber]['answers']['answer' + questionNumber] = answerValue;
+        this.answers['beam' + beamNumber]['segment' + segmentNumber]['comments']['comment' + questionNumber] = commentValue;
         this.saveAnswersToBrowser();
 
     }
@@ -338,7 +335,7 @@ class Answers {
         let beamNumber = this.getElementClassNumber( activeBeam );
         let segmentNumber = this.getElementClassNumber( activeSegment );
         let questionNumber = this.getElementClassNumber( activeQuestion );
-        let value = this.answers['set' + beamNumber]['segment' + segmentNumber]['answers']['answer' + questionNumber];
+        let value = this.answers['beam' + beamNumber]['segment' + segmentNumber]['answers']['answer' + questionNumber];
         return( value );
 
     }
@@ -348,7 +345,7 @@ class Answers {
         let beamNumber = this.getElementClassNumber( activeBeam );
         let segmentNumber = this.getElementClassNumber( activeSegment );
         let questionNumber = this.getElementClassNumber( activeQuestion );
-        let value = this.answers['set' + beamNumber]['segment' + segmentNumber]['comments']['comment' + questionNumber];
+        let value = this.answers['beam' + beamNumber]['segment' + segmentNumber]['comments']['comment' + questionNumber];
         return( value );
 
     }
@@ -380,3 +377,4 @@ class Answers {
     }
 
 }
+

@@ -11,7 +11,7 @@ add_action( 'wp_enqueue_scripts', 'thet_interactive_form_scripts' );
 function thet_interactive_form_scripts(){
 
     global $post;
-    if ( $post->ID === get_option( 'thet_options' )['interactive_form_page_id'] ) {
+    if ( isset( $post ) && $post->ID === get_option( 'thet_options' )['interactive_form_page_id'] ) {
 
         $dir_url = plugin_dir_url( __FILE__ );
 
@@ -42,15 +42,19 @@ function thet_interactive_form_scripts(){
         $output_array = [];
 
         foreach( $questions as $question ){
+            
+            $question_array = (array) $question;
+            $output_array[ 'beam' . $question_array['menu_order'] ]['title'] = $question_array['post_title']; 
 
-            $current_output = [ 
-                'beam' . $question->menu_order => 
-                [
-                    'title' => $question->post_title,
-                    get_post_meta( $question->ID, 'question_data', true ),
-                ]
-            ];
-            array_push( $output_array, $current_output );
+            $question_data = get_post_meta( $question_array['ID'], 'question_data', true );
+            $question_data_array = (array) $question_data;
+            $remaining_keys = array_keys( $question_data_array );
+
+            foreach( $remaining_keys as $key ){
+    
+                $output_array[ 'beam' . $question_array['menu_order'] ][$key] = $question_data_array[$key]; 
+
+            };
 
         }
 

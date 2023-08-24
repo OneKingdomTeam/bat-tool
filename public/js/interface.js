@@ -2,6 +2,8 @@ class Interface {
 
     constructor() {
 
+        thetAnswers.clearAnswersFromBrowser();
+
         this.beamClass = 'beam-';
         this.segmentClass = 'segment-';
         this.subsegmentClass = 'subsegment-';
@@ -75,7 +77,7 @@ class Interface {
         for (const [key, value] of Object.entries(currentData)) {
 
             let currentBeamClass = this.beamClass + key.replace( /[^0-9]/g,"");
-            // Key is 'set1' 'set2'...
+            // Key is 'beam1' 'beam2'...
             // Value is { 'segment1': {....}}
 
             for (const [segmentKey, segmentValue] of Object.entries( value )) {
@@ -100,13 +102,16 @@ class Interface {
 
         this.introContent.classList.add('is-hidden');
         this.mainContent.classList.remove('is-hidden');
+
         this.beams.forEach( function( beam ){
             beam.classList.remove('active');
         });
+
         let currentBeam = event.target.closest('.beam')
         currentBeam.classList.add('active');
         this.activeBeam = currentBeam;
-        this.activeSegment = currentBeam.querySelector('.segment-1');
+
+        this.activeSegment = event.target.closest('.segment');
 
         this.questions[0].click();
 
@@ -116,6 +121,7 @@ class Interface {
 
     handleQuestionClick( event ){
 
+        event.preventDefault();
         this.questions.forEach( function( question ){
             question.classList.remove('is-active');
         });
@@ -271,10 +277,6 @@ class Interface {
             self.handleNextClick( event );
         } );
 
-        // temporary
-        document.querySelector('.reload').addEventListener( 'click', function(){
-            thetAnswers.clearAnswersFromBrowser();
-        })
-
     }
 }
+
