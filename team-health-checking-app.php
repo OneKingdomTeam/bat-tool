@@ -17,8 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// ---------------------- Backend Scripts  ---------------------
+
 // Activation and deactivation hooks
-require_once plugin_dir_path( __FILE__ ) . 'admin/de-activation.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/de-activation/de-activation.php';
 
 register_activation_hook( __FILE__, 'thet_activation' );
 register_deactivation_hook( __FILE__, 'thet_deactivation' );
@@ -27,14 +29,15 @@ register_deactivation_hook( __FILE__, 'thet_deactivation' );
 
 // Register post types and set rules// Register post types and set rules
 require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/query-rules.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/rest-rules.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/query-rules.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
 
 // Force Classic Editor for Quesions
-require_once plugin_dir_path( __FILE__ ) . 'admin/force-classic-editor.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/force-classic-editor.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/enqueue-scripts.php';
 
-// Enq necessary JS
-require_once plugin_dir_path( __FILE__ ) . 'admin/enqueue-scripts.php';
+
+// ---------------------- Front end related scripts ---------------------
 
 // Enq UI shortcodes
 require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';

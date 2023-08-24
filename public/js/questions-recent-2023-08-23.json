@@ -38,7 +38,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam1": {
         "title": "Prayer",
@@ -79,7 +79,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam2": {
         "title": "Marketing",
@@ -120,7 +120,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam3": {
         "title": "Content Development & Planning",
@@ -161,7 +161,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam4": {
         "title": "Digital Filtering",
@@ -202,7 +202,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam5": {
         "title": "Follow-up Data Management",
@@ -243,7 +243,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam6": {
         "title": "Reporting",
@@ -284,7 +284,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam7": {
         "title": "Funding",
@@ -325,7 +325,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam8": {
         "title": "Multiplication Strategies",
@@ -366,7 +366,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam9": {
         "title": "Coalition Development",
@@ -407,7 +407,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam10": {
         "title": "Reach",
@@ -448,7 +448,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam11": {
         "title": "Outreach Platforms",
@@ -489,7 +489,7 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     },
     "beam12": {
         "title": "Accountability Structures",
@@ -530,7 +530,6 @@
                     "option3": "100 %"
                 }
             }
-        },
+        }
     }
-
 }
