@@ -34,7 +34,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
 
 // Force Classic Editor for Quesions
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/force-classic-editor.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/questions/enqueue-scripts.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php';
 
 
 // ---------------------- Front end related scripts ---------------------

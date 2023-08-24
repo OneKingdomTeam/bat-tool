@@ -70,15 +70,22 @@ function thet_create_questions(){
         # post title is inserted dynamically
         'post_type' => 'questions',
         'post_status' => 'publish',
-        'post_content' => 'lovely stringified json'       
 
     );
+    
+    $questions_template_data = file_get_contents( plugin_dir_path( __FILE__ ) . 'templates/questions-recent-2023-08-23.json' );
+    $questions_template = json_decode( $questions_template_data, true );
+    
 
     for ( $i = 0; $i < 13; $i++ ) {
 
         
-        $questions_attr['post_title'] = 'Beam - ' . strval( $i );
-        wp_insert_post( $questions_attr );
+        $questions_attr['post_title'] = $questions_template[ 'beam' . strval( $i ) ]["title"];
+        $questions_attr['menu_order'] = $i;
+        $question_id = wp_insert_post( $questions_attr );
+        
+        update_post_meta( $question_id, 'question_data', $questions_template[ 'beam' . strval( $i ) ]);
+        
 
     }
 
