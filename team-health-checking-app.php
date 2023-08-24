@@ -41,3 +41,4 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php
 
 // Enq UI shortcodes
 require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/register-application-scripts.php';

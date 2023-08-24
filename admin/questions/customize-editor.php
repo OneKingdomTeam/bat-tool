@@ -13,12 +13,12 @@ function thet_question_edit_page_custom_js(){
 
     if ( isset( $post ) && $post->post_type === 'questions' && $pagenow === 'post.php' ){
 
-        wp_register_script( 'thet_json_editor', plugin_dir_url( __FILE__ ) . 'js/jsoneditor.min.js', [], '1.0.0', true );
-        wp_register_script( 'thet_questions_editor_js', plugin_dir_url( __FILE__ ) . 'js/question-editor.js', ['thet_json_editor'], '1.0.0', true );
+        wp_register_script( 'thet_json_editor', plugin_dir_url( __FILE__ ) . 'js/jsoneditor.min.js', [], false, true );
+        wp_register_script( 'thet_questions_editor_js', plugin_dir_url( __FILE__ ) . 'js/question-editor.js', ['thet_json_editor'], false, true );
         wp_localize_script( 'thet_questions_editor_js', 'thetQEditor', [
             
                 'nonce' => wp_create_nonce( 'ajax-nonce' ),
-                'data' => get_post_meta( $post->ID, 'question_data' ),
+                'data' => get_post_meta( $post->ID, 'question_data', true ),
 
             ] );
 

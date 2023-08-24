@@ -14,7 +14,7 @@ function thet_create_pages(){
         'post_type' => 'page',
         'post_title' => 'Applications',
         'post_status' => 'publish',
-        'post_content' => '<!-- wp:shortcode -->[thet_get_applications]<!-- /wp:shortcode -->',
+        'post_content' => file_get_contents( plugin_dir_path(__FILE__) . 'templates/applications-page.html' ),
 
     );
     
@@ -23,6 +23,7 @@ function thet_create_pages(){
         'post_type' => 'page',
         'post_title' => 'Interactive form',
         'post_status' => 'publish',
+        'post_content' => file_get_contents( plugin_dir_path(__FILE__) . 'templates/interactive-form.html' ),
 
     );
 
@@ -37,7 +38,7 @@ function thet_create_pages(){
 
     );
 
-    if ( empty( get_posts( array( 'post_type' => 'questions'  ) ) ) ){
+    if ( empty( get_posts( [ 'post_type' => 'questions' ] ) ) ){
 
         thet_create_questions();   
 
@@ -79,13 +80,13 @@ function thet_create_questions(){
 
     for ( $i = 0; $i < 13; $i++ ) {
 
-        
-        $questions_attr['post_title'] = $questions_template[ 'beam' . strval( $i ) ]["title"];
+        $current_question_content = $questions_template[ 'beam' . strval( $i )];
+        $questions_attr['post_title'] = $current_question_content['title'];
+        unset( $current_question_content['title'] );
         $questions_attr['menu_order'] = $i;
         $question_id = wp_insert_post( $questions_attr );
         
-        update_post_meta( $question_id, 'question_data', $questions_template[ 'beam' . strval( $i ) ]);
-        
+        update_post_meta( $question_id, 'question_data', $current_question_content );
 
     }
 

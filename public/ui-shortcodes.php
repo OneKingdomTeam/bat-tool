@@ -41,21 +41,25 @@ function thet_get_applications(){
 
             foreach ($applications as $application) {
                 ?>
-
-                <div class="wp-block-columns are-vertically-aligned-center is-layout-flex wp-container-10 wp-block-columns-is-layout-flex" style="border-width:1px;border-radius:1rem;margin-bottom:1rem;padding-top:0.5rem;padding-right:0.5rem;padding-bottom:0.5rem;padding-left:0.5rem">
-                <div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow" style="padding-top:1rem;padding-right:1rem;padding-bottom:1rem;padding-left:1rem;flex-basis:66.66%">
-                <h4 class="wp-block-heading"><?php echo $application->post_title ?></h4>
-                <p><?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></p>
-                </div>
-                <div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:33.33%">
-                <div class="wp-block-buttons is-content-justification-center is-layout-flex wp-container-8 wp-block-buttons-is-layout-flex">
-                <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
-                <div class="wp-block-button is-style-fill"><a href="<?php echo get_permalink( get_option('thet_options')['interactive_form_page_id'] ) . '?application_id=' . $application->ID  ?>" class="wp-block-button__link has-background-color has-pale-cyan-blue-background-color has-text-color has-background wp-element-button" style="border-radius:0.25rem;padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">Edit</a></div>
-                </div>
-                </div>
-                </div>
-                </div>
-
+                    <div class="columns mb-5">
+                        <div class="column is-three-fifths is-offset-one-fifth box p-5">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="wrapper">
+                                        <h1 class="title pb-4"><?php echo $application->post_title ?></h1>
+                                        <h2 class="subtitle"><?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></h1>
+                                    </div>
+                                </div>
+                                <div class="column is-one-fifth is-flex is-justify-content-center is-align-items-center">
+                                    <a href="<?php echo get_permalink( get_option('thet_options')['interactive_form_page_id'] ) . '?application_id=' . $application->ID  ?>">
+                                        <div class="button is-primary px-6">
+                                            Edit
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <?php
             }
 
@@ -87,15 +91,40 @@ function thet_get_wheel(){
 add_shortcode( 'thet_testing', 'thet_testing' );
 
 function thet_testing(){
-
-    $questions = get_posts( array( 'post_type' => 'questions' ) );
-
-    ob_start();
-    var_dump( $questions );
-    $output = ob_get_contents();
-    ob_end_clean();
     
-    return $output;
+    ob_start();
+
+    $args = [
+        'post_type' => 'questions',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'posts_per_page' => -1
+    ];
+
+    $query = new WP_Query( $args );
+    $questions = $query->posts;
+
+    $output_array = [];
+
+    foreach( $questions as $question ){
+
+        $current_output = [ 
+            'beam' . $question->menu_order => 
+            [
+                'title' => $question->post_title,
+                get_post_meta( $question->ID, 'question_data', true ),
+            ]
+        ];
+        array_push( $output_array, $current_output );
+
+    }
+    
+    echo var_dump( $output_array );
+    echo json_encode( $output_array );
+
+    
+    $output = ob_get_clean();
+    return "<pre>" . $output . "</pre>";
 
 }
 
