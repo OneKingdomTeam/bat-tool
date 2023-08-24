@@ -42,7 +42,7 @@ function thet_register_applications() {
             'read_private_posts' => 'read_private_applications', 
             'create_posts'       => 'edit_applications', 
         ),
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-aside',
         'supports' => array('title', 'revisions', 'author', 'custom-fields'),
 
@@ -83,9 +83,9 @@ function thet_register_questions(){
             'read_private_posts' => 'read_private_questions', 
             'create_posts'       => 'edit_questions', 
         ),
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-quote',
-        'supports' => array('title', 'revisions', 'author', 'custom-fields', 'editor'),
+        'supports' => array('title', 'revisions', 'author', 'custom-fields' ),
 
     );
 
