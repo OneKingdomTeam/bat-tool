@@ -93,35 +93,9 @@ add_shortcode( 'thet_testing', 'thet_testing' );
 function thet_testing(){
     
     ob_start();
+    update_post_meta( 402, 'answers_data', 'hello' );
 
-    $args = [
-        'post_type' => 'questions',
-        'orderby' => 'menu_order',
-        'order' => 'ASC',
-        'posts_per_page' => -1
-    ];
-
-    $query = new WP_Query( $args );
-    $questions = $query->posts;
-
-    $output_array = [];
-
-    foreach( $questions as $question ){
-
-        $current_output = [ 
-            'beam' . $question->menu_order => 
-            [
-                'title' => $question->post_title,
-                get_post_meta( $question->ID, 'question_data', true ),
-            ]
-        ];
-        array_push( $output_array, $current_output );
-
-    }
-    
-    echo var_dump( $output_array );
-    echo json_encode( $output_array );
-
+    var_dump( get_post_meta( 402, 'answers_data' ));
     
     $output = ob_get_clean();
     return "<pre>" . $output . "</pre>";

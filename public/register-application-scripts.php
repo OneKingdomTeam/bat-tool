@@ -20,14 +20,21 @@ function thet_interactive_form_scripts(){
         wp_register_script( 'thet_interactive_form_questions', $dir_url . 'js/questions.js', [], NULL, true );
         wp_register_script( 'thet_interactive_form_interface', $dir_url . 'js/interface.js', [], NULL, true );
         wp_register_script( 'thet_interactive_form_answers', $dir_url . 'js/answers.js', [], NULL, true );
+        wp_register_script( 'thet_interactive_form_connector', $dir_url . 'js/connector.js', [], NULL, true );
 
         wp_register_script(
                 'thet_interactive_form_main',
                 plugin_dir_url( __FILE__ ) . 'js/main.js',
-                [ 'thet_interactive_form_questions', 'thet_interactive_form_interface', 'thet_interactive_form_answers'],
+                [
+                    'thet_interactive_form_questions',
+                    'thet_interactive_form_interface',
+                    'thet_interactive_form_answers',
+                    'thet_interactive_form_connector',
+                ],
                 false,
                 true
             );
+
 
         $args = [
             'post_type' => 'questions',
@@ -63,7 +70,7 @@ function thet_interactive_form_scripts(){
                 'nonce' => wp_create_nonce( 'thet_ajax'),
                 'questionsData' => $output_array,
 
-            ] );
+            ]);
 
         wp_enqueue_style( 'thet_interactive_form_css' );
         wp_enqueue_script( 'thet_interactive_form_main' );

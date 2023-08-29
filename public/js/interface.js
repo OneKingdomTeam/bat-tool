@@ -278,5 +278,35 @@ class Interface {
         } );
 
     }
+
+    showError( title = 'Error',  content = 'Error occured' ){
+
+        console.log(`Error orrucred: \nTitle: ${ title }\nContent: ${ content }`);
+
+    }
+
+    showLoading( show ){
+
+        show ? console.log('Loading showed') : console.log('Loading hidden');
+
+    }
+
+    autoSaveing( status ){
+
+        if ( status === true ) {
+
+            this.autoSaveInterval = setInterval(() => {
+                console.log( 'Saving to server...' );
+                thetConnector.saveApplicationData( thetAnswers.answers );
+            }, 15000 );
+
+        } else {
+
+            clearInterval( this.autoSaveInterval );
+
+        }
+
+    }
+
 }
 
