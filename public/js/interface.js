@@ -195,16 +195,16 @@ class Interface {
 
         let currentQuestionNumber = this.activeQuestion.getAttribute( 'class' ).replace( /[^0-9]/g,"");
 
-        this.nextButton.classList.remove('disabled');
-        this.previousButton.classList.remove('disabled');
+        this.nextButton.disabled = false;
+        this.previousButton.disabled = false;
         this.lastQuestionWarning.classList.add('is-hidden');
 
         if ( currentQuestionNumber == "1" ){
-            this.previousButton.classList.add('disabled');
+            this.previousButton.disabled = true;
         }
 
         if ( currentQuestionNumber == "4" ){
-            this.nextButton.classList.add('disabled');
+            this.nextButton.disabled = true;
             this.lastQuestionWarning.classList.remove('is-hidden');
         }
 

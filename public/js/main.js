@@ -13,7 +13,7 @@ window.addEventListener('load', async function(){
 
         await thetConnector.getApplicationData();
 
-        if ( thetConnector.applicationData === false ) {
+        if ( thetConnector.applicationData === false || thetConnector.applicationData === "" ) {
 
             thetAnswers.saveAnswersToBrowser();
             console.log( 'No data yet stored' );
@@ -28,6 +28,7 @@ window.addEventListener('load', async function(){
 
         thetInterface.autoSaveing( true );
         thetInterface.updateWheel();
+        thetInterface.showLoading( false );
 
     } else {
 

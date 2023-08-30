@@ -20,7 +20,7 @@ function thet_get_application_data(){
     $requesting_user = wp_get_current_user();
 
 
-    if ( $requesting_user->ID === $application_author_id ){
+    if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
     }
     if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
@@ -35,8 +35,16 @@ function thet_get_application_data(){
 
     }
 
-    
-    wp_send_json( 'Unauthorised' );
+    $test = [
+        'req_post_author' => $required_application_object->post_author,
+        'current_user_id' => $requesting_user->ID,
+        'user_can_access' => $user_can_access,
+        'user_logged_in' => $user_is_logged_in,
+        'nonce_is_valid' => $nonce_is_valid,
+    ];
+
+    wp_send_json( $test );
+    //wp_send_json( 'Unauthorised' );
     wp_die();
 
 };
@@ -59,7 +67,7 @@ function thet_save_application_data(){
     $requesting_user = wp_get_current_user();
 
 
-    if ( $requesting_user->ID === $application_author_id ){
+    if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
     }
     if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){

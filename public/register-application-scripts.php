@@ -11,7 +11,7 @@ add_action( 'wp_enqueue_scripts', 'thet_interactive_form_scripts' );
 function thet_interactive_form_scripts(){
 
     global $post;
-    if ( isset( $post ) && $post->ID === get_option( 'thet_options' )['interactive_form_page_id'] ) {
+    if ( is_user_logged_in() && isset( $post ) && $post->ID === get_option( 'thet_options' )['interactive_form_page_id'] ) {
 
         $dir_url = plugin_dir_url( __FILE__ );
 

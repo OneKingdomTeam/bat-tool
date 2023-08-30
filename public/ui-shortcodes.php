@@ -88,6 +88,50 @@ function thet_get_wheel(){
 
 // -------------------------------------------------------------------------------------------------------------------
 
+add_shortcode('thet_get_application_title', 'thet_get_application_title');
+
+function thet_get_application_title(){
+
+    if( isset( $_GET['application_id'] )){
+
+        $user_is_logged_in = is_user_logged_in();
+        if( $user_is_logged_in === false ){
+
+            return 'Unauthorised';
+
+        };
+            
+        $user_can_access = false;
+
+        $required_application_id = intval( $_GET['application_id'] );
+        $required_application_object = get_post( $required_application_id );
+
+        $application_author_id = $required_application_object->post_author;
+        $requesting_user = wp_get_current_user();
+
+
+        if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
+            $user_can_access = true;
+        }
+        if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
+            $user_can_access = true;
+        }
+
+        if ( $user_can_access === true ){
+
+            return $required_application_object->post_title;
+
+        }
+    
+        return 'Unauthorised';
+
+    }
+
+
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+
 add_shortcode( 'thet_testing', 'thet_testing' );
 
 function thet_testing(){
