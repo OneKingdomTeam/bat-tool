@@ -69,6 +69,7 @@ function thet_interactive_form_scripts(){
 
                 'nonce' => wp_create_nonce( 'thet_ajax'),
                 'questionsData' => $output_array,
+                'loaderHTML' => file_get_contents( plugin_dir_path( __FILE__ ) . 'media/loader-clean.svg' ),
 
             ]);
 

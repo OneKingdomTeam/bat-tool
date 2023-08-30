@@ -3,7 +3,7 @@ const thetAnswers = new Answers();
 const thetInterface = new Interface();
 const thetConnector = new Connector( thetAjax.nonce );
 
-thetInterface.showLoading();
+thetInterface.showLoading( true );
 
 window.addEventListener('load', async function(){
 

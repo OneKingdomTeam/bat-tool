@@ -287,7 +287,31 @@ class Interface {
 
     showLoading( show ){
 
-        show ? console.log('Loading showed') : console.log('Loading hidden');
+        if ( show === true ){
+
+            if ( document.querySelector('.thet-loader') === null ) {
+
+                let loadingScreenString = '<div class="thet-loader" >' + thetAjax.loaderHTML + '</div>';
+                let parser = new DOMParser();
+                let loadingScreenObj = parser.parseFromString( loadingScreenString, 'text/html' );
+                document.body.appendChild( loadingScreenObj.querySelector('.thet-loader') );
+ 
+            }
+
+            document.querySelector('.thet-loader').classList.remove('is-hidden');
+
+        }
+
+        if ( show === false ){
+
+            if ( document.querySelector('.thet-loader') !== null ){
+
+                document.querySelector('.thet-loader').classList.add('is-hidden');
+
+            }
+
+        }
+        
 
     }
 
