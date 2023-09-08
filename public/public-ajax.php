@@ -23,7 +23,7 @@ function thet_get_application_data(){
     if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
     }
-    if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
+    if ( in_array( 'form_admin', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
         $user_can_access = true;
     }
     
@@ -38,6 +38,7 @@ function thet_get_application_data(){
     $test = [
         'req_post_author' => $required_application_object->post_author,
         'current_user_id' => $requesting_user->ID,
+        'current_user_roles' => $requesting_user->roles,
         'user_can_access' => $user_can_access,
         'user_logged_in' => $user_is_logged_in,
         'nonce_is_valid' => $nonce_is_valid,
@@ -70,7 +71,7 @@ function thet_save_application_data(){
     if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
     }
-    if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
+    if ( in_array( 'form_admin', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
         $user_can_access = true;
     }
     

@@ -11,10 +11,9 @@ function thet_question_edit_page_custom_js(){
 
     global $pagenow, $post;
 
-    if ( isset( $post ) && $post->post_type === 'questions' && $pagenow === 'post.php' ){
+    if ( isset( $post ) && $post->post_type === 'questions' && ( $pagenow === 'post.php' || $pagenow === 'post-new.php' )){
 
-        wp_register_script( 'thet_json_editor', plugin_dir_url( __FILE__ ) . 'js/jsoneditor.min.js', [], false, true );
-        wp_register_script( 'thet_questions_editor_js', plugin_dir_url( __FILE__ ) . 'js/question-editor.js', ['thet_json_editor'], false, true );
+        wp_register_script( 'thet_questions_editor_js', plugin_dir_url( __FILE__ ) . 'js/question-editor.js', [], false, true );
         wp_localize_script( 'thet_questions_editor_js', 'thetQEditor', [
             
                 'nonce' => wp_create_nonce( 'ajax-nonce' ),
@@ -24,96 +23,151 @@ function thet_question_edit_page_custom_js(){
 
         wp_register_style( 'thet_questions_editor_css', plugin_dir_url( __FILE__ ) . 'css/questions-editor.css' );
 
-        wp_enqueue_script( 'thet_json_editor' );
         wp_enqueue_script( 'thet_questions_editor_js' );
         wp_enqueue_style( 'thet_questions_editor_css' );
 
         add_action( 'edit_form_after_editor', 'thet_question_editor_adjustments' );
-          
-    }
 
+    }
 }
 
 function thet_question_editor_adjustments(){
 
     global $post;
     
+    $name_divider = '___';
+    
     ?>
         
         <div style="margin-top: 2rem;">
 
-        <table class="form-table" role="presentation">
-            <tbody>
-                <tr>
-                <th scope="row"><label>Order:</label></th>
-                <td><input type="number" id="order" value="<?php echo $post->menu_order ?>" class="regular-text"></td>
-                </tr>
-            </tbody>
-        </table>
-            <div>
-                <h2>Beam Content:</h2>
-            </div>
+            <table class="form-table" role="presentation">
+                <tbody>
+                    <tr>
+                        <th scope="row"><label>Order:</label></th>
+                        <td><input type="number" name="thet-order" value="<?php echo $post->menu_order ?>" class="regular-text"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div class="thet-question-editor-wrapper">
+            <?php 
 
-            </div>
-        </div>
+                $question_data = get_post_meta( $post->ID, 'question_data', true );
+
+                foreach( $question_data as $segment_key => $segment_value ){
+
+                    ?>
+                        <h3><?php echo $segment_key ?></h3>
+                        <table class="form-table" role="presentation">
+                            <tbody>
+                    <?php
+                    
+                    foreach( $segment_value as $question_key => $question_value ){
+
+                        ?><tr><td><hr></td><td><h4><?php echo $question_key ?></h4></td></tr><?php
+
+                        foreach( $question_value as $current_question_key => $current_question_value ){
+
+                            if ( gettype( $current_question_value ) !== 'array' ){
+                                ?>
+                                    <tr>
+                                        <th scope="row"><label><?php echo $current_question_key ?></label></th>
+                                        <td>
+                                        <?php
+                                            if ( $current_question_key === 'description' ) {
+
+                                               ?>
+                                                   <textarea rows="5" cols="38" name="<?php echo $segment_key . $name_divider . $question_key . $name_divider . $current_question_key ?>"><?php echo $current_question_value ?></textarea>
+                                                <?php  
+
+                                            } else {
+                                                ?>
+                                                    <input type="text" name="<?php echo $segment_key . $name_divider . $question_key . $name_divider . $current_question_key ?>" value="<?php echo $current_question_value ?>" class="regular-text">
+                                                <?php  
+                                            }  
+
+                                        ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                
+                            if ( gettype( $current_question_value ) === 'array' ){
+
+                                ?><tr><td><h4><?php echo $current_question_key ?></h4></td></tr><?php
+                                foreach( $current_question_value as $radio_key => $radio_value ){
+
+                                ?>
+                                    <tr>
+                                        <th scope="row"><label><?php echo $radio_key ?></label></th>
+                                        <td><input type="text" name="<?php echo $segment_key . $name_divider . $question_key . $name_divider . $current_question_key . $name_divider . $radio_key ?>" value="<?php echo $radio_value ?>" class="regular-text"></td>
+                                    </tr>
+                                <?php
+
+                                }
+
+                            }
+
+                        };
+
+
+                    }
+                        ?>
+                            </tbody>
+                        </table>
+                        <?php
         
+                };
 
+            ?>
+
+        </div>
     <?php
 
+
 }
 
-add_action('admin_head', 'thet_customize_questions_columns_width');
-function thet_customize_questions_columns_width() {
-    global $post_type;
-    if ( 'questions' == $post_type ) {
-        ?>
-            <style type="text/css">
-                .column-menu_order {
-                    width: 100px;
-                    text-align: center;
+add_action('save_post_questions', 'thet_save_question_changes');
+
+
+function thet_save_question_changes(){
+    
+    $file = fopen( plugin_dir_path(__FILE__) . 'log.txt', "w" ) or die('tadafdada');
+    ob_start();
+    var_dump( $_POST );
+    fwrite( $file, ob_get_clean() );
+    fclose( $file );
+
+    if ( isset( $_POST['action'] ) && $_POST['action'] === 'editpost' ){
+
+        $question_data = get_post_meta( $_POST['post_ID'], 'question_data', true );
+        foreach( $_POST as $post_key => $post_value ){
+
+           if( str_contains( $post_key, '___' ) ){
+
+                $path_to_data = explode( '___', $post_key );
+
+                $current_path = &$question_data;
+                foreach( $path_to_data as $step ){
+
+                    if ( isset( $current_path[$step] ) ){
+
+                        $current_path = &$current_path[$step];
+
+                    } 
+
                 }
-            </style>
-        <?php
-    }
-}
 
-add_action( 'manage_questions_posts_columns', 'thet_customize_questions_columns' );
+                $current_path = wp_strip_all_tags( $post_value, true );
 
-function thet_customize_questions_columns( $columns ){
+            }
 
-    $new_columns = [
-            'cb' => $columns['cb'],
-            'menu_order' => 'Order',
-            'title' => $columns['title'],
-            'date' => $columns['date']
-        ];
-    return $new_columns;
+        };
 
-}
-
-add_action( 'manage_questions_posts_custom_column', 'thet_questions_custom_columns_values', 10, 2 );
-
-function thet_questions_custom_columns_values( $column, $post_id ){
-
-    switch ( $column ){
-
-        case 'menu_order': echo get_post( $post_id )->menu_order; break;
+        update_post_meta( $_POST['post_ID'], 'question_data', $question_data );
 
     }
 
-}
-
-add_action( 'pre_get_posts', 'thet_customize_questions_query');
-
-function thet_customize_questions_query( $query ){
-
-    if ( $query->is_main_query() && $query->get('post_type') === 'questions' ){
-
-        $query->set( 'orderby', 'menu_order' );
-        $query->set( 'order', 'ASC' );
-
-    }
 
 }
+

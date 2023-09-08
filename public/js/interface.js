@@ -19,6 +19,7 @@ class Interface {
         this.beams = document.querySelectorAll('.beam');
         this.questions = document.querySelectorAll('.question');
         this.answers = document.querySelectorAll('.answer');
+        this.radioBtns = document.querySelectorAll('.thet-radio-option');
 
         this.beamTitle = document.querySelector('.beam-title');
 
@@ -131,6 +132,7 @@ class Interface {
 
         this.activeQuestion = currentQuestion;
         this.fillInMainquestionAndDecription();
+        this.fillInRadioValues();
         this.fillInAnswer();
         this.fillInComment();
 
@@ -215,6 +217,20 @@ class Interface {
         let mainQuestionContentAndDescription = thetQuestions.getCurrentMainQuestionContentAndDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
         this.mainQuestion.innerText = mainQuestionContentAndDescription['title'];
         this.mainQuestionDescription.innerText = mainQuestionContentAndDescription['description'];
+
+    }
+
+    fillInRadioValues(){
+
+        let values = thetQuestions.getCurrentQuestionRadioValues( this.activeBeam, this.activeSegment, this.activeQuestion );
+
+        let i = 0;
+        this.radioBtns.forEach( function( radioButton ){
+
+            radioButton.querySelector('span').innerText = values[i];
+            i++;
+
+        } );
 
     }
 

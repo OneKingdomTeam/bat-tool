@@ -39,5 +39,20 @@ class Questions {
         return( questionTitle );
 
     }
+
+    getCurrentQuestionRadioValues( activeBeam, activeSegment, activeQuestion ){
+
+        let currentBeamNumber = activeBeam.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+        let currentSegmentNumber = activeSegment.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+        let currentQuestionNumber = activeQuestion.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+
+        let radioValues = [
+            this.questions['beam' + currentBeamNumber ][ 'segment' + currentSegmentNumber ]['question' + currentQuestionNumber ]['radio']['option1'],
+            this.questions['beam' + currentBeamNumber ][ 'segment' + currentSegmentNumber ]['question' + currentQuestionNumber ]['radio']['option2'],
+            this.questions['beam' + currentBeamNumber ][ 'segment' + currentSegmentNumber ]['question' + currentQuestionNumber ]['radio']['option3'],
+        ];
+
+        return radioValues;
+    }
 }
 

@@ -137,12 +137,10 @@ add_shortcode( 'thet_testing', 'thet_testing' );
 function thet_testing(){
     
     ob_start();
-    update_post_meta( 402, 'answers_data', 'hello' );
+    $admin_role = get_role( 'form_admin' );
+    var_dump( $admin_role );
 
-    var_dump( get_post_meta( 402, 'answers_data' ));
-    
-    $output = ob_get_clean();
-    return "<pre>" . $output . "</pre>";
+    return "<pre>" . ob_get_clean() . "</pre>";
 
 }
 

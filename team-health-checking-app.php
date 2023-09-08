@@ -19,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ---------------------- Backend Scripts  ---------------------
 
+// Redirect to login for non-logged in users
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/login-redirect.php';
+
+// Restrict wp-admin for form-user
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/hide-admin.php';
+
 // Activation and deactivation hooks
 require_once plugin_dir_path( __FILE__ ) . 'admin/de-activation/de-activation.php';
 
@@ -31,10 +37,13 @@ register_deactivation_hook( __FILE__, 'thet_deactivation' );
 require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/query-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/set-editable-roles.php';
+
 
 // Force Classic Editor for Quesions
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/force-classic-editor.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/question-admin-ui-customizations.php';
 
 
 // ---------------------- Front end related scripts ---------------------
@@ -43,3 +52,5 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php
 require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';
 require_once plugin_dir_path( __FILE__ ) . 'public/register-application-scripts.php';
 require_once plugin_dir_path( __FILE__ ) . 'public/public-ajax.php';
+
+

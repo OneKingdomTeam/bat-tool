@@ -25,7 +25,13 @@ function thet_return_user_roles_capabilities(){
                 'edit_others_applications', 
                 'publish_applications',       
                 'read_private_applications', 
-                'edit_applications'
+                'edit_applications',
+                'edit_users',
+                'delete_users',
+                'create_users',
+                'list_users',
+                'remove_users',
+                'promote_users',
             ),
         'form_user_capabilities' => array(
                 'edit_application', 

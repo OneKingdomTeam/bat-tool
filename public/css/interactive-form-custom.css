@@ -23,6 +23,10 @@
   margin: 0px 5px;
 }
 
+.main-question {
+    line-height: 1.45!important;
+}
+
 .thet-loader {
 	position: fixed;
 	top: 0px;
