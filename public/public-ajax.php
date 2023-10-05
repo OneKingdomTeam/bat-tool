@@ -90,3 +90,22 @@ function thet_save_application_data(){
     wp_die();
 
 }
+
+
+add_action( 'wp_ajax_get_recent_update_time', 'thet_get_recent_update_time');
+
+function thet_get_recent_update_time(){
+
+    $applications = get_posts( ['post_type' => 'applications' ] );
+    
+    $output = [];
+
+    foreach( $applications as $application ){
+        $output[ $application->ID ]['title'] = $application->post_title;
+        $output[ $application->ID ]['last_save_time'] = get_post_meta( $application->ID, 'last_save_time', true );
+    }
+
+    wp_send_json( $output );
+    wp_die();
+
+}
