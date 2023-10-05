@@ -48,6 +48,7 @@ function thet_get_applications(){
                                     <div class="wrapper">
                                         <h1 class="title pb-4"><?php echo $application->post_title ?></h1>
                                         <h2 class="subtitle"><?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></h1>
+                                        <div class="thet-last-save-time">Last save time:<br><span><?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?></span></div>
                                     </div>
                                 </div>
                                 <div class="column is-one-fifth is-flex is-justify-content-center is-align-items-center">
@@ -65,6 +66,33 @@ function thet_get_applications(){
 
         ?>
     </div>
+    <script>
+        let timeFields = document.querySelectorAll('.thet-last-save-time span');
+        window.addEventListener('DOMContentLoaded', function(){
+            timeFields.forEach( function( timeField ){
+                thetConvertTimeToLocal( timeField );
+            } );
+        } );
+        function thetConvertTimeToLocal( timeField ){
+            const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; 
+            // Create a new JavaScript Date object based on the timestamp
+            // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+            var date = new Date( parseInt( timeField.innerText ) * 1000);
+            // Hours part from the timestamp
+            var hours = date.getHours();
+            // Minutes part from the timestamp
+            var minutes = "0" + date.getMinutes();
+            // Seconds part from the timestamp
+            var seconds = "0" + date.getSeconds();
+
+            // Will display time in 10:30:23 format
+            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+            formattedTime += " - " + date.getDate() + " " + month[date.getUTCMonth()] + " " + date.getFullYear();
+
+            timeField.innerText = formattedTime;        
+        }
+    </script>
     <?php
 
     $output = ob_get_contents();

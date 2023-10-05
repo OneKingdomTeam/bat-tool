@@ -80,6 +80,7 @@ function thet_save_application_data(){
         // WARNING the $_POST['data'] should be sanitized in one way or another
     
         update_post_meta( $required_application_id, 'answers_data', $data );
+        update_post_meta( $required_application_id, 'last_save_time', time() );
         wp_send_json( 'okay' );
         wp_die();
 

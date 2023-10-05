@@ -24,6 +24,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/login-redirect.ph
 
 // Restrict wp-admin for form-user
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/hide-admin.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/disable-admin-user-changes.php';
 
 // Activation and deactivation hooks
 require_once plugin_dir_path( __FILE__ ) . 'admin/de-activation/de-activation.php';
