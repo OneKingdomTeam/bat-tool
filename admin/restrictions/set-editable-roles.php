@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_filter('editable_roles', 'thet_restrict_editable_roles');
+// Allows form_admin to only assign 2 roles for newely created users
+// form_admin as themselves and form_user as for the people in different
+// countries
 
 function thet_restrict_editable_roles( $roles ){
 
