@@ -18,6 +18,7 @@ function thet_restrict_wp_admin(){
             show_admin_bar( false );
 
             if ( is_admin() && !wp_doing_ajax() ){
+            // WP AJAX is considered as is_admin() request. So we need to exclude wp-admin/admin-ajax.php requests from it.
 
                 wp_redirect( '/' );
                 exit;
