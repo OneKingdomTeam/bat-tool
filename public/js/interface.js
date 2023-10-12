@@ -4,6 +4,8 @@ class Interface {
 
         thetAnswers.clearAnswersFromBrowser();
 
+        this.sessionKey = this.generateSessionKey();
+
         this.beamClass = 'beam-';
         this.segmentClass = 'segment-';
         this.subsegmentClass = 'subsegment-';
@@ -36,6 +38,20 @@ class Interface {
         this.appendEventListeners();
 
     }
+
+    generateSessionKey(){
+        let length = 32;
+        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let randomString = '';
+
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            randomString += characters.charAt(randomIndex);
+        }
+
+        return randomString;
+
+        }
 
     updateBeamTitle(){
 
@@ -335,9 +351,10 @@ class Interface {
 
         if ( status === true ) {
 
+            var self = this;
             this.autoSaveInterval = setInterval(() => {
                 console.log( 'Saving to server...' );
-                thetConnector.saveApplicationData( thetAnswers.answers );
+                thetConnector.saveApplicationData( thetAnswers.answers, self.sessionKey );
             }, 15000 );
 
         } else {

@@ -13,39 +13,75 @@ function thet_get_application_data(){
     $user_is_logged_in = is_user_logged_in();
     $user_can_access = false;
 
+    $new_session_key = sanitize_title( $_POST['session_key'] );
+
     $required_application_id = intval( $_POST['application_id'] );
     $required_application_object = get_post( $required_application_id );
 
     $application_author_id = $required_application_object->post_author;
     $requesting_user = wp_get_current_user();
 
+    // Various checking variables to prevent opening 2 instances
+    $last_save_time = intval( get_post_meta( $required_application_id, 'last_save_time', true ) );
+    $time_now = time();
+    $since_last_save = $time_now - $last_save_time;
+    $last_editor = get_post_meta( $required_application_id, '_edit_last', true );
+    $force_opening = boolval( $_POST['force_open'] );
 
+    // Verify if user can actually access the application
     if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
     }
     if ( in_array( 'form_admin', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
         $user_can_access = true;
     }
-    
+
+
+    // If all goes well sends data to frontend
     if ( $user_is_logged_in && $nonce_is_valid !== false && $user_can_access ){
+    
+        if ( $since_last_save >= 30 || $force_opening === true ){
+
+            update_post_meta( $required_application_id, '_edit_last', $requesting_user->ID );   
+            update_post_meta( $required_application_id, 'last_editor_session_key', $new_session_key );
+            update_post_meta( $required_application_id, 'last_save_time', time() );
+            $required_application_data = get_post_meta( $required_application_id, 'answers_data', true );
+            wp_send_json( $required_application_data );
+            wp_die();
+
+        } else {
+    
+            if ( $since_last_save < 30 && intval( $requesting_user->ID ) !== intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ) {
+            
+                $response = [
+                    'response' => 'warning',
+                    'message' => 'Last save is less than 30 seconds ago. Try later or use force_open flag to take over the application other user will be disconnected.',
+                ];
+
+                wp_send_json( $response, 401 );
+                wp_die();
+
+
+            }
+
+            if ( $since_last_save < 30 && intval( $requesting_user->ID ) === intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ) {
+            
+                $response = [
+                    'response' => 'warning',
+                    'message' => 'Seems that this application is opened by you in another window. Try waiting for a bit and opening it again or use force_open flag to take over in this window.',
+                ];
+
+                wp_send_json( $response, 401 );
+                wp_die();
+            }
+
         
-        $required_application_data = get_post_meta( $required_application_id, 'answers_data', true );
-        wp_send_json( $required_application_data );
-        wp_die();
+        }
 
-    }
+    } 
 
-    $test = [
-        'req_post_author' => $required_application_object->post_author,
-        'current_user_id' => $requesting_user->ID,
-        'current_user_roles' => $requesting_user->roles,
-        'user_can_access' => $user_can_access,
-        'user_logged_in' => $user_is_logged_in,
-        'nonce_is_valid' => $nonce_is_valid,
-    ];
-
-    wp_send_json( $test );
-    //wp_send_json( 'Unauthorised' );
+    wp_send_json( 
+        [ 'response' => 'unauthorised' ], 401 );
     wp_die();
 
 };
@@ -60,6 +96,8 @@ function thet_save_application_data(){
     $user_is_logged_in = is_user_logged_in();
     $new_data_exists = isset( $_POST['data'] );
     $user_can_access = false;
+
+    $current_session_key = sanitize_title( $_POST['session_key'] );
 
     $required_application_id = intval( $_POST['application_id'] );
     $required_application_object = get_post( $required_application_id );
@@ -77,16 +115,48 @@ function thet_save_application_data(){
     
     if ( $user_is_logged_in && $nonce_is_valid !== false && $new_data_exists && $user_can_access ){
         
-        // WARNING the $_POST['data'] should be sanitized in one way or another
-    
+        if ( intval( $requesting_user->ID ) !== intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ){
+
+            $response = [
+                'response' => 'overtaken',
+                'message' => 'Another user took over the form. You can check who it was in the application list page'
+            ];
+            
+            wp_send_json( $response, 401 );
+            wp_die();
+
+        }
+
+        if ( $current_session_key !== get_post_meta( $required_application_id, 'last_editor_session_key', true  ) ){
+
+            $response = [
+                'response' => 'overtaken',
+                'message' => 'Seems that you opened the form in the new window. Try finding the window or hit "Force open" to open take over in this window.'
+            ];
+
+            wp_send_json( $response, 401 );
+            wp_die();
+
+        }
+
+        update_post_meta( $required_application_id, '_edit_last', $requesting_user->ID );   
+        update_post_meta( $required_application_id, 'last_editor_session_key', $current_session_key );
         update_post_meta( $required_application_id, 'answers_data', $data );
         update_post_meta( $required_application_id, 'last_save_time', time() );
-        wp_send_json( 'okay' );
+        
+        $response = [
+            'response' => 'okay',
+            'last_save_time' => get_post_meta( $required_application_id, 'last_save_time', true ),
+            'last_editor' => get_post_meta( $required_application_id, '_edit_last', true ),
+            'last_editor_session_key' => get_post_meta( $required_application_id, 'last_editor_session_key', true ),
+        ];
+
+        wp_send_json( $response );
         wp_die();
 
     }
     
-    wp_send_json( 'Unauthorised' );
+    wp_send_json( 'unauthorised', 401);
     wp_die();
 
 }
