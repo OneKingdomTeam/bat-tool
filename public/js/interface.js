@@ -22,6 +22,7 @@ class Interface {
         this.questions = document.querySelectorAll('.question');
         this.answers = document.querySelectorAll('.answer');
         this.radioBtns = document.querySelectorAll('.thet-radio-option');
+        this.radioBtnClear = document.querySelector('.thet-radio-clear');
 
         this.beamTitle = document.querySelector('.beam-title');
 
@@ -204,6 +205,14 @@ class Interface {
 
     }
 
+    handleClearRadioClick(){
+        this.radioBtns.forEach( function(radio){
+            radio.firstElementChild.checked = false;
+        } );
+        this.activeAnswer = null;
+        this.callSaveData();
+    }
+
     callSaveData(){
 
         thetAnswers.updateAnswers( this.activeBeam, this.activeSegment, this.activeQuestion, this.activeAnswer, this.textarea );
@@ -262,6 +271,10 @@ class Interface {
 
         })
 
+        document.querySelector('.answer-1').checked = false;
+        document.querySelector('.answer-2').checked = false;
+        document.querySelector('.answer-3').checked = false;
+
         if ( value == 0 ) { document.querySelector('.answer-1').checked = true };
         if ( value == 50 ) { document.querySelector('.answer-2').checked = true };
         if ( value == 100 ) { document.querySelector('.answer-3').checked = true };
@@ -298,6 +311,10 @@ class Interface {
                 self.handleAnswerClick( event );
             } );
         });
+
+        self.radioBtnClear.addEventListener('click', function(){
+            self.handleClearRadioClick();
+        } );
 
         self.textarea.addEventListener('change', function(){
             self.handleCommentChange();

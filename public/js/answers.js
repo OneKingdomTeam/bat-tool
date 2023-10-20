@@ -352,6 +352,10 @@ class Answers {
 
     extractAnswerValue( activeAnswer ){
 
+        if( activeAnswer == null ){
+            return ( null );
+        }
+
         let classList = activeAnswer.getAttribute( 'class' );
 
         if ( classList.includes('answer-1' )){

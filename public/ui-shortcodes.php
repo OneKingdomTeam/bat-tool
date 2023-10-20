@@ -54,7 +54,7 @@ function thet_get_applications(){
                                                 <div class="thet-last-save-time" data-last-save-time="<?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?>">Last save time:<br><span><?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?></span></div>
                                             </div>
                                             <div class="column">
-                                                <div class="thet-last-editor">Last editor:<br><span><?php echo get_userdata( get_post_meta( $application->ID, '_edit_last', true ) )->user_login ?></span></div>
+                                                <div class="thet-last-editor">Last editor:<br><span><?php echo get_userdata( intval( get_post_meta( $application->ID, '_edit_last', true )))->user_login ?></span></div>
                                             </div>
 
                                         </div>
