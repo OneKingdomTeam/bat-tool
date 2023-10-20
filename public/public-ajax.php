@@ -52,10 +52,13 @@ function thet_get_application_data(){
         } else {
     
             if ( $since_last_save < 30 && intval( $requesting_user->ID ) !== intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ) {
+
+                $last_editor_name = get_userdata( intval( $last_editor ) )->user_login;
+
             
                 $response = [
-                    'response' => 'warning',
-                    'message' => 'Last save is less than 30 seconds ago. Try later or use force_open flag to take over the application other user will be disconnected.',
+                    'response' => 'Warning',
+                    'message' => 'Last save is less than 30 seconds ago. Seems that user: "' . $last_editor_name . '" is currently editting or viewing this application. Try again later.',
                 ];
 
                 wp_send_json( $response, 401 );
@@ -67,8 +70,8 @@ function thet_get_application_data(){
             if ( $since_last_save < 30 && intval( $requesting_user->ID ) === intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ) {
             
                 $response = [
-                    'response' => 'warning',
-                    'message' => 'Seems that this application is opened by you in another window. Try waiting for a bit and opening it again or use force_open flag to take over in this window.',
+                    'response' => 'Warning',
+                    'message' => 'Seems that this application is opened by you in another window. It may also happened that you closed the application and reopend it within 30 seconds. Check other browser tab or reload this page after at least 30 seconds.',
                 ];
 
                 wp_send_json( $response, 401 );
@@ -105,6 +108,7 @@ function thet_save_application_data(){
     $application_author_id = $required_application_object->post_author;
     $requesting_user = wp_get_current_user();
 
+    $last_editor = get_post_meta( $required_application_id, '_edit_last', true );
 
     if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
         $user_can_access = true;
@@ -115,11 +119,13 @@ function thet_save_application_data(){
     
     if ( $user_is_logged_in && $nonce_is_valid !== false && $new_data_exists && $user_can_access ){
         
-        if ( intval( $requesting_user->ID ) !== intval( get_post_meta( $required_application_id, '_edit_last', true ) ) ){
+        if ( intval( $requesting_user->ID ) !== intval( $last_editor ) ){
+
+            $last_editor_name = get_userdata( intval( $last_editor ) )->user_login;
 
             $response = [
-                'response' => 'overtaken',
-                'message' => 'Another user took over the form. You can check who it was in the application list page'
+                'response' => 'Overtaken',
+                'message' => 'User: "' . $last_editor_name . '" took over the form. Sorry about that, you can go back to application listing, or trying to reload the page in a bit.'
             ];
             
             wp_send_json( $response, 401 );
@@ -130,7 +136,7 @@ function thet_save_application_data(){
         if ( $current_session_key !== get_post_meta( $required_application_id, 'last_editor_session_key', true  ) ){
 
             $response = [
-                'response' => 'overtaken',
+                'response' => 'Overtaken',
                 'message' => 'Seems that you opened the form in the new window. Try finding the window or hit "Force open" to open take over in this window.'
             ];
 
@@ -145,7 +151,7 @@ function thet_save_application_data(){
         update_post_meta( $required_application_id, 'last_save_time', time() );
         
         $response = [
-            'response' => 'okay',
+            'response' => 'Okay',
             'last_save_time' => get_post_meta( $required_application_id, 'last_save_time', true ),
             'last_editor' => get_post_meta( $required_application_id, '_edit_last', true ),
             'last_editor_session_key' => get_post_meta( $required_application_id, 'last_editor_session_key', true ),

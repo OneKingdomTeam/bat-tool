@@ -47,13 +47,22 @@ function thet_get_applications(){
                                 <div class="column">
                                     <div class="wrapper">
                                         <h1 class="title pb-4"><?php echo $application->post_title ?></h1>
-                                        <h2 class="subtitle"><?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></h1>
-                                        <div class="thet-last-save-time">Last save time:<br><span><?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?></span></div>
+                                        <h3 class="subtitle">Owner: <?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></h3>
+                                        <div class="columns">
+
+                                            <div class="column">
+                                                <div class="thet-last-save-time" data-last-save-time="<?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?>">Last save time:<br><span><?php echo get_post_meta( $application->ID, 'last_save_time', true ) ?></span></div>
+                                            </div>
+                                            <div class="column">
+                                                <div class="thet-last-editor">Last editor:<br><span><?php echo get_userdata( get_post_meta( $application->ID, '_edit_last', true ) )->user_login ?></span></div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="column is-one-fifth is-flex is-justify-content-center is-align-items-center">
                                     <a href="<?php echo get_permalink( get_option('thet_options')['interactive_form_page_id'] ) . '?application_id=' . $application->ID  ?>">
-                                        <div class="button is-primary px-6">
+                                        <div class="button is-primary px-6 thet-listing-edit-button">
                                             Edit
                                         </div>
                                     </a>

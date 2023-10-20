@@ -35,6 +35,8 @@ class Interface {
 
         this.lastQuestionWarning = document.querySelector('.last-question-warning');
 
+        this.popupHtmlContent = '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; background-color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;" class="thet-interactive-form-popup-wrapper"> <div class="thet-interactive-form-popup-window is-flex is-flex-direction-column is-justify-content-space-evenly p-5" style="width: 550px; height: 300px; background-color: #fff; border-radius: 0.5rem; box-shadow: 0px 0px 2rem 0px rgba(0,0,0,0.75);"> <div class="container thet-interactive-form-popup-title"> <h3 class="title is-3">Title placeholder</h3> </div><div class="container thet-interactive-form-popup-message"> <div class="content has-text-centered"> Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. </div></div><div class="thet-interactive-form-popup-buttons" style="width: 100%"> <div class="columns"> <div class="column"> <button class="button is-warning is-fullwidth thet-interactive-form-popup-warning-button">Back to listing</button> </div><div class="column"> <button class="button is-success is-fullwidth thet-interactive-form-popup-warning-button">Reload the page</button> </div></div></div></div>';
+
         this.appendEventListeners();
 
     }
@@ -362,6 +364,42 @@ class Interface {
             clearInterval( this.autoSaveInterval );
 
         }
+
+    }
+
+    showPopup( visible, title, message, btnToListing, btnReload ){
+
+        if ( visible == false ){
+
+            let popupWrapper = document.querySelector('.thet-interactive-form-popup-wrapper');
+            if ( popupWrapper !== null ){
+                popupWrapper.outerHTML = "";
+            }
+
+            return;
+            
+        };
+
+        if ( visible == true ){
+
+            const parser = new DOMParser();
+            const parsedHtml = parser.parseFromString( this.popupHtmlContent, 'text/html');
+            const actuallContent = parsedHtml.querySelector('.thet-interactive-form-popup-wrapper').cloneNode(true);
+
+            actuallContent.querySelector('.thet-interactive-form-popup-title h3').innerText = title;
+            actuallContent.querySelector('.thet-interactive-form-popup-message .content').innerText = message;
+            actuallContent.querySelector('.button.is-warning').addEventListener('click', function(){ window.location.href = '/' });
+            actuallContent.querySelector('.button.is-success').addEventListener('click', function(){ window.location.reload()});
+
+            if ( btnToListing == false ) {
+                actuallContent.querySelector('.button.is-warning').closest('.column').outerHTML = "";
+            }
+            if ( btnReload == false ) {
+                actuallContent.querySelector('.button.is-success').closest('.column').outerHTML = "";
+            }
+
+            document.body.appendChild( actuallContent );
+        };
 
     }
 

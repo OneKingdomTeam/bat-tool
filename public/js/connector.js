@@ -5,6 +5,7 @@ class Connector {
         this.nonce = nonce;
         this.ajaxUrl = '/wp-admin/admin-ajax.php';
         this.applicationId = this.extractRequiredPostId();
+        this.isForceOpen = this.extractForceOpen();
         this.applicationData = null;
         this.recentResponse = null;
         this.recentResponseCode = null;
@@ -17,6 +18,12 @@ class Connector {
 
         const data = await this.fetchApplicationData( this.applicationId, sessionKey ).then( (data) => { return data });
         this.applicationData = data;
+        this.recentResponse =  data;
+
+        if( this.recentResponseCode !== 200 ){
+            thetInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
+        }
+
         return this.applicationData;
 
     }
@@ -25,6 +32,11 @@ class Connector {
 
         const data = await this.fetchSaveApplicationData( this.applicationId, applicationData, sessionKey).then( (data) => { return data });
         this.recentResponse =  data;
+
+        if( this.recentResponseCode !== 200 ){
+            thetInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
+        }
+
         return this.recentResponse;
 
     }
@@ -36,13 +48,17 @@ class Connector {
         data.append( 'action', 'get_application_data');
         data.append( 'application_id', parseInt( applicationId ));
         data.append( 'session_key', sessionKey );
+        if ( this.isForceOpen == true ){
+            data.append( 'force_open', true );
+        }
         data.append( 'nonce', thetAjax.nonce );
 
         const response = await fetch( '/wp-admin/admin-ajax.php' , {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: data});
         this.recentResponseCode = response.status;
-        return response.json();
+        let responseData = response.json();
+        return responseData;
 
     }
 
@@ -59,8 +75,10 @@ class Connector {
         const response = await fetch( '/wp-admin/admin-ajax.php' , {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: data});
+
         this.recentResponseCode = response.status;
-        return response.json();
+        let responseData = response.json();
+        return responseData;
 
     };
 
@@ -69,6 +87,18 @@ class Connector {
         let params = new URL(document.location).searchParams;
         let parsedApplicationId = params.get("application_id");
         return parsedApplicationId;
+
+    };
+
+    extractForceOpen(){
+
+        let params = new URL(document.location).searchParams;
+        let parsedForceOpen = params.get("force_open");
+        if( parsedForceOpen === "true" ){
+            return true;
+        } else {
+            return false;
+        }
 
     };
 
