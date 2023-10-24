@@ -123,7 +123,7 @@ function thet_get_application_title(){
         if ( intval( $requesting_user->ID ) === intval( $application_author_id ) ){
             $user_can_access = true;
         }
-        if ( in_array( 'form_editor', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
+        if ( in_array( 'form_admin', $requesting_user->roles ) || in_array( 'administrator', $requesting_user->roles )){
             $user_can_access = true;
         }
 
