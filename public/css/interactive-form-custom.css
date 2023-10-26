@@ -12,15 +12,24 @@
 }
 
 .disabled {
-  color: #888888!important;
-  cursor: not-allowed;
+    color: #888888!important;
+    cursor: not-allowed;
+}
+
+.beam-disabled {
+	filter: saturate( 0% ) brightness(150%);
+	cursor: not-allowed;
+}
+.beam-disabled:hover {
+	filter: saturate( 0% ) brightness(150%);
+	cursor: not-allowed;
 }
 
 .is-active {
-  border: 1px solid blue;
-  padding: 0px 10px;
-  border-radius: 7px;
-  margin: 0px 5px;
+    border: 1px solid blue;
+    padding: 0px 10px;
+    border-radius: 7px;
+    margin: 0px 5px;
 }
 
 .main-question {
@@ -28,21 +37,21 @@
 }
 
 .thet-loader {
-	position: fixed;
-	top: 0px;
-	left: 50%;
-	transform: translateX( -50% );
-	width: 100%;
-	height: 100vh;
-	background-color: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX( -50% );
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .thet-loader svg {
     max-width: 100px;
-	animation: circle 1s steps(18) infinite;
+    animation: circle 1s steps(18) infinite;
 }
 
 .is-hidden {
@@ -51,7 +60,7 @@
 
 @keyframes circle {
     from { 
-    	transform: rotate(90deg);
+        transform: rotate(90deg);
     }
     to {
         transform: rotate(450deg);

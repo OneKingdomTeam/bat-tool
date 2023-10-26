@@ -6,6 +6,9 @@ class Interface {
 
         this.sessionKey = this.generateSessionKey();
 
+        this.hoverWindow = '';
+
+        this.interactiveCircleClass = 'thet-interactive-circle';
         this.beamClass = 'beam-';
         this.segmentClass = 'segment-';
         this.subsegmentClass = 'subsegment-';
@@ -18,6 +21,7 @@ class Interface {
         this.introContent = document.querySelector('.intro-content')
         this.mainContent = document.querySelector('.main-content')
 
+        this.interactiveCircle = document.querySelector('.' + this.interactiveCircleClass );
         this.beams = document.querySelectorAll('.beam');
         this.questions = document.querySelectorAll('.question');
         this.answers = document.querySelectorAll('.answer');
@@ -38,6 +42,7 @@ class Interface {
 
         this.popupHtmlContent = '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; background-color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;" class="thet-interactive-form-popup-wrapper"> <div class="thet-interactive-form-popup-window is-flex is-flex-direction-column is-justify-content-space-evenly p-5" style="width: 550px; height: 300px; background-color: #fff; border-radius: 0.5rem; box-shadow: 0px 0px 2rem 0px rgba(0,0,0,0.75);"> <div class="container thet-interactive-form-popup-title"> <h3 class="title is-3">Title placeholder</h3> </div><div class="container thet-interactive-form-popup-message"> <div class="content has-text-centered"> Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. </div></div><div class="thet-interactive-form-popup-buttons" style="width: 100%"> <div class="columns"> <div class="column"> <button class="button is-warning is-fullwidth thet-interactive-form-popup-warning-button">Back to listing</button> </div><div class="column"> <button class="button is-success is-fullwidth thet-interactive-form-popup-warning-button">Reload the page</button> </div></div></div></div>';
 
+        this.prepareHoverElement();
         this.appendEventListeners();
 
     }
@@ -118,6 +123,54 @@ class Interface {
 
     }
 
+    prepareHoverElement(){
+
+        this.hoverWindow = document.createElement('div');
+        this.hoverWindow.style.minWidth = '10rem';
+        this.hoverWindow.style.minHeight = '1rem';
+        this.hoverWindow.style.padding = '1rem';
+        this.hoverWindow.style.borderRadius = '0.4rem' ;
+        this.hoverWindow.style.backgroundColor = '#ffffff' ;
+        this.hoverWindow.style.boxShadow = '10px 10px 25px 0px rgba(0,0,0,0.57)';
+        this.hoverWindow.style.fontSize = '1.2rem';
+        this.hoverWindow.style.textAlign  = 'center';
+        this.hoverWindow.style.display = 'block';
+        this.hoverWindow.style.position = 'absolute';
+        this.hoverWindow.style.zIndex = '9999999';
+        this.hoverWindow.innerText = 'Loren Ipsum';
+        this.hoverWindow.classList.add('thet-interactive-form-hover-window');
+        this.hoverWindow.style.display = 'none';
+
+        document.body.appendChild( this.hoverWindow );
+
+    }
+
+    handleBeamMouseEnter( event ){
+
+        let hoverBeam = event.target;
+        let hoverBeamTitle = thetQuestions.getCurrentBeamTitle( hoverBeam );
+        this.hoverWindow.innerText = hoverBeamTitle;
+        this.hoverWindow.style.display = 'block';
+
+    }
+
+    handleBeamMouseLeave(){
+
+        this.hoverWindow.style.display = 'none';
+
+    }
+
+    handleCircleHover( event ){
+
+        let mouseX = event.clientX;
+        let mouseY = event.clientY;
+        let windowPositionX = mouseX + 30;
+        let windowPositionY = mouseY + 30;
+        this.hoverWindow.style.top = windowPositionY.toString() + 'px';
+        this.hoverWindow.style.left = windowPositionX.toString() + 'px';
+
+    }
+
     handleBeamClick( event ){
 
         this.introContent.classList.add('is-hidden');
@@ -129,6 +182,7 @@ class Interface {
 
         let currentBeam = event.target.closest('.beam')
         currentBeam.classList.add('active');
+
         this.activeBeam = currentBeam;
 
         this.activeSegment = event.target.closest('.segment');
@@ -294,10 +348,18 @@ class Interface {
 
         var self = this;
 
+        self.interactiveCircle.addEventListener('mousemove', (event)=>this.handleCircleHover(event));
+
         self.beams.forEach( function( beam ){
+            // Checks if current beam is disabled
+            if( beam.classList.contains('beam-disabled') ) { return };
+            
             beam.addEventListener( 'click', function( event ){
                 self.handleBeamClick( event );
             } );
+
+            beam.addEventListener( 'mouseenter', (event)=>self.handleBeamMouseEnter(event) );
+            beam.addEventListener( 'mouseleave', (event)=>self.handleBeamMouseLeave(event) );
         });
 
         self.questions.forEach( function( question ){
