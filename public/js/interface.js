@@ -27,6 +27,9 @@ class Interface {
         this.answers = document.querySelectorAll('.answer');
         this.radioBtns = document.querySelectorAll('.thet-radio-option');
         this.radioBtnClear = document.querySelector('.thet-radio-clear');
+        this.commentTitle = document.querySelector('.thet-comment-title');
+        this.commentDescription = document.querySelector('.thet-comment-description');
+
 
         this.beamTitle = document.querySelector('.beam-title');
 
@@ -206,6 +209,7 @@ class Interface {
         this.activeQuestion = currentQuestion;
         this.fillInMainquestionAndDecription();
         this.fillInRadioValues();
+        this.fillInCommentTitleAndCommentDescription();
         this.fillInAnswer();
         this.fillInComment();
 
@@ -312,6 +316,15 @@ class Interface {
             i++;
 
         } );
+
+    }
+
+    fillInCommentTitleAndCommentDescription(){
+
+        let commentData = thetQuestions.getCurrentCommentTitleAndCommentDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
+
+        this.commentTitle.innerText = commentData['commentTitle'];
+        this.commentDescription.innerText = commentData['commentDescription'];
 
     }
 

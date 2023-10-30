@@ -54,5 +54,19 @@ class Questions {
 
         return radioValues;
     }
+
+    getCurrentCommentTitleAndCommentDescription( activeBeam, activeSegment, activeQuestion ){
+
+        let currentBeamNumber = activeBeam.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+        let currentSegmentNumber = activeSegment.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+        let currentQuestionNumber = activeQuestion.getAttribute( 'class' ).replace( /[^0-9]/g,"");
+
+        let commentSectionData = {
+            "commentTitle" : this.questions['beam' + currentBeamNumber ][ 'segment' + currentSegmentNumber ]['question' + currentQuestionNumber ]['commentTitle'],
+            "commentDescription" : this.questions['beam' + currentBeamNumber ][ 'segment' + currentSegmentNumber ]['question' + currentQuestionNumber ]['commentDescription']
+        };
+
+        return commentSectionData;
+    }
 }
 

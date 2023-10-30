@@ -10,8 +10,8 @@
           "option2": "Not sure / Needs Improvement",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We’ve received coaching/training about vision and mission.",
@@ -21,8 +21,8 @@
           "option2": "Not sure / Needs Improvement",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "Those on our MTM team can articulate the vision and mission.",
@@ -32,8 +32,8 @@
           "option2": "Not sure / Needs Improvement",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re satisfied that our current vision and mission accurately reflect our present MTM strategy.",
@@ -43,8 +43,8 @@
           "option2": "Not sure / Needs Improvement",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -59,8 +59,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We’ve received prayer strategy coaching/training.",
@@ -70,8 +70,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We regularly pray together and/or engage others to pray for our people group/target audience.",
@@ -81,8 +81,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We are satisfied with our current prayer strategy and the level of active engagement in it.",
@@ -92,8 +92,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -108,8 +108,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching/training in Marketing.",
@@ -119,8 +119,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We are marketing content to our target audience on at least one digital platform (Facebook, Instagram, etc) on a consistent basis.",
@@ -130,8 +130,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We are satisfied with the results we’re receiving from our current marketing efforts.",
@@ -141,8 +141,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -157,8 +157,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received content development & planning coaching/training.",
@@ -168,8 +168,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We are strategically creating original and/or sourcing existing content to plan campaigns.",
@@ -179,8 +179,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re satisfied with our current content development and planning process.",
@@ -190,8 +190,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -206,8 +206,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "Our Digital Responder/Filterer(s) has received coaching/training for and feels competent in his/her role.",
@@ -217,8 +217,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "Our Digital Responder is regularly engaging in conversations and filtering for spiritual seekers.",
@@ -228,8 +228,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "Our current digital filtering process is yielding the desired results.",
@@ -239,8 +239,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -255,8 +255,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "Digital Responders, Dispatchers, and Multipliers have received follow-up data management coaching/training.",
@@ -266,8 +266,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We are regularly assigning, receiving, and providing updates about contacts in the follow-up data management system.",
@@ -277,8 +277,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We are satisfied with our process/system for following up with spiritual seekers.",
@@ -288,8 +288,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -304,8 +304,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching/training about digital assets and their role in reporting. ",
@@ -315,8 +315,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We are aware of and consistently completing the MTM quarterly reporting updates.",
@@ -326,8 +326,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We are confident in our understanding of Global Movement Metrics and reporting.",
@@ -337,8 +337,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -353,8 +353,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching/training around the topic of funding.",
@@ -364,8 +364,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We have access to sufficient funding to cover this year’s budgeted MTM costs.",
@@ -375,8 +375,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "Our source of funding is able to sustain our MTM initiative going forward.",
@@ -386,8 +386,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -402,8 +402,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have  received coaching/training in multiplicative disciple making.",
@@ -413,8 +413,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We have a plan/process to train new Multipliers and new believers in multiplicative disciple making (i.e. Zúme).",
@@ -424,8 +424,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re confident that our offline disciple making strategy is designed to lead to multiplication.",
@@ -435,8 +435,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -451,8 +451,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coalition development coaching/training.",
@@ -462,8 +462,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We’re regularly identifying, referring and mobilizing potential Multipliers and partners.",
@@ -473,8 +473,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re satisfied with the current makeup and growth opportunities for our MTM coalition.",
@@ -484,8 +484,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -500,8 +500,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching/training about how to expand our reach.",
@@ -511,8 +511,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "We're actively sharing content and targeting ads to identity seekers in the city(ies) where equipped Multiplers live.",
@@ -522,8 +522,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re satisfied with the fruit we are seeing with our current targeted reach and expansion efforts.",
@@ -533,8 +533,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -549,8 +549,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching/training about various outreach platforms and how to use them.",
@@ -560,8 +560,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "Our platforms are currently up to date, functioning, and being utilized.",
@@ -571,8 +571,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "We’re satisfied with the results we are getting from our current outreach platforms.",
@@ -582,8 +582,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   },
@@ -598,8 +598,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question2": {
         "title": "We have received coaching about how to remain true to our vision, mission, and values, especially as our coalition grows.",
@@ -609,8 +609,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question3": {
         "title": "Members of our MTM team are abiding by the things outlined in our coalition documents.",
@@ -620,8 +620,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       },
       "question4": {
         "title": "Our current coalition documents sufficiently provide the accountability structure that our MTM needs.",
@@ -631,8 +631,8 @@
           "option2": "Not sure",
           "option3": "Yes"
         },
-        "comment-title" : "Comment section",
-        "comment-description" : "If you would want to add something to your answer feel free to write it here:"
+        "commentTitle" : "Comment section",
+        "commentDescription" : "If you would want to add something to your answer feel free to write it here:"
       }
     }
   }

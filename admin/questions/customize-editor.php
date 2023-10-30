@@ -74,7 +74,7 @@ function thet_question_editor_adjustments(){
                                         <th scope="row"><label><?php echo $current_question_key ?></label></th>
                                         <td>
                                         <?php
-                                            if ( $current_question_key === 'description' ) {
+                                            if ( $current_question_key === 'description' || $current_question_key === 'commentDescription' ) {
 
                                                ?>
                                                    <textarea rows="5" cols="38" name="<?php echo $segment_key . $name_divider . $question_key . $name_divider . $current_question_key ?>"><?php echo $current_question_value ?></textarea>
@@ -168,6 +168,7 @@ function thet_save_question_changes(){
         update_post_meta( $_POST['post_ID'], 'question_data', $question_data );
         unset( $question_data );
     
+/*
         if ( isset( $_POST['thet-order'] )) {
 
             $args = [
@@ -178,6 +179,7 @@ function thet_save_question_changes(){
             wp_update_post( $args, true );
 
         }
+*/
 
     }
 
