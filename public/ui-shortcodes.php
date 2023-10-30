@@ -147,8 +147,8 @@ add_shortcode( 'thet_testing', 'thet_testing' );
 function thet_testing(){
     
     ob_start();
-    $admin_role = get_role( 'form_admin' );
-    var_dump( $admin_role );
+    $question_data = get_post_meta( 636, 'question_data', true );
+    var_dump( $question_data );
 
     return "<pre>" . ob_get_clean() . "</pre>";
 

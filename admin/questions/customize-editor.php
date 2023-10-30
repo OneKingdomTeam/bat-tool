@@ -137,6 +137,7 @@ function thet_save_question_changes(){
     var_dump( $_POST );
     fwrite( $file, ob_get_clean() );
     fclose( $file );
+    unset( $file );
 
     if ( isset( $_POST['action'] ) && $_POST['action'] === 'editpost' ){
 
@@ -165,6 +166,18 @@ function thet_save_question_changes(){
         };
 
         update_post_meta( $_POST['post_ID'], 'question_data', $question_data );
+        unset( $question_data );
+    
+        if ( isset( $_POST['thet-order'] )) {
+
+            $args = [
+                'ID' => intval( $_POST['ID'] ),
+                'menu_order' => intval( $_POST['thet-order'] ),
+            ];
+
+            wp_update_post( $args, true );
+
+        }
 
     }
 
