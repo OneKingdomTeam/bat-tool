@@ -36,7 +36,7 @@ window.addEventListener('load', async function(){
 
         }
 
-        thetInterface.autoSaveing( true );
+        thetInterface.autoSaving( true );
         thetInterface.updateWheel();
         thetInterface.showLoading( false );
 

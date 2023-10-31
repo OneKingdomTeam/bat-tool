@@ -9,6 +9,7 @@ class Connector {
         this.applicationData = null;
         this.recentResponse = null;
         this.recentResponseCode = null;
+        this.recentSaveTime = null;
 
         this.init();
 
@@ -30,12 +31,20 @@ class Connector {
 
     async saveApplicationData( applicationData, sessionKey ){
 
+        thetInterface.showSavingProgress( true );
         const data = await this.fetchSaveApplicationData( this.applicationId, applicationData, sessionKey).then( (data) => { return data });
         this.recentResponse =  data;
 
         if( this.recentResponseCode !== 200 ){
             thetInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
+            thetInterface.autoSaving( false );
         }
+
+        if( this.recentResponseCode === 200 ){
+            thetInterface.showSavingProgress( false );
+        }
+
+        this.recentSaveTime = Math.round( Date.now() / 1000 );
 
         return this.recentResponse;
 

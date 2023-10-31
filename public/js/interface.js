@@ -6,7 +6,8 @@ class Interface {
 
         this.sessionKey = this.generateSessionKey();
 
-        this.hoverWindow = '';
+        this.hoverWindow = null;
+
 
         this.interactiveCircleClass = 'thet-interactive-circle';
         this.beamClass = 'beam-';
@@ -29,6 +30,8 @@ class Interface {
         this.radioBtnClear = document.querySelector('.thet-radio-clear');
         this.commentTitle = document.querySelector('.thet-comment-title');
         this.commentDescription = document.querySelector('.thet-comment-description');
+        this.saveButton = document.querySelector('.thet-save-progress-button');
+        this.saveButtonLabel = document.querySelector('.thet-save-progress-label');
 
 
         this.beamTitle = document.querySelector('.beam-title');
@@ -45,7 +48,7 @@ class Interface {
 
         this.popupHtmlContent = '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; background-color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;" class="thet-interactive-form-popup-wrapper"> <div class="thet-interactive-form-popup-window is-flex is-flex-direction-column is-justify-content-space-evenly p-5" style="width: 550px; height: 300px; background-color: #fff; border-radius: 0.5rem; box-shadow: 0px 0px 2rem 0px rgba(0,0,0,0.75);"> <div class="container thet-interactive-form-popup-title"> <h3 class="title is-3">Title placeholder</h3> </div><div class="container thet-interactive-form-popup-message"> <div class="content has-text-centered"> Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. </div></div><div class="thet-interactive-form-popup-buttons" style="width: 100%"> <div class="columns"> <div class="column"> <button class="button is-warning is-fullwidth thet-interactive-form-popup-warning-button">Back to listing</button> </div><div class="column"> <button class="button is-success is-fullwidth thet-interactive-form-popup-warning-button">Reload the page</button> </div></div></div></div>';
 
-        this.prepareHoverElement();
+        this.prepareHoverElements();
         this.appendEventListeners();
 
     }
@@ -126,7 +129,7 @@ class Interface {
 
     }
 
-    prepareHoverElement(){
+    prepareHoverElements(){
 
         this.hoverWindow = document.createElement('div');
         this.hoverWindow.style.minWidth = '10rem';
@@ -145,6 +148,7 @@ class Interface {
         this.hoverWindow.style.display = 'none';
 
         document.body.appendChild( this.hoverWindow );
+
 
     }
 
@@ -403,6 +407,10 @@ class Interface {
             self.handleNextClick( event );
         } );
 
+        self.saveButton.addEventListener('click', function( event ){
+            thetConnector.saveApplicationData( thetAnswers.answers, self.sessionKey );
+        });
+
     }
 
     showError( title = 'Error',  content = 'Error occured' ){
@@ -441,7 +449,18 @@ class Interface {
 
     }
 
-    autoSaveing( status ){
+    showSavingProgress( status ){
+        if ( status === true ) {
+            this.saveButton.classList.add('is-loading');
+        }
+
+        if ( status === false ){
+            this.saveButton.classList.remove('is-loading');
+        }
+    }
+
+    autoSaving( status ){
+
 
         if ( status === true ) {
 
@@ -451,9 +470,20 @@ class Interface {
                 thetConnector.saveApplicationData( thetAnswers.answers, self.sessionKey );
             }, 15000 );
 
+            this.saveNotificationInterval = setInterval( () => {
+                if ( thetConnector.recentSaveTime !== null ) {
+                    let timeNow = Math.round( Date.now() / 1000 );
+                    let timeDifference = timeNow - thetConnector.recentSaveTime;
+                    let timeDifferenceStr = timeDifference.toString();
+                    this.saveButtonLabel.innerText = `Last save:  ${timeDifferenceStr}s ago`;
+                    this.saveButtonLabel.style.visibility = 'visible';
+                } 
+            }, 1000 );
+
         } else {
 
             clearInterval( this.autoSaveInterval );
+            clearInterval( this.saveNotificationInterval );
 
         }
 
