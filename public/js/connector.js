@@ -103,7 +103,13 @@ class Connector {
 
         let params = new URL(document.location).searchParams;
         let parsedForceOpen = params.get("force_open");
-        if( parsedForceOpen === "true" ){
+
+        // Expanded for option to do this through the localStorage as well
+        let localStorageForceOpen = window.localStorage.getItem('thet_force_open');
+
+        window.localStorage.removeItem('thet_force_open');
+        
+        if( parsedForceOpen === "true" || localStorageForceOpen === "true" ){
             return true;
         } else {
             return false;
