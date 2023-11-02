@@ -53,6 +53,7 @@ function thet_create_pages(){
     
 }
 
+
 function thet_remove_pages(){
 
     $thet_options = get_option( 'thet_options' );

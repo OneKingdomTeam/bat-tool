@@ -19,23 +19,23 @@ function thet_register_new_post_types(){
 
 function thet_register_applications() {
 
-    $labels = array(
+    $labels = [
 
         'name'          => _x( 'Applications', 'Post type general name', 'textdomain'),
         'singular_name' => _x( 'Application', 'Post type singular name', 'textdomain'),
         'menu_name' => _x( 'Applications', 'Admin menu text', 'textdomain'),
         'add_new' => _x( 'Add new', 'Add New on Toolbar', 'textdomain')
 
-    );
+    ];
 
-    $args = array(
+    $args = [
 
         'labels'              => $labels,
         'description'         => 'Form applications of the teams.',
         'public'              => false,
         'exclude_from_search' => true,
         'show_ui' => true,
-        'capabilities' => array(
+        'capabilities' => [
             'edit_post'          => 'edit_application', 
             'read_post'          => 'read_application', 
             'delete_post'        => 'delete_application', 
@@ -44,12 +44,12 @@ function thet_register_applications() {
             'publish_posts'      => 'publish_applications',       
             'read_private_posts' => 'read_private_applications', 
             'create_posts'       => 'edit_applications', 
-        ),
+        ],
         'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-aside',
-        'supports' => array('title', 'revisions', 'author', 'custom-fields'),
+        'supports' => [ 'title', 'author' ],
 
-    );
+    ];
 
 
     register_post_type( 'applications', $args );
@@ -60,23 +60,23 @@ function thet_register_applications() {
 
 function thet_register_questions(){
 
-    $labels = array(
+    $labels = [
 
         'name'          => _x( 'Questions', 'Post type general name', 'textdomain'),
         'singular_name' => _x( 'question', 'Post type singular name', 'textdomain'),
         'menu_name' => _x( 'Questions', 'Admin menu text', 'textdomain'),
         'add_new' => _x( 'Add new', 'Add New on Toolbar', 'textdomain')
 
-    );
+    ];
 
-    $args = array(
+    $args = [
 
         'labels'   => $labels,
         'description' => 'Question that teams will asnwer',
         'public' => false,
         'exclude_from_search' => true,
         'show_ui' => true,
-        'capabilities' => array(
+        'capabilities' => [
             'edit_post'          => 'edit_question', 
             'read_post'          => 'read_question', 
             'delete_post'        => 'delete_question', 
@@ -85,12 +85,12 @@ function thet_register_questions(){
             'publish_posts'      => 'publish_questions',       
             'read_private_posts' => 'read_private_questions', 
             'create_posts'       => 'edit_questions', 
-        ),
+        ],
         'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-quote',
-        'supports' => array('title', 'revisions', 'author', 'custom-fields' ),
+        'supports' => [ 'title', 'author' ],
 
-    );
+    ];
 
     register_post_type( 'questions', $args );
 

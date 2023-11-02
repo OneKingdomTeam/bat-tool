@@ -455,7 +455,9 @@ class Interface {
         }
 
         if ( status === false ){
-            this.saveButton.classList.remove('is-loading');
+            setTimeout( ()=>{
+                this.saveButton.classList.remove('is-loading');
+            }, 500 );
         }
     }
 

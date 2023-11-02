@@ -17,7 +17,6 @@ window.addEventListener('load', async function(){
 
             thetAnswers.saveAnswersToBrowser();
             console.log( 'No data yet stored' );
-            return;
 
         } else {
 

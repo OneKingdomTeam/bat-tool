@@ -41,11 +41,13 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/set-editable-roles.php';
 
 
-// Force Classic Editor for Quesions
+// Customizations for questions editor
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/force-classic-editor.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/question-admin-ui-customizations.php';
 
+// Customizations for applications saving etc.
+require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php';
 
 // ---------------------- Front end related scripts ---------------------
 
