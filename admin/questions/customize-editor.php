@@ -168,21 +168,26 @@ function thet_save_question_changes(){
         update_post_meta( $_POST['post_ID'], 'question_data', $question_data );
         unset( $question_data );
     
-/*
         if ( isset( $_POST['thet-order'] )) {
 
-            $args = [
-                'ID' => intval( $_POST['ID'] ),
-                'menu_order' => intval( $_POST['thet-order'] ),
-            ];
+            global $wpdb;
+            
+            $new_value = absint( $_POST['thet-order'] );
+            $post_id = absint( $_POST['ID'] );
 
-            wp_update_post( $args, true );
+            $sql_query = $wpdb->prepare(
+            "UPDATE $wpdb->posts
+            SET menu_order = %d
+            WHERE ID =  %d",
+            $new_value,
+            $post_id
+            );
+
+            $wpdb->query( $sql_query );
 
         }
-*/
 
     }
-
 
 }
 

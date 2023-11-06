@@ -141,7 +141,7 @@ class Interface {
         this.hoverWindow.style.fontSize = '1.2rem';
         this.hoverWindow.style.textAlign  = 'center';
         this.hoverWindow.style.display = 'block';
-        this.hoverWindow.style.position = 'absolute';
+        this.hoverWindow.style.position = 'fixed';
         this.hoverWindow.style.zIndex = '9999999';
         this.hoverWindow.innerText = 'Loren Ipsum';
         this.hoverWindow.classList.add('thet-interactive-form-hover-window');
