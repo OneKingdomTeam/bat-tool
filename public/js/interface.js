@@ -25,6 +25,9 @@ class Interface {
         this.interactiveCircle = document.querySelector('.' + this.interactiveCircleClass );
         this.beams = document.querySelectorAll('.beam');
         this.questions = document.querySelectorAll('.question');
+
+        this.startButton = document.querySelector('.thet-start-assessment');
+
         this.answers = document.querySelectorAll('.answer');
         this.radioBtns = document.querySelectorAll('.thet-radio-option');
         this.radioBtnClear = document.querySelector('.thet-radio-clear');
@@ -54,6 +57,7 @@ class Interface {
     }
 
     generateSessionKey(){
+
         let length = 32;
         const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
         let randomString = '';
@@ -65,7 +69,7 @@ class Interface {
 
         return randomString;
 
-        }
+    }
 
     updateBeamTitle(){
 
@@ -187,6 +191,7 @@ class Interface {
             beam.classList.remove('active');
         });
 
+        console.log( event );
         let currentBeam = event.target.closest('.beam')
         currentBeam.classList.add('active');
 
@@ -197,6 +202,14 @@ class Interface {
         this.questions[0].click();
 
         this.updateBeamTitle();       
+
+    }
+
+    handleStartButtonClick(){
+        
+        let firstBeamTarget = {};
+        firstBeamTarget.target = this.beams[0].querySelector('.subsegment-1');
+        this.handleBeamClick( firstBeamTarget );
 
     }
 
@@ -379,6 +392,11 @@ class Interface {
             beam.addEventListener( 'mouseleave', (event)=>self.handleBeamMouseLeave(event) );
         });
 
+        self.startButton.addEventListener('click', ( event ) => {
+            event.preventDefault();
+            this.handleStartButtonClick();
+        });
+
         self.questions.forEach( function( question ){
             question.addEventListener( 'click', function( event ){
                 self.handleQuestionClick( event );
@@ -528,4 +546,3 @@ class Interface {
     }
 
 }
-
