@@ -191,7 +191,6 @@ class Interface {
             beam.classList.remove('active');
         });
 
-        console.log( event );
         let currentBeam = event.target.closest('.beam')
         currentBeam.classList.add('active');
 
