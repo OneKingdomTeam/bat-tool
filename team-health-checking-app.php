@@ -5,7 +5,7 @@ Plugin Name:  Team Health Checking App
 Description:  Creates UI and backend for health checking app. Manages users, data, etc.
 Plugin URI:   https://vrubel.online/
 Author:       Petr Vrubel
-Version:      1.0
+Version:      1.1
 Text Domain:  team-health-checking-app
 Domain Path:  /languages
 License:      GPL v2 or later
