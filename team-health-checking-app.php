@@ -47,6 +47,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/question-admin-ui-customizations.php';
 
 // Customizations for applications saving etc.
+require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php';
 
 // Admin notes scripts
 
@@ -56,5 +57,3 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/question-admin-ui-cu
 require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';
 require_once plugin_dir_path( __FILE__ ) . 'public/register-application-scripts.php';
 require_once plugin_dir_path( __FILE__ ) . 'public/public-ajax.php';
-
-
