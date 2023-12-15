@@ -12,10 +12,10 @@ function thet_return_user_roles_capabilities(){
         'form_admin_capabilities' => array(
                 'edit_question', 
                 'read_question', 
-                'delete_question', 
+                //'delete_question', 
                 'edit_questions', 
                 'edit_others_questions', 
-                'publish_questions',       
+                //'publish_questions',       
                 'read_private_questions', 
                 'edit_questions',
                 'edit_application', 

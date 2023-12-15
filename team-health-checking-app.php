@@ -1,8 +1,8 @@
 <?php
 
 /*
-Plugin Name:  Team Health Checking App
-Description:  Creates UI and backend for health checking app. Manages users, data, etc.
+Plugin Name:  Benchamrk Assessment Tool - Plugin
+Description:  Creates UI and backend for BAT Tool. Manages users, data, etc.
 Plugin URI:   https://vrubel.online/
 Author:       Petr Vrubel
 Version:      1.2
@@ -45,11 +45,16 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/set-editable-role
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/force-classic-editor.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/customize-editor.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/questions/question-admin-ui-customizations.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/block-add-new-question.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/questions/supportive-functions.php';
 
 // Customizations for applications saving etc.
 require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php';
 
-// Admin notes scripts
+// Admin notes code
+require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/database-functions.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/ajax-functions.php';
+
 
 // ---------------------- Front end related scripts ---------------------
 

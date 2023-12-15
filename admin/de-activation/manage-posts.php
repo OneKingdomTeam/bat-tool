@@ -75,7 +75,7 @@ function thet_create_questions(){
 
     );
     
-    $questions_template_data = file_get_contents( plugin_dir_path( __FILE__ ) . 'templates/questions-recent-2023-08-23.json' );
+    $questions_template_data = file_get_contents( plugin_dir_path( __FILE__ ) . 'templates/questions-recent.json' );
     $questions_template = json_decode( $questions_template_data, true );
     
 

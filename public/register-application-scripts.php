@@ -35,16 +35,7 @@ function thet_interactive_form_scripts(){
                 true
             );
 
-
-        $args = [
-            'post_type' => 'questions',
-            'orderby' => 'menu_order',
-            'order' => 'ASC',
-            'posts_per_page' => -1
-        ];
-
-        $query = new WP_Query( $args );
-        $questions = $query->posts;
+        $questions = thet_get_questions_by_menu_order();
 
         $output_array = [];
 
