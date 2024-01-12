@@ -52,6 +52,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/supportive-functions
 require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php';
 
 // Admin notes code
+require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/supportive-functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/database-functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/ajax-functions.php';
 

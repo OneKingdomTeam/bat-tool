@@ -125,3 +125,14 @@ function thet_get_notes_table_column_names(){
 
     return $columns_names;
 }
+
+
+function thet_insert_into_note_to_question_map($note_id, $question_id){
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'bat_notes_map';
+
+    $query = $wpdb->prepare("INSERT INTO $table_name (note_id, question_id) VALUES (%d, %d)", $note_id, $question_id );
+    $wpdb->query($query);
+
+}

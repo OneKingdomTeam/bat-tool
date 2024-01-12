@@ -147,10 +147,10 @@ add_shortcode( 'thet_testing', 'thet_testing' );
 function thet_testing(){
     
     ob_start();
-    $question_data = get_post_meta( 636, 'question_data', true );
+    $question_data = thet_get_questions_by_menu_order();
     var_dump( $question_data );
 
-    return "<pre>" . ob_get_clean() . "</pre>";
+   return "<pre>" . ob_get_clean() . "</pre>";
 
 }
 

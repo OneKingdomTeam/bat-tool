@@ -12,11 +12,14 @@ function thet_activation(){
     require_once plugin_dir_path( __FILE__ ) . 'homepage-ctl.php';
     require_once plugin_dir_path( __FILE__ ) . '../admin-notes/create-table.php';
 
-    thet_create_admin_notes_table();
 
     thet_register_new_user_roles();
     thet_create_pages();
     thet_set_application_page_as_homepage();
+
+    // Needs to run after questions are already created to correctly map 
+    // note_id to question_id
+    thet_create_admin_notes_tables();
 
 }
 
