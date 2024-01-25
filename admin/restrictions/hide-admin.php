@@ -4,6 +4,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+// Restrict access to the WP Admin for NON logged in users
+// Maybe there should be the check for regular users as well.
 
 add_action( 'init', 'thet_restrict_wp_admin');
 

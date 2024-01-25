@@ -23,3 +23,12 @@ function thet_populate_note_to_question_map(){
 
 }
 
+
+function thet_admin_notes_create_frontend_nonce():string {
+
+    $admin_notes_frontend_nonce = wp_create_nonce('admin_notes_frontend_nonce');
+    return $admin_notes_frontend_nonce;
+
+}
+
+

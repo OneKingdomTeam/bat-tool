@@ -5,6 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// Redirect non-logged in users to the login page. Page is basically only
+// for logged in users noone else has anything to do here.
+
 add_action( 'template_redirect', 'thet_redirect_unauthenticated_users' );
 
 function thet_redirect_unauthenticated_users(){

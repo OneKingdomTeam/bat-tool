@@ -36,9 +36,13 @@ register_deactivation_hook( __FILE__, 'thet_deactivation' );
 
 // Register post types and set rules// Register post types and set rules
 require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
+
+// Restriction rules and sets
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/query-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/set-editable-roles.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/user-access-level-checker.php';
+
 
 
 // Customizations for questions editor
@@ -55,6 +59,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/supportive-functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/database-functions.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/ajax-functions.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/enqueue-admin-notes.php';
 
 
 // ---------------------- Front end related scripts ---------------------
