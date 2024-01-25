@@ -10,7 +10,7 @@ function thet_activation(){
     require_once plugin_dir_path( __FILE__ ) . 'de-register-user-roles.php';
     require_once plugin_dir_path( __FILE__ ) . 'manage-posts.php';
     require_once plugin_dir_path( __FILE__ ) . 'homepage-ctl.php';
-    require_once plugin_dir_path( __FILE__ ) . '../admin-notes/create-table.php';
+    require_once plugin_dir_path( __FILE__ ) . '../admin-notes/create-tables.php';
 
 
     thet_register_new_user_roles();

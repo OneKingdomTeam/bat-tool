@@ -15,8 +15,6 @@ function thet_create_admin_notes_tables() {
 
 }
 
-
-
 function thet_create_admin_notes_table(){
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
@@ -48,7 +46,6 @@ function thet_create_admin_notes_table(){
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
 }
-
 
 function thet_create_admin_notes_table_map() {
     global $wpdb;
