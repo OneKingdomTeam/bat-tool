@@ -4,7 +4,8 @@ class Answers {
 
         this.answers = {
 
-            'beam0' : {
+            'beam00' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -24,28 +25,8 @@ class Answers {
 
 
             },
-            'beam1' : {
-
-                'segment1': {
-
-                    'answers' : {
-                        'answer1' : null,
-                        'answer2' : null,
-                        'answer3' : null,
-                        'answer4' : null,
-                    },
-                    'comments' : {
-                        'comment1' : null,
-                        'comment2' : null,
-                        'comment3' : null,
-                        'comment4' : null,
-                    }
-                },
-
-
-            },
-
-            'beam2' : {
+            'beam01' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -66,7 +47,8 @@ class Answers {
 
             },
 
-            'beam3' : {
+            'beam02' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -87,7 +69,8 @@ class Answers {
 
             },
 
-            'beam4' : {
+            'beam03' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -108,7 +91,8 @@ class Answers {
 
             },
 
-            'beam5' : {
+            'beam04' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -129,7 +113,8 @@ class Answers {
 
             },
 
-            'beam6' : {
+            'beam05' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -150,7 +135,8 @@ class Answers {
 
             },
 
-            'beam7' : {
+            'beam06' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -171,7 +157,8 @@ class Answers {
 
             },
 
-            'beam8' : {
+            'beam07' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -192,7 +179,30 @@ class Answers {
 
             },
 
-            'beam9' : {
+            'beam08' : {
+                'question_id': 0,
+
+                'segment1': {
+
+                    'answers' : {
+                        'answer1' : null,
+                        'answer2' : null,
+                        'answer3' : null,
+                        'answer4' : null,
+                    },
+                    'comments' : {
+                        'comment1' : null,
+                        'comment2' : null,
+                        'comment3' : null,
+                        'comment4' : null,
+                    }
+                },
+
+
+            },
+
+            'beam09' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -214,6 +224,7 @@ class Answers {
             },
 
             'beam10' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -235,6 +246,7 @@ class Answers {
             },
 
             'beam11' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -256,6 +268,7 @@ class Answers {
             },
 
             'beam12' : {
+                'question_id': 0,
 
                 'segment1': {
 
@@ -278,19 +291,7 @@ class Answers {
 
         }
 
-    }
-
-    initLoad(){
-
-        if ( window.localStorage.getItem( 'thetAnswers' ) == null ) {
-
-            this.saveAnswersToBrowser();
-
-        } else {
-
-            this.getAnswersFromBrowser();
-
-        }
+        this.storeQuestionsIDtoBeam( thetQuestions.questions );
 
     }
 
@@ -374,11 +375,35 @@ class Answers {
 
     getElementClassNumber( element ){
 
-        let classList = element.getAttribute('class');
-        let number = classList.replace( /[^0-9]/g,"");
-        return( number );
+        let classList = element.classList;
+        let outputNumber = undefined;
+        classList.forEach(classVal => {
+            // Checks for either beam, segment or subsegment and extract the number from that class
+            if( classVal.includes('beam-') || classVal.includes('segment-') || classVal.includes('subsegment-') || classVal.includes('question-') ){
+                outputNumber = classVal.replace( /[^0-9]/g,"");
+            }
+        });
+        return outputNumber;
+    }
+
+    storeQuestionsIDtoBeam( questionsData ){
+
+        for (const [questionKey, questionValue] of Object.entries( questionsData )) {
+            this.answers[ questionKey ]['question_id'] = questionValue['question_id'];
+        }
+    }
+
+    checkQuestionAnswerAlignment(){
+
+        var updatedAnswers = {};
+        for( const [key,value] of Object.entries( thetAjax.questionsData )){
+            console.log('QuestionID: ', value.question_id);
+            console.log('BeamID: ', key);
+            let foundObject = Object.values(this.answers).find(obj => obj.question_id === value.question_id );
+            updatedAnswers[key] = foundObject;
+        }
+        this.answers = updatedAnswers;
 
     }
 
 }
-

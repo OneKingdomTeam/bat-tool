@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-function thet_get_questions_by_menu_order(){
+function thet_get_questions_by_menu_order() {
 
     $args = [
         'post_type' => 'questions',

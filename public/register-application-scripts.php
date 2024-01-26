@@ -39,20 +39,27 @@ function thet_interactive_form_scripts(){
 
         $output_array = [];
 
+        $i = 0;
         foreach( $questions as $question ){
-            
+
             $question_array = (array) $question;
-            $output_array[ 'beam' . $question_array['menu_order'] ]['title'] = $question_array['post_title']; 
+            
+            $beam_number = sprintf("%02d", $i);
+            
+            $output_array[ 'beam' . $beam_number ]['title'] = $question_array['post_title']; 
+            $output_array[ 'beam' . $beam_number ]['question_id'] = $question_array['ID']; 
 
             $question_data = get_post_meta( $question_array['ID'], 'question_data', true );
             $question_data_array = (array) $question_data;
             $remaining_keys = array_keys( $question_data_array );
-
+            
             foreach( $remaining_keys as $key ){
     
-                $output_array[ 'beam' . $question_array['menu_order'] ][$key] = $question_data_array[$key]; 
+                $output_array[ 'beam' . $beam_number ][$key] = $question_data_array[$key]; 
 
             };
+
+            $i += 1;
 
         }
 
@@ -79,3 +86,5 @@ function thet_interactive_form_scripts(){
     }
 
 }
+
+

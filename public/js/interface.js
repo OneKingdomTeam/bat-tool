@@ -14,6 +14,8 @@ class Interface {
         this.segmentClass = 'segment-';
         this.subsegmentClass = 'subsegment-';
 
+        this.appendQuestionIdClassToBeam(thetQuestions.questions);
+
         this.activeBeam = null;
         this.activeSegment = null;
         this.activeQuestion = null;
@@ -117,6 +119,10 @@ class Interface {
 
             for (const [segmentKey, segmentValue] of Object.entries( value )) {
 
+                if (!segmentKey.includes('segment')) {
+                    continue;
+                }
+
                 segmentKey;
 
                 for (const [subKey, subValue] of Object.entries( segmentValue.answers )) {
@@ -185,6 +191,7 @@ class Interface {
     handleBeamClick( event ){
 
         this.introContent.classList.add('is-hidden');
+
         this.mainContent.classList.remove('is-hidden');
 
         this.beams.forEach( function( beam ){
@@ -432,7 +439,9 @@ class Interface {
 
     showError( title = 'Error',  content = 'Error occured' ){
 
-        console.log(`Error orrucred: \nTitle: ${ title }\nContent: ${ content }`);
+        console.log(`Error orrucred: 
+Title: ${ title }
+Content: ${ content }`);
 
     }
 
@@ -544,4 +553,12 @@ class Interface {
 
     }
 
+    appendQuestionIdClassToBeam( questionData ){
+
+        for (const [questionKey, questionValue] of Object.entries( questionData )) {
+            document.querySelector('.' + questionKey.replace('beam', 'beam-')).classList.add('question_id-' + questionValue['question_id']);
+        }
+    }
+
 }
+

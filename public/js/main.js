@@ -1,3 +1,5 @@
+// Order matters. It is important first to load Quesions data to the thetQuestions object
+// then those data are used to match BEAM to it's propriate question_id
 const thetQuestions = new Questions( thetAjax.questionsData );
 const thetAnswers = new Answers();
 const thetInterface = new Interface();
@@ -21,7 +23,9 @@ window.addEventListener('load', async function(){
         } else {
 
             thetAnswers.answers = thetConnector.applicationData;
+            thetAnswers.checkQuestionAnswerAlignment();
 			thetAnswers.saveAnswersToBrowser();
+            console.log('main - thetAnswers.answes: ', thetAnswers.answers);
             console.log( 'Answers configured' );
 
         }

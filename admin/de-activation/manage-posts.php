@@ -81,7 +81,7 @@ function thet_create_questions(){
 
     for ( $i = 0; $i < 13; $i++ ) {
 
-        $current_question_content = $questions_template[ 'beam' . strval( $i )];
+        $current_question_content = $questions_template[ 'beam' . sprintf("%02d", $i)];
         $questions_attr['post_title'] = $current_question_content['title'];
         unset( $current_question_content['title'] );
         $questions_attr['menu_order'] = $i;

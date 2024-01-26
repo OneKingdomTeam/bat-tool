@@ -1,0 +1,110 @@
+array(54) {
+  ["_wpnonce"]=>
+  string(10) "74e7593bd4"
+  ["_wp_http_referer"]=>
+  string(37) "/wp-admin/post.php?post=9&action=edit"
+  ["user_ID"]=>
+  int(1)
+  ["action"]=>
+  string(8) "editpost"
+  ["originalaction"]=>
+  string(8) "editpost"
+  ["post_author"]=>
+  int(1)
+  ["post_type"]=>
+  string(9) "questions"
+  ["original_post_status"]=>
+  string(7) "publish"
+  ["referredby"]=>
+  string(59) "http://127.0.0.1:8080/wp-admin/edit.php?post_type=questions"
+  ["_wp_original_http_referer"]=>
+  string(59) "http://127.0.0.1:8080/wp-admin/edit.php?post_type=questions"
+  ["post_ID"]=>
+  string(1) "9"
+  ["meta-box-order-nonce"]=>
+  string(10) "4242680a80"
+  ["closedpostboxesnonce"]=>
+  string(10) "c6e0d9e0d0"
+  ["post_title"]=>
+  string(6) "Prayer"
+  ["samplepermalinknonce"]=>
+  string(10) "621bcc52ec"
+  ["thet-order"]=>
+  string(1) "5"
+  ["segment1___question1___title"]=>
+  string(26) "We have a prayer strategy."
+  ["segment1___question1___description"]=>
+  string(0) ""
+  ["segment1___question1___radio___option1"]=>
+  string(2) "No"
+  ["segment1___question1___radio___option2"]=>
+  string(8) "Not sure"
+  ["segment1___question1___radio___option3"]=>
+  string(3) "Yes"
+  ["segment1___question1___commentTitle"]=>
+  string(54) "Please briefly describe your team’s prayer strategy."
+  ["segment1___question1___commentDescription"]=>
+  string(0) ""
+  ["segment1___question2___title"]=>
+  string(51) "We’ve received prayer strategy coaching/training."
+  ["segment1___question2___description"]=>
+  string(0) ""
+  ["segment1___question2___radio___option1"]=>
+  string(2) "No"
+  ["segment1___question2___radio___option2"]=>
+  string(8) "Not sure"
+  ["segment1___question2___radio___option3"]=>
+  string(3) "Yes"
+  ["segment1___question2___commentTitle"]=>
+  string(48) "Please tell us where you received your training."
+  ["segment1___question2___commentDescription"]=>
+  string(0) ""
+  ["segment1___question3___title"]=>
+  string(93) "We regularly pray together and/or engage others to pray for our people group/target audience."
+  ["segment1___question3___description"]=>
+  string(0) ""
+  ["segment1___question3___radio___option1"]=>
+  string(2) "No"
+  ["segment1___question3___radio___option2"]=>
+  string(8) "Not sure"
+  ["segment1___question3___radio___option3"]=>
+  string(3) "Yes"
+  ["segment1___question3___commentTitle"]=>
+  string(0) ""
+  ["segment1___question3___commentDescription"]=>
+  string(77) "If you would want to add something to your answer feel free to write it here:"
+  ["segment1___question4___title"]=>
+  string(91) "We are satisfied with our current prayer strategy and the level of active engagement in it."
+  ["segment1___question4___description"]=>
+  string(0) ""
+  ["segment1___question4___radio___option1"]=>
+  string(2) "No"
+  ["segment1___question4___radio___option2"]=>
+  string(8) "Not sure"
+  ["segment1___question4___radio___option3"]=>
+  string(3) "Yes"
+  ["segment1___question4___commentTitle"]=>
+  string(0) ""
+  ["segment1___question4___commentDescription"]=>
+  string(77) "If you would want to add something to your answer feel free to write it here:"
+  ["hidden_post_status"]=>
+  string(7) "publish"
+  ["post_status"]=>
+  string(7) "publish"
+  ["original_publish"]=>
+  string(6) "Update"
+  ["save"]=>
+  string(6) "Update"
+  ["post_name"]=>
+  string(6) "prayer"
+  ["post_author_override"]=>
+  string(1) "1"
+  ["post_mime_type"]=>
+  string(0) ""
+  ["ID"]=>
+  int(9)
+  ["comment_status"]=>
+  string(6) "closed"
+  ["ping_status"]=>
+  string(6) "closed"
+}
