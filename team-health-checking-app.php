@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ---------------------- Backend Scripts  ---------------------
+require_once plugin_dir_path( __FILE__ ) . 'checks.php';
 
 // Redirect to login for non-logged in users
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/login-redirect.php';
@@ -56,15 +57,17 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/questions/supportive-functions
 require_once plugin_dir_path( __FILE__ ) . 'admin/applications/post-creation.php';
 
 // Admin notes code
-require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/supportive-functions.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/database-functions.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/ajax-functions.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/enqueue-admin-notes.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/admin-notes/admin-notes.php';
 
 
 // ---------------------- Front end related scripts ---------------------
 
+
 // Enq UI shortcodes
-require_once plugin_dir_path( __FILE__ ) . 'public/ui-shortcodes.php';
-require_once plugin_dir_path( __FILE__ ) . 'public/register-application-scripts.php';
-require_once plugin_dir_path( __FILE__ ) . 'public/public-ajax.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/applications/ui-shortcodes.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/applications/register-application-scripts.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/applications/public-ajax.php';
+
+
+// ENQ admin notes
+require_once plugin_dir_path( __FILE__ ) . 'public/admin-notes/admin-notes.php';

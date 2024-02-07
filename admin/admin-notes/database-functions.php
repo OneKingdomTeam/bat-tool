@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function thet_get_notes_by_application_id($application_id, $current_editor_id, $current_tab_hash) {
+function thet_get_notes_by_application_id(int $application_id, int $current_editor_id, string $current_session_key)  {
 
     global $wpdb;
 
@@ -18,7 +18,8 @@ function thet_get_notes_by_application_id($application_id, $current_editor_id, $
 
     if(!$row){
 
-        thet_notes_create_row_if_not_exists( $application_id, $current_editor_id, $current_tab_hash );
+        thet_notes_create_row_if_not_exists( $application_id, $current_editor_id, $current_session_key );
+        $row = $wpdb->get_row($sql);
 
     }
 
@@ -35,7 +36,7 @@ function thet_update_admin_note($note_data) {
 
     $id = $note_data->id;
     $current_editor_id = $note_data->last_editor_id;
-    $current_tab_hash = $note_data->tab_hash;
+    $current_session_key = $note_data->session_key;
 
 
     $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $id));
@@ -47,14 +48,14 @@ function thet_update_admin_note($note_data) {
     $is_locked = $row->is_locked;
     $last_editor_id = $row->last_editor_id;
     $last_update = strtotime($row->last_updated);
-    $tab_hash = $row->tab_hash;
+    $session_key = $row->session_key;
     $five_minutes_ago = time() - (5 * 60);
 
     if ($is_locked) {
         if ($last_update < $five_minutes_ago) {
 
             $note_data->is_locked = true;
-        } elseif ($current_editor_id == $last_editor_id && $current_tab_hash == $tab_hash) {
+        } elseif ($current_editor_id == $last_editor_id && $current_session_key == $session_key) {
 
             $note_data->is_locked = true;
         } else {
@@ -75,7 +76,7 @@ function thet_update_admin_note($note_data) {
 }
 
 
-function thet_notes_create_row_if_not_exists( $application_id, $current_editor_id, $current_tab_hash ){
+function thet_notes_create_row_if_not_exists( $application_id, $current_editor_id, $current_session_key ){
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
@@ -104,7 +105,7 @@ function thet_notes_create_row_if_not_exists( $application_id, $current_editor_i
 
     $data['application_id'] = $application_id;
     $data['last_editor_id'] = $current_editor_id;
-    $data['tab_hash'] = $current_tab_hash;
+    $data['session_key'] = $current_session_key;
 
     $wpdb = $wpdb->replace( $table_name, $data);
 

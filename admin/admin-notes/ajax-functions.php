@@ -8,20 +8,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 function thet_ajax_get_notes() {
 
     // Check if user is logged in
-    if (!is_user_logged_in()) {
+    if ( !thet_check_is_user_logged_in_and_admin() ) {
         wp_send_json_error('Unauthorized: User is not logged in.', 401);
     }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
         wp_send_json_error('GET request not supported', 403);
     }
 
 
     // Verify nonce first
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'thet_ajax')) {
+    if ( !isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'admin_notes_frontend_nonce' )) {
         wp_send_json_error('Invalid nonce or nonce not set.', 403);
     }
 
+    if( !isset($_POST['session_key']) ){
+        wp_send_json_error('No session key provided.', 403);
+    }
 
     // Check user roles
     $user = wp_get_current_user();
@@ -29,18 +32,19 @@ function thet_ajax_get_notes() {
         wp_send_json_error('Unauthorized: User does not have permission.', 403);
     }
 
+
     // Retrieve the notes
     $application_id = isset($_POST['application_id']) ? intval($_POST['application_id']) : wp_send_json_error('No application ID provided', 500);
     $current_editor_id = $user->ID;
-    $current_tab_hash = isset($_POST['tab_hash']) ? strval($_POST['tab_hash']) : wp_send_json_error('No tab hash provided', 500); 
-    $notes = thet_get_notes_by_application_id( $application_id, $current_editor_id, $current_tab_hash);
+    $session_key = sanitize_text_field( $_POST['session_key'] );
+    $notes = thet_get_notes_by_application_id( $application_id, $current_editor_id, $session_key);
 
     // Return the notes as JSON
     wp_send_json_success($notes);
 
 }
 
-add_action('wp_ajax_thet_get_notes', 'thet_ajax_get_notes');
+add_action('wp_ajax_thet_ajax_get_notes', 'thet_ajax_get_notes');
 
 function thet_ajax_update_note() {
 
@@ -90,7 +94,7 @@ function thet_ajax_update_note() {
 
 }
 
-add_action('wp_ajax_thet_update_note', 'thet_ajax_update_note');
+add_action('wp_ajax_thet_ajax_update_note', 'thet_ajax_update_note');
 
 
 function thet_sanitize_note_data( $note_data ){

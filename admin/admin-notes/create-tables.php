@@ -39,7 +39,7 @@ function thet_create_admin_notes_table(){
         note12 text NOT NULL,
         last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         last_editor_id mediumint(9) DEFAULT 0 NOT NULL,
-        tab_hash varchar(255) NOT NULL,
+        session_key varchar(255) NOT NULL,
         PRIMARY KEY  (id)
     ) $charset_collate;";
 

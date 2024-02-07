@@ -397,8 +397,6 @@ class Answers {
 
         var updatedAnswers = {};
         for( const [key,value] of Object.entries( thetAjax.questionsData )){
-            console.log('QuestionID: ', value.question_id);
-            console.log('BeamID: ', key);
             let foundObject = Object.values(this.answers).find(obj => obj.question_id === value.question_id );
             updatedAnswers[key] = foundObject;
         }
