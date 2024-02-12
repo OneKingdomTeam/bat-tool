@@ -27,22 +27,22 @@ function thet_get_notes_by_application_id(int $application_id, int $current_edit
 
 }
 
-
 function thet_update_admin_note($note_data) {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
 
-
-    $id = $note_data->id;
-    $current_editor_id = $note_data->last_editor_id;
+    $application_id = intval( $note_data->application_id );
+    $current_editor_id = intval( $note_data->last_editor_id ) ;
     $current_session_key = $note_data->session_key;
 
-
-    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $id));
+    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
 
     if (!$row) {
-        return 'Error: Row not found.';
+        return [
+            'success'=> false,
+            'message'=> 'Row does not exist'
+        ];
     }
 
     $is_locked = $row->is_locked;
@@ -52,29 +52,123 @@ function thet_update_admin_note($note_data) {
     $five_minutes_ago = time() - (5 * 60);
 
     if ($is_locked) {
-        if ($last_update < $five_minutes_ago) {
 
+        if ($last_update < $five_minutes_ago) {
             $note_data->is_locked = true;
         } elseif ($current_editor_id == $last_editor_id && $current_session_key == $session_key) {
-
             $note_data->is_locked = true;
         } else {
-            return 'Error: Entry is currently being edited by someone else.';
+            return [
+                'success' => false,
+                'message' => 'Note is being editted by someone else'
+            ];
         }
+
     }
 
     unset($note_data->id);
 
-    $result = $wpdb->update($table_name, (array)$note_data, array('id' => $id));
+    $result = $wpdb->update($table_name, (array)$note_data, array('application_id' => $application_id));
 
     if ($result === false) {
-        return 'Error: Unable to update the entry.';
+        return [
+            'success' => false,
+            'message' => 'Unable to edit the entry'
+        ];
     }
 
     return 'Entry updated successfully.';
 
 }
 
+function thet_unlock_admin_note( $note_data ){
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'bat_notes';
+
+    $application_id = intval( $note_data->application_id );
+    $current_editor_id = intval( $note_data->last_editor_id ) ;
+    $current_session_key = $note_data->session_key;
+
+    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
+
+    if (!$row) {
+        return [
+            'success' => false,
+            'message' => 'Row not found'
+        ];
+    }
+
+    if ( $row->is_locked === 0 ){
+        return [
+            'success' => false,
+            'message' => 'Row is already unlocked'
+        ];
+    }
+
+    if ( $row->last_editor_id !== get_current_user_id() ){
+        return [
+            'success' => false,
+            'message' => 'You are not the one who locked the note'
+        ];
+    }
+
+    $sql = $wpdb->prepare("UPDATE %s SET is_locked=1 WHERE application_id=%d", $table_name, $application_id);
+    $result = $wpdb->get_results($sql);
+    if ( $wpdb->last_error ) {
+        return [
+            'success' => false,
+            'message' => $wpdb->last_error
+        ];
+    }
+
+    return [
+        'success' => true,
+        'message' => 'Successfuly locked'
+    ];
+    
+}
+
+function thet_lock_admin_note( $note_data ){
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'bat_notes';
+
+    $application_id = intval( $note_data->application_id );
+    $current_editor_id = intval( $note_data->last_editor_id ) ;
+    $current_session_key = $note_data->session_key;
+
+    $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
+
+    if (!$row) {
+        return [
+            'success' => false,
+            'message' => 'Row not found'
+        ];
+    }
+
+    if ( $row->is_locked === 1 ){
+        return [
+            'success' => false,
+            'message' => 'Row already locked'
+        ];
+    }
+
+    $sql = $wpdb->prepare("UPDATE %s SET is_locked=1 WHERE application_id=%d", $table_name, $application_id);
+    $result = $wpdb->get_results($sql);
+    if ( $wpdb->last_error ) {
+        return [
+            'success' => false,
+            'message' => $wpdb->last_error
+        ];
+    }
+
+    return [
+        'success' => true,
+        'message' => 'Successfuly locked'
+    ];
+    
+}
 
 function thet_notes_create_row_if_not_exists( $application_id, $current_editor_id, $current_session_key ){
 
@@ -126,7 +220,6 @@ function thet_get_notes_table_column_names(){
 
     return $columns_names;
 }
-
 
 function thet_insert_into_note_to_question_map($note_id, $question_id){
 

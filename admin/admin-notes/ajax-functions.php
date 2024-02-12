@@ -59,7 +59,7 @@ function thet_ajax_update_note() {
     }
 
     // Verify nonce
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'thet_ajax')) {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'admin_notes_frontend_nonce')) {
         wp_send_json_error('Invalid nonce or nonce not set.', 403);
     }
 
@@ -69,16 +69,14 @@ function thet_ajax_update_note() {
         wp_send_json_error('Unauthorized: User does not have permission.', 403);
     }
 
-    // Expecting note_data to be passed in POST request
-    if (!isset($_POST['note_data'])) {
+    // Expecting notes_data to be passed in POST request
+    if (!isset($_POST['notes_data'])) {
         wp_send_json_error('Error: No note data provided.', 400);
     }
 
-    $note_data = isset($_POST['note_data']) ? $_POST['note_data'] : '';
+    $notes_data = isset($_POST['notes_data']) && $_POST['notes_data'] != '' ? json_decode(stripslashes($_POST['notes_data'])) : wp_send_json_error('Invalid notes_data data.', 403);
 
-
-    $note_data = $_POST['note_data']; 
-    $update_result = thet_update_admin_note($note_data);
+    $update_result = thet_update_admin_note($notes_data);
     $is_error = 0;
 
     if ( str_contains($update_result, 'Error') ){
@@ -96,20 +94,64 @@ function thet_ajax_update_note() {
 
 add_action('wp_ajax_thet_ajax_update_note', 'thet_ajax_update_note');
 
+function thet_ajax_lock_and_unlock_note(){
 
-function thet_sanitize_note_data( $note_data ){
+    // Check if the request method is POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        wp_send_json_error('Invalid request method. Only POST requests are allowed.', 405);
+    }
 
-    foreach ($note_data as $key => $value) {
+    // Check if user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error('Unauthorized: User is not logged in.', 401);
+    }
+
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'admin_notes_frontend_nonce')) {
+        wp_send_json_error('Invalid nonce or nonce not set.', 403);
+    }
+
+    // Check user roles
+    $user = wp_get_current_user();
+    if (!in_array('administrator', $user->roles) && !in_array('form_admin', $user->roles)) {
+        wp_send_json_error('Unauthorized: User does not have permission.', 403);
+    }
+
+    // Expecting notes_data to be passed in POST request
+    if (!isset($_POST['notes_data'])) {
+        wp_send_json_error('Error: No note data provided.', 400);
+    }
+
+    $notes_data = isset($_POST['notes_data']) && $_POST['notes_data'] != '' ? json_decode(stripslashes($_POST['notes_data'])) : wp_send_json_error('Invalid notes_data data.', 403);
+
+    if( $notes_data['action'] == 'thet_ajax_lock_note' ) {
+
+
+    } 
+
+    if( $notes_data['action'] == 'thet_ajax_unlock_note' ) {
+
+    }
+
+}
+
+
+add_action('wp_ajax_thet_ajax_lock_note', 'thet_ajax_lock_and_unlock_note');
+add_action('wp_ajax_thet_ajax_unlock_note', 'thet_ajax_lock_and_unlock_note');
+
+function thet_sanitize_notes_data( $notes_data ){
+
+    foreach ($notes_data as $key => $value) {
 
         if ( str_contains($key, '_id' )){
-            $note_data[$key] = intval($value);
+            $notes_data[$key] = intval($value);
         };
         if ( str_contains($key, 'note' )){
-            $note_data[$key] = sanitize_text_field($value);
+            $notes_data[$key] = sanitize_text_field($value);
         };
     }
 
-    return $note_data;
+    return $notes_data;
 
 }
 

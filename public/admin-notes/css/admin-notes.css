@@ -1,0 +1,41 @@
+.thet-admin-notes-sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 25vw;
+	height: 100vh;
+	background: #ffffffdd;
+	backdrop-filter: blur(10px);
+	box-shadow: 0.2rem 0rem 2rem #f2f2f2;
+}
+
+.thet-admin-notes-floating-icon {
+	position: fixed;
+	bottom: 5rem;
+	left: 5rem;
+	width: 4rem;
+	height: 4rem;
+	transform: translateX( -50% ) translateY( 50% );
+    background: #0299FFCC;
+    backdrop-filter: blur(10px);
+	box-shadow: 0.2rem 0rem 2rem #f2f2f2;
+    border-radius: 0.8rem;
+    background-image: url('../media/notes-icon.svg');
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.thet-admin-notes-floating-icon.is-open {
+    left: calc( 5rem + 25vw );   
+    background: #f55;
+    background-image: url('../media/cross.svg');
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.is-display-none {
+    display: none;
+}
