@@ -155,20 +155,41 @@ function thet_sanitize_notes_data( $notes_data ){
 
 }
 
-function thet_notes_testing(){
+function thet_ajax_get_notes_map(){
 
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'bat_notes';
-
-    $query = "SHOW COLUMNS FROM $table_name";
-    $results = $wpdb->get_results($query);
-
-    $columns = array();
-    foreach ($results as $column) {
-        $columns[] = $column->Field;
+    // Check if the request method is POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        wp_send_json_error('Invalid request method. Only POST requests are allowed.', 405);
     }
 
-    wp_send_json($column);
+    // Check if user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error('Unauthorized: User is not logged in.', 401);
+    }
+
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'admin_notes_frontend_nonce')) {
+        wp_send_json_error('Invalid nonce or nonce not set.', 403);
+    }
+
+    // Check user roles
+    $user = wp_get_current_user();
+    if (!in_array('administrator', $user->roles) && !in_array('form_admin', $user->roles)) {
+        wp_send_json_error('Unauthorized: User does not have permission.', 403);
+    }
+
+    
+
+}
+
+add_action('wp_ajax_thet_ajax_get_notes_map', 'thet_ajax_get_notes_map');
+
+
+function thet_notes_testing(){
+
+
+
+    wp_send_json( thet_check_is_post_interactive_form_page() );
 
 }
 

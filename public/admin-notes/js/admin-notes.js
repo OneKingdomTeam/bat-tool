@@ -11,16 +11,18 @@ class AdminNotes {
 
     }
 
-    init(){
+    async init(){
 
         // Fetch response codes and messages
         this.recentResponseCode;
         this.recentResponseMessage;
 
         // Get's the notes from database
-        this.notesData = this.getNotesFromDatabase();
+        this.notesData = await this.getNotesFromDatabase();
         this.createSideBar();
         this.createFloatingIcon();
+
+        this.prepopulateContent();
 
     }
 
@@ -34,6 +36,7 @@ class AdminNotes {
 
             this.ajaxNonce = adminNotesLoc.nonce;
             this.ajaxUrl = adminNotesLoc.ajax_url;
+            this.notesMap = adminNotesLoc.notes_map;
 
         }
 
@@ -81,7 +84,7 @@ class AdminNotes {
 
         this.recentResponseData = responseData.data;
         this.notesData = responseData.data;
-        return responseData;
+        return responseData.data;
         
     }
 
@@ -104,7 +107,7 @@ class AdminNotes {
         let responseData = await response.json();
 
         this.recentResponseData = responseData.data;
-        return responseData;
+        return responseData.data;
 
     }
 
@@ -149,7 +152,38 @@ class AdminNotes {
 
     prepopulateContent(){
 
+        for (const [key, values] of Object.entries(thetQuestions.questions)) {
+            let noteTopicWrapper = document.createElement( 'div' );
+            noteTopicWrapper.classList.add( 'thet-admin-notes-topic-wrapper' );
+            noteTopicWrapper.classList.add( 'note-question-id-' + values.question_id.toString() );
+            noteTopicWrapper.dataset.question_id = values.question_id;
+
+            let foundMapping = this.notesMap.find( obj => obj.question_id === values.question_id.toString() );
+
+            if ( foundMapping === undefined ) {
+                throw new Error ('Question ID not found in notesMap');
+            }
+
+            noteTopicWrapper.dataset.note_id = parseInt( foundMapping.note_id ).toString().padStart(2, '0');
+
+            let noteTopicHeader = document.createElement( 'h3' );
+            noteTopicHeader.classList.add( 'thet-admin-notes-topic-header' );
+            noteTopicHeader.innerText = values.title;
+
+            let noteTopicContent = document.createElement( 'div' );
+            noteTopicContent.classList.add( 'thet-admin-notes-topic-content' );
+            noteTopicContent.innerText = this.notesData['note' + noteTopicWrapper.dataset.note_id ];
+
+            noteTopicWrapper.appendChild( noteTopicHeader );
+            noteTopicWrapper.appendChild( noteTopicContent );
+
+            this.sideBar.appendChild( noteTopicWrapper );
+        };
+
+
+
     }
+
 
 }
 

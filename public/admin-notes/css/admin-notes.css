@@ -7,6 +7,8 @@
 	background: #ffffffdd;
 	backdrop-filter: blur(10px);
 	box-shadow: 0.2rem 0rem 2rem #f2f2f2;
+    padding: 2rem 1rem;
+    overflow: scroll;
 }
 
 .thet-admin-notes-floating-icon {
@@ -39,3 +41,14 @@
 .is-display-none {
     display: none;
 }
+
+.thet-admin-notes-topic-wrapper{
+    padding: 1rem 0rem;
+}
+
+.thet-admin-notes-topic-header {
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0.5rem 0rem;
+}
+

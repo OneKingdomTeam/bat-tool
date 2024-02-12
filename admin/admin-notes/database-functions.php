@@ -230,3 +230,15 @@ function thet_insert_into_note_to_question_map($note_id, $question_id){
     $wpdb->query($query);
 
 }
+
+function thet_get_notes_map()  {
+
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . 'bat_notes_map';
+
+    $result = $wpdb->get_results("SELECT * FROM $table_name");
+
+    return $result;
+
+}

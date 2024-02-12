@@ -25,7 +25,6 @@ window.addEventListener('load', async function(){
             thetAnswers.answers = thetConnector.applicationData;
             thetAnswers.checkQuestionAnswerAlignment();
 			thetAnswers.saveAnswersToBrowser();
-            console.log('main - thetAnswers.answes: ', thetAnswers.answers);
             console.log( 'Answers configured' );
 
         }
