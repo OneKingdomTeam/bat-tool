@@ -48,7 +48,64 @@
 
 .thet-admin-notes-topic-header {
     font-weight: bold;
-    font-size: 2rem;
-    padding: 0.5rem 0rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.5rem;
 }
 
+.thet-admin-notes-topic-header-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.thet-admin-notes-topic-edit-icon {
+    width: 40px;
+    height: 40px;
+    cursor: edit;
+    background-image: url('../media/notes-icon.svg');
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 0.8rem;
+}
+.thet-admin-notes-topic-edit-icon:hover {
+    background-color: #9bd4fa;
+}
+
+/* EDITOR CSS */
+.thet-admin-notes-topic-editor-button-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.75rem 0rem;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+
+.thet-admin-notes-topic-editor-cancel-btn,
+.thet-admin-notes-topic-editor-save-btn {
+  width: 50%;
+  text-align: center;
+  padding: 0.75rem 0rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.thet-admin-notes-topic-editor-cancel-btn {
+  background-color: #FF555577;
+}
+
+.thet-admin-notes-topic-editor-save-btn {
+  background-color: #3EB05D77;  
+}
+
+.thet-admin-notes-topic-editor-cancel-btn:hover {
+  background-color: #FF5555bb;
+}
+
+.thet-admin-notes-topic-editor-save-btn:hover {
+  background-color: #3EB05Dbb;  
+}
+/* END EDITOR CSS */

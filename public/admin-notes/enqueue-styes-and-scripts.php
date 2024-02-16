@@ -21,6 +21,8 @@ function thet_enqueue_admin_notes_fornt_end_js_and_css() {
             'notes_map' => thet_get_notes_map(),
         ]);
 
+        wp_enqueue_script('wp-tinymce');
+        wp_enqueue_script('wp-editor');
         wp_enqueue_style('admin_notes_frontend_css');
         wp_enqueue_script('admin_notes_frontend_script');
         

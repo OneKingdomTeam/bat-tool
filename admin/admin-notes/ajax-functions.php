@@ -96,6 +96,7 @@ add_action('wp_ajax_thet_ajax_update_note', 'thet_ajax_update_note');
 
 function thet_ajax_lock_and_unlock_note(){
 
+
     // Check if the request method is POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         wp_send_json_error('Invalid request method. Only POST requests are allowed.', 405);
@@ -124,17 +125,31 @@ function thet_ajax_lock_and_unlock_note(){
 
     $notes_data = isset($_POST['notes_data']) && $_POST['notes_data'] != '' ? json_decode(stripslashes($_POST['notes_data'])) : wp_send_json_error('Invalid notes_data data.', 403);
 
-    if( $notes_data['action'] == 'thet_ajax_lock_note' ) {
+    if( $_POST['action'] == 'thet_ajax_lock_note' ) {
 
+        $result = thet_lock_admin_note( $notes_data, $_POST['session_key'] );
+        
+        if ( $result['success'] ) {
+            wp_send_json( $result, 200 );
+        } else {
+            wp_send_json_error( $result, 400 );
+        }
 
     } 
 
-    if( $notes_data['action'] == 'thet_ajax_unlock_note' ) {
+    if( $_POST['action'] == 'thet_ajax_unlock_note' ) {
+
+        $result = thet_unlock_admin_note( $notes_data, $_POST['session_key'] );
+
+        if ( $result['success'] ) {
+            wp_send_json( $result, 200 );
+        } else {
+            wp_send_json_error( $result, 400 );
+        }
 
     }
 
 }
-
 
 add_action('wp_ajax_thet_ajax_lock_note', 'thet_ajax_lock_and_unlock_note');
 add_action('wp_ajax_thet_ajax_unlock_note', 'thet_ajax_lock_and_unlock_note');
