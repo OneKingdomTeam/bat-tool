@@ -220,9 +220,11 @@ class AdminNotes {
 
             let noteTopicEditIcon = document.createElement( 'div' );
             noteTopicEditIcon.classList.add('thet-admin-notes-topic-edit-icon');
+            noteTopicEditIcon.addEventListener('click', event => { this.handleTopicEditIconClick( event )});
 
             let noteTopicContent = document.createElement( 'div' );
             noteTopicContent.classList.add( 'thet-admin-notes-topic-content' );
+            noteTopicContent.classList.add( 'content' );
             noteTopicContent.innerHTML = this.notesData['note' + noteTopicWrapper.dataset.note_id ];
 
             
@@ -241,18 +243,6 @@ class AdminNotes {
 
         this.sideBar.addEventListener('click', event => {
             
-            if( event.target.classList.contains('thet-admin-notes-topic-edit-icon') ){
-                this.handleTopicEditIconClick( event );
-            }
-
-            if( event.target.classList.contains('thet-admin-notes-topic-editor-save-btn') ){
-                this.handleTopicEditSaveBtnClick( event );
-            }
-
-            if( event.target.classList.contains('thet-admin-notes-topic-editor-cancel-btn') ){
-                this.handleTopicEditCancelBtnClick( event );
-            }
-
         } );
 
     }
@@ -299,9 +289,9 @@ class AdminNotes {
 
         console.log('Current list of editors: ', tinymce.editors );
 
-        while( this.topicEditor.length !== 0 ) {
+        while( tinymce.editors.length !== 0 ) {
             console.log('Removing editor: ', tinymce.editors[0] );
-            this.topicEditor[0].remove();
+            tinymce.editors[0].remove();
         }
 
         console.log('After deletion: ', tinymce.editors );
@@ -332,6 +322,7 @@ class AdminNotes {
 
         let editor = document.createElement('textarea');
         editor.classList.add('thet-admin-notes-topic-textarea');
+        editor.setAttribute('id', 'tinymce-topic-editor');
 
         topicContentWrapper.appendChild( editor );
 
@@ -340,10 +331,12 @@ class AdminNotes {
 
         let cancelButton = document.createElement('div');
         cancelButton.classList.add('thet-admin-notes-topic-editor-cancel-btn');
+        cancelButton.addEventListener('click', event => { this.handleTopicEditCancelBtnClick( event )});
         cancelButton.innerText = 'Cancel';
 
         let saveButton = document.createElement('div');
         saveButton.classList.add('thet-admin-notes-topic-editor-save-btn');
+        saveButton.addEventListener('click', event => { this.handleTopicEditSaveBtnClick( event )});
         saveButton.innerText = 'Save';
 
         buttonWrapper.appendChild( cancelButton );
@@ -352,11 +345,33 @@ class AdminNotes {
         topicContentWrapper.appendChild( buttonWrapper );
 
         this.topicEditor = await tinymce.init({
-            selector: '.thet-admin-notes-topic-textarea',
+            selector: '#tinymce-topic-editor',
             themes: "modern",
             menubar: false,
             plugins: 'lists',
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            style_formats: [
+                {title: 'Headings', items: [
+                    // {title: 'Heading 1', format: 'h1'},  // Excluded
+                    // {title: 'Heading 2', format: 'h2'},  // Excluded
+                    // {title: 'Heading 3', format: 'h3'},  // Excluded
+                    {title: 'Heading 1', format: 'h4'},
+                    {title: 'Heading 2', format: 'h5'},
+                    {title: 'Heading 3', format: 'h6'}
+                ]},
+                {title: 'Inline', items: [
+                    {title: 'Bold', icon: 'bold', format: 'bold'},
+                    {title: 'Italic', icon: 'italic', format: 'italic'},
+                    {title: 'Underline', icon: 'underline', format: 'underline'},
+                    // More inline styles...
+                ]},
+                {title: 'Blocks', items: [
+                    {title: 'Paragraph', format: 'p'},
+                    {title: 'Blockquote', format: 'blockquote'},
+                    {title: 'Div', format: 'div'},
+                    // More block formats...
+                ]},
+            ],
             height: '60vh',
         });
 
