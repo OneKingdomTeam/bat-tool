@@ -27,7 +27,7 @@ function thet_get_notes_by_application_id(int $application_id, int $current_edit
 
 }
 
-function thet_update_admin_note($note_data) {
+function thet_update_admin_note($note_data): array {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
@@ -77,16 +77,17 @@ function thet_update_admin_note($note_data) {
         ];
     }
 
-    return 'Entry updated successfully.';
+    return [
+            'success' => true,
+            'message' => 'Entry sucessfuly updated.'
+    ];
 
 }
 
-function thet_unlock_admin_note( $note_data ){
+function thet_unlock_admin_note( int $application_id, string $session_key ): array {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
-
-    $application_id = intval( $note_data->application_id );
 
     $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
 
@@ -99,8 +100,8 @@ function thet_unlock_admin_note( $note_data ){
 
     if ( intval( $row->is_locked ) === 0 ){
         return [
-            'success' => false,
-            'message' => 'Row is already unlocked'
+            'success' => true,
+            'message' => 'Row was already unlocked'
         ];
     }
 
@@ -142,12 +143,10 @@ function thet_unlock_admin_note( $note_data ){
 
 }
 
-function thet_lock_admin_note(object $note_data, string $current_session_key ):array {
+function thet_lock_admin_note(int $application_id, string $current_session_key ):array {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
-
-    $application_id = intval( $note_data->application_id );
 
     $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
 
@@ -160,15 +159,15 @@ function thet_lock_admin_note(object $note_data, string $current_session_key ):a
 
     if ( intval( $row->is_locked ) === 1 ){
         return [
-            'success' => false,
-            'message' => 'Row already locked'
+            'success' => true,
+            'message' => 'Row was already locked'
         ];
     }
 
     $sql = $wpdb->prepare(
         "UPDATE $table_name SET is_locked = %d, session_key = %s WHERE application_id = %d",
-        $current_session_key,
         1,
+        $current_session_key,
         $application_id
     );
 

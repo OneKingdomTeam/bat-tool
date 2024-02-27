@@ -6,6 +6,7 @@ class AdminNotes {
         this.errorNote = '';
         this.applicationId = this.extractApplicationIdFromUrl();
         this.sessionId = this.generateSessionKey();
+        this.refreshInterval;
 
         this.checkForLocalization();
 
@@ -20,6 +21,9 @@ class AdminNotes {
         // Get's the notes from database
         this.getAndPrepareDataToSidebar();
 
+        this.changesChecker( true );
+
+
     }
 
     async getAndPrepareDataToSidebar(){
@@ -33,6 +37,7 @@ class AdminNotes {
         }
 
         if ( this.floatingIcon === undefined ) {
+
             this.createFloatingIcon();
         } 
 
@@ -101,6 +106,22 @@ class AdminNotes {
         this.notesData = responseData.data;
         return responseData.data;
         
+    }
+
+    changesChecker( status ){
+
+        if (status === true ){
+            this.refreshInterval = setInterval(() => {
+                console.log('thetNotes: ', 'Downloading recent notes');
+                this.getAndPrepareDataToSidebar();
+            }, 5000);
+            return;
+        }
+
+        if ( status === false ){
+            clearInterval( this.refreshInterval );
+        }
+
     }
 
     async saveNotesToDatabase() {
@@ -250,6 +271,8 @@ class AdminNotes {
     handleTopicEditIconClick( event ) {
 
         let topicWrapper = event.target.closest('.thet-admin-notes-topic-wrapper');
+        this.lockNotesFromOtherEditors(true);
+        this.changesChecker( false );
         this.openTopicEditor( topicWrapper );
 
     }
@@ -263,18 +286,22 @@ class AdminNotes {
         this.saveNotesToDatabase();
 
         this.destroyTopicEditors();
+        this.lockNotesFromOtherEditors( false );
 
         setTimeout(() => {
             this.getAndPrepareDataToSidebar();
         }, 250);
 
+        this.changesChecker( true );
 
     }
 
     handleTopicEditCancelBtnClick( event ){
 
         this.destroyTopicEditors();
+        this.lockNotesFromOtherEditors( false );
         this.getAndPrepareDataToSidebar();
+        this.changesChecker( true );
 
     }
 

@@ -77,14 +77,9 @@ function thet_ajax_update_note() {
     $notes_data = isset($_POST['notes_data']) && $_POST['notes_data'] != '' ? json_decode(stripslashes($_POST['notes_data'])) : wp_send_json_error('Invalid notes_data data.', 403);
 
     $update_result = thet_update_admin_note($notes_data);
-    $is_error = 0;
-
-    if ( str_contains($update_result, 'Error') ){
-        $is_error = true;
-    }
 
     // Check for errors in update
-    if ($is_error) {
+    if ( $update_result['success'] === false ) {
         wp_send_json_error($update_result, 500);
     } else {
         wp_send_json_success('Note updated successfully.');
@@ -127,7 +122,7 @@ function thet_ajax_lock_and_unlock_note(){
 
     if( $_POST['action'] == 'thet_ajax_lock_note' ) {
 
-        $result = thet_lock_admin_note( $notes_data, $_POST['session_key'] );
+        $result = thet_lock_admin_note( intval( $_POST['application_id'] ), $_POST['session_key'] );
         
         if ( $result['success'] ) {
             wp_send_json( $result, 200 );
@@ -139,7 +134,7 @@ function thet_ajax_lock_and_unlock_note(){
 
     if( $_POST['action'] == 'thet_ajax_unlock_note' ) {
 
-        $result = thet_unlock_admin_note( $notes_data, $_POST['session_key'] );
+        $result = thet_unlock_admin_note( intval( $_POST['application_id'] ), $_POST['session_key'] );
 
         if ( $result['success'] ) {
             wp_send_json( $result, 200 );
