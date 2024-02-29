@@ -11,6 +11,7 @@ function thet_register_new_post_types(){
 
     thet_register_applications();
     thet_register_questions();
+    thet_register_reports();
 
 }
 
@@ -93,5 +94,43 @@ function thet_register_questions(){
     ];
 
     register_post_type( 'questions', $args );
+
+}
+
+function thet_register_reports(){
+
+    $labels = [
+
+        'name'          => _x( 'Reports', 'Post type general name', 'textdomain'),
+        'singular_name' => _x( 'report', 'Post type singular name', 'textdomain'),
+        'menu_name' => _x( 'Reports', 'Admin menu text', 'textdomain'),
+        'add_new' => _x( 'Create report', 'Add New on Toolbar', 'textdomain')
+
+    ];
+
+    $args = [
+
+        'labels'   => $labels,
+        'description' => 'Holds reports created for the teams.',
+        'public' => false,
+        'exclude_from_search' => true,
+        'show_ui' => true,
+        'capabilities' => [
+            'edit_post'          => 'edit_report', 
+            'read_post'          => 'read_report', 
+            'delete_post'        => 'delete_report', 
+            'edit_posts'         => 'edit_reports', 
+            'edit_others_posts'  => 'edit_others_reports', 
+            'publish_posts'      => 'publish_reports',
+            'read_private_posts' => 'read_private_reports', 
+            'create_posts'       => 'edit_reports', 
+        ],
+        'show_in_rest' => false,
+        'menu_icon' => 'dashicons-clipboard',
+        'supports' => [ 'title', 'author', 'revisions', 'thumbnail' ],
+
+    ];
+
+    register_post_type( 'reports' , $args );
 
 }
