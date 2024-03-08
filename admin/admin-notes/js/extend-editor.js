@@ -1,9 +1,10 @@
 class EditorNotes {
 
-    constructor(){
+     constructor(){
 
         this.Settings = {};
         this.Settings.grabPostHeaderSettingsMaxAttempts = 5;
+        this.Settings.iconCreationMaxAttempts = 10;
 
 
         console.log('Initialized thetEditorExtentnion');
@@ -11,10 +12,12 @@ class EditorNotes {
 
         this.Temp = {};
         this.Temp.grabPostHeaderSettingsAttempts = 0;
+        this.Temp.iconCreationAttempts = 0;
 
         this.selectPostHeaderSettings();
         this.localizeThis();
         this.loadApplicaitonNotes();
+        this.createNotesIconWhenReady();
 
 
     }
@@ -30,52 +33,63 @@ class EditorNotes {
     }
 
     createNotesIcon (){
+
         if ( this.UIElements.postHeaderSettings !== null ){
 
-            this.UIElements.postHeaderNotesIcon = document.createElement('div');
-            this.UIElements.postHeaderNotesIcon.style.minWidth = '30px';
-            this.UIElements.postHeaderNotesIcon.style.height = '30px';
-            this.UIElements.postHeaderNotesIcon.style.backgroundColor = 'blue';
-            this.UIElements.postHeaderNotesIcon.style.cursor = 'pointer';
-            this.UIElements.postHeaderNotesIcon.innerText = 'Show notes';
+            let notesIcon = document.createElement('div');
+            notesIcon.classList.add('components-button');
+            notesIcon.setAttribute('style', 'min-width: 30px; border: solid 2px #001540; border-radius: 0.15rem; cursor: pointer; display: flex; justify-content: center; align-items: center;');
+            notesIcon.innerText = 'Show notes';
 
-            this.UIElements.postHeaderNotesIcon.addEventListener('click', (event) => {
+            let innerIcon = document.createElement('img');
+            innerIcon.src = this.Settings.pluginDirUrl + 'media/notes-icon.svg';
+            innerIcon.setAttribute('style', 'width: 20px; height: 20px; margin-left: 6px;');
+
+            notesIcon.appendChild( innerIcon );
+
+            notesIcon.addEventListener('click', (event) => {
                 this.handleShowNotesClick(event);
             })
 
+            this.UIElements.postHeaderNotesIcon = notesIcon;
             this.UIElements.postHeaderSettings.insertBefore( this.UIElements.postHeaderNotesIcon, this.UIElements.postHeaderSettings.firstElementChild )
 
         } else {
+
             throw new Error('Unable to locate edit-post-header__settings element');
+
         }
     }
+
+    createNotesIconWhenReady(){
+
+        if ( this.Settings.applicationId === "" ){
+            console.log('No application ID set. Going without it');
+            return;
+        }
+
+        if ( this.Temp.iconCreationAttempts >= this.Settings.iconCreationMaxAttempts ) {
+            throw new Error('Coudn\'t create an icon.');
+        }
+
+        if ( this.UIElements.postHeaderSettings === undefined || this.UIElements.postHeaderSettings === null ){
+            setTimeout(()=>{
+                this.createNotesIconWhenReady();
+            }, 250);
+        } else {
+            this.createNotesIcon();
+        }
+
+    }
+
 
     showAvailableApplicationsSelector( availableApplications ){
 
         let overlay = document.createElement('div');
-        overlay.style.zIndex = 9999;
-        overlay.style.width = '100vw';
-        overlay.style.height = '100vh';
-        overlay.style.backgroundColor = '#ffffff99';
-        overlay.style.backdropFilter = 'blur(10px)';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0px';
-        overlay.style.left = '0px';
-        overlay.style.display = 'flex';
-        overlay.style.justifyContent = 'center';
-        overlay.style.alignItems = 'center';
+        overlay.setAttribute('style', 'z-index: 9999; width: 100vw; height: 100vh; background-color: #ffffff99; backdrop-filter: blur(10px); position: fixed; top: 0px; left: 0px; display: flex; justify-content: center; align-items: center;');
 
         let window = document.createElement('div');
-        window.style.backgroundColor = '#ffffff';
-        window.style.borderRadius = '0.5rem';
-        window.style.padding = '3rem 3rem'; 
-        window.style.boxShadow = '0rem 0rem 1rem #00000033'; 
-        window.style.minWidth = '380px';
-        window.style.minHeight = '160px';
-        window.style.display = 'flex';
-        window.style.flexDirection = 'column';
-        window.style.alignItems = 'center';
-        window.style.justifyContent = 'center';
+        window.setAttribute('style', 'background-color: #ffffff; border-radius: 0.5rem; padding: 3rem; box-shadow: 0rem 0rem 1rem #00000033; min-width: 380px; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center;');
 
         let title = document.createElement('h4');
         title.innerText = 'Select application';
@@ -86,11 +100,7 @@ class EditorNotes {
         subTitle.innerText = 'It will allow you to view the notes and have them right here during the creation of the report';
 
         let select = document.createElement('select');
-        select.style.minWidth = '19rem';
-        select.style.fontSize = '1.15rem';
-        select.style.padding = '0.35rem';
-        select.style.textAlign = 'center';
-        select.style.marginBottom = '18px';
+        select.setAttribute('style', 'min-width: 19rem; font-size: 1.15rem; padding: 0.35rem; text-align: center; margin-bottom: 18px;');
         select.id = 'availableApplications';
 
         let defaultOption = document.createElement('option');
@@ -140,7 +150,6 @@ class EditorNotes {
 
         } else {
             console.log('postHeaderSettings is no longer null');
-            this.createNotesIcon();
         }
     }
 
@@ -148,7 +157,7 @@ class EditorNotes {
 
         if( this.Settings.applicationId ){
             console.log('ApplicationID found. Fetching Application Notes');
-            this.applicationNotes = this.fetchApplicationData();
+            this.applicationNotes = await this.fetchApplicationData();
         } else { 
             console.log('Report has not yet been connected with any Application. Showing popup.');
             this.Temp.availableApplications = await this.fetchAvailableApplications();
@@ -215,7 +224,22 @@ class EditorNotes {
     }
 
     handleShowNotesClick( event ){
-        console.log('Clicked element: ', event.target);
+        let wpSideBar = document.querySelector('.interface-interface-skeleton__sidebar');
+        let sideBarWidth;
+        if( wpSideBar === null ){
+            sideBarWidth = '281px';
+        } else {
+            sideBarWidth = wpSideBar.offsetWidth.toString() + 'px';
+        }
+
+        let notesSidebar = document.createElement('div');
+        notesSidebar.setAttribute('style', 'position: fixed; top: 0; right: 0; height: 100vh; padding: 1rem; overflow: scroll; background-color: #ffffff; box-shadow: -10px 0px 15px #0003; z-index: 9999; width: ' + sideBarWidth + ';');
+        notesSidebar.classList.add('content');
+        notesSidebar.innerHTML = this.applicationNotes;
+
+        this.UIElements.notesSidebar = notesSidebar;
+        document.body.appendChild( this.UIElements.notesSidebar );
+        
     }
 
     async handleSelectFromAvailableApplications( select ){

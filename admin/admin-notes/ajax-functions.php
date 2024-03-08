@@ -255,7 +255,28 @@ function thet_handle_reports_ajax(){
     }
 
     if( $_POST['subaction'] === 'get_application_notes' ){
-        wp_send_json('Okay!');
+        $notes_data = thet_get_notes_by_application_id( intval($_POST['application_id']), wp_get_current_user()->ID, "");
+        $notes_map = thet_get_notes_map();
+
+        $output = "";
+
+
+        $output .= "<div class \"content\">";
+        foreach($notes_map as $entry){
+            $note_id = $entry->note_id;
+            $question_id = $entry->question_id;
+            
+            $note_id_formatted = str_pad($note_id, 2, '0', STR_PAD_LEFT);
+            $question_title = get_post( intval( $question_id ) )->post_title;
+            
+            $notes_data_array = (array) $notes_data;
+
+            $output .= "<h3>{$question_title}</h3>{$notes_data_array['note' . $note_id_formatted]}";
+
+        }
+
+        wp_send_json( $output );
+
     }
     
 

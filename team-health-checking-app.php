@@ -17,6 +17,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function thet_set_plugin_environment(){
+
+    global $thet_plugin_environment;
+    $thet_plugin_environment = [
+        'root_dir_path' => plugin_dir_path(__FILE__), // Has trailing slash probably coz of directory
+        'root_dir_url' => plugin_dir_url(__FILE__) // also have trailing slash
+    ];
+
+}
+add_action('init', 'thet_set_plugin_environment', 1);
+
+
 
 // ---------------------- Backend Scripts  ---------------------
 require_once plugin_dir_path( __FILE__ ) . 'checks.php';
