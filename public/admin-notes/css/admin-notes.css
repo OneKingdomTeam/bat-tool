@@ -12,9 +12,6 @@
 }
 
 .thet-admin-notes-floating-icon {
-	position: fixed;
-	bottom: 5rem;
-	left: 5rem;
 	width: 4rem;
 	height: 4rem;
 	transform: translateX( -50% ) translateY( 50% );

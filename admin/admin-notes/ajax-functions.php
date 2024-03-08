@@ -195,12 +195,70 @@ function thet_ajax_get_notes_map(){
 add_action('wp_ajax_thet_ajax_get_notes_map', 'thet_ajax_get_notes_map');
 
 
-function thet_notes_testing(){
+function thet_handle_reports_ajax(){
+
+    if ( !current_user_can('edit_report') ){
+        wp_send_json_error('Unauthorzied to do that', 401);
+    }
+
+    if ( !$_POST ){
+        wp_send_json_error('Only POST method is allowed', 401);
+    }
 
 
+    if( $_POST['subaction'] === 'get_available_applications' ){
 
-    wp_send_json( thet_check_is_post_interactive_form_page() );
+        $attr = [
+            'post_type' => 'applications',
+            'posts_per_page' => -1,
+        ];
+        $applications = get_posts( $attr );
+
+        $output = [];
+
+        foreach($applications as $application){
+            array_push($output, ['ID' => $application->ID, 'title' => $application->post_title]);
+        }
+
+        if ( count( $output ) === 0 ){
+            wp_send_json_error(['success'=>false, 'message' => 'No applications found yet'], 400);
+        }
+        wp_send_json( $output );
+
+    }
+
+    if( $_POST['subaction'] === 'set_application_id_for_current_report' ){
+
+        $new_application_id = intval( $_POST['application_id'] );
+        $report_id = intval( $_POST['report_id'] );
+
+
+        $current_val = intval( get_post_meta( $report_id, 'connected_application', true));
+
+        if ( $current_val === $new_application_id ){
+            wp_send_json(['success' => true, 'message' => 'Attempted to store the same value']);
+        } else {
+            if( metadata_exists('reports', $report_id, 'connected_application') ){
+                $result = update_post_meta( $report_id, 'connected_application', $new_application_id);
+            } else {
+                $result = add_post_meta( $report_id, 'connected_application', $new_application_id);
+            }
+        }
+
+        if ( $result !== false ){
+            wp_send_json(['success' => true, 'message' => 'Succesfully updated!']);
+        } else {
+            wp_send_json_error(['success' => false, 'message' => 'Something went wrong while updating conneted_application.'], 400);
+        }
+
+
+    }
+
+    if( $_POST['subaction'] === 'get_application_notes' ){
+        wp_send_json('Okay!');
+    }
+    
 
 }
 
-add_action('wp_ajax_thet_notes_testing', 'thet_notes_testing');
+add_action('wp_ajax_thet_ajax_reports', 'thet_handle_reports_ajax');

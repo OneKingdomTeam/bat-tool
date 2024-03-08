@@ -112,7 +112,7 @@ function thet_register_reports(){
 
         'labels'   => $labels,
         'description' => 'Holds reports created for the teams.',
-        'public' => false,
+        'public' => true,
         'exclude_from_search' => true,
         'show_ui' => true,
         'capabilities' => [
@@ -125,10 +125,75 @@ function thet_register_reports(){
             'read_private_posts' => 'read_private_reports', 
             'create_posts'       => 'edit_reports', 
         ],
-        'show_in_rest' => false,
+        'show_in_rest' => true,
         'menu_icon' => 'dashicons-clipboard',
-        'supports' => [ 'title', 'author', 'revisions', 'thumbnail' ],
-
+        'supports' => [ 'title', 'editor', 'author', 'revisions', 'thumbnail' ],
+        'template' => [
+            ['core/group', ['style' => ['spacing' => ['blockGap' => 'var:preset|spacing|40' ]], 'className' => 'content is-medium'], [
+                ['core/image', ['url' => plugin_dir_url(dirname(__FILE__, 1)) . 'media/OK-logo.png', 'align' => 'center', 'width' => '100px' ] ],
+                ['core/post-title',
+                    [ 'level' => '1',
+                    'textAlign' => 'center']
+                ],
+                ['core/columns', ['style' => ['spacing' => ['blockGap' => ['left' => 'var:preset|spacing|40' ]]]],
+                    [
+                        ['core/column', [], [
+                            ['core/post-featured-image', [], [] ]
+                        ] ],
+                        ['core/column', [], [
+                            [ 'core/group', ['templateLock' => false, 'layout' => ['type' => 'constrained'], 'style' => ['spacing' => ['blockGap' => '0.7em']]], 
+                                [
+                                    ['core/group', ['templateLock' => true, 'layout' => ['type' => 'constrained' ], 'style' => ['spacing' => ['blockGap', '0px']]], [
+                                        ['core/heading', [ 'level' => 4, 'content' => 'Summary:' ] ],
+                                    ]],
+                                    ['core/paragraph', [ 'placeholder' => 'Summary, encouragement, etc...'] ]
+                                ]
+                            ]
+                        ] ],
+                    ]
+                ],
+                ['core/group', ['style' => ['spacing' => ['blockGap' => 'var:preset|spacing|30']]], [
+                    ['core/heading', ['level' => 2, 'textAlign' => 'center', 'content' => 'Recommendations' ] ],
+                    ['core/group', ['style' => ['spacing' => ['blockGap' => '1em']]], [
+                        ['core/heading',
+                            [ 'level' => 3,
+                            'placeholder' => '#1 recommendation template',
+                            ]
+                        ],
+                        [ 'core/group', ['templateLock' => false, 'layout' => ['type' => 'constrained'], 'style' => ['spacing' => ['blockGap' => '0.7em']]], 
+                            [
+                                ['core/paragraph', [ 'placeholder' => 'Recommendation content...'] ]
+                            ]
+                        ]
+                    ]],
+                    ['core/group', ['style' => ['spacing' => ['blockGap' => '1em']]], [
+                        ['core/heading',
+                            [ 'level' => 3,
+                            'placeholder' => '#2 recommendation template',
+                            ]
+                        ],
+                        [ 'core/group', ['templateLock' => false, 'layout' => ['type' => 'constrained'], 'style' => ['spacing' => ['blockGap' => '0.7em']]], 
+                            [
+                                ['core/paragraph', [ 'placeholder' => 'Recommendation content...'] ]
+                            ]
+                        ]
+                    ]],
+                    ['core/group', ['style' => ['spacing' => ['blockGap' => '1em']]], [
+                        ['core/heading',
+                            [ 'level' => 3,
+                            'placeholder' => '#3 recommendation template',
+                            ]
+                        ],
+                        [ 'core/group', ['templateLock' => false, 'layout' => ['type' => 'constrained'], 'style' => ['spacing' => ['blockGap' => '0.7em']]], 
+                            [
+                                ['core/paragraph', [ 'placeholder' => 'Recommendation content...'] ]
+                            ]
+                        ]
+                    ]]
+                ]]
+            ]]
+        ],
+        'template_lock' => true
     ];
 
     register_post_type( 'reports' , $args );

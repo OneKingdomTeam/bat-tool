@@ -25,7 +25,7 @@ function thet_check_is_post_interactive_form_page(): bool {
 
     global $post;
 
-    if ( $post->ID === intval(get_option('thet_options')['interactive_form_page_id'] ) ) {
+    if ( $post !== null && $post->ID === intval(get_option('thet_options')['interactive_form_page_id'] ) ) {
         return true;
     }
 
