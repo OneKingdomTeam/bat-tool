@@ -24,7 +24,9 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-}
+    position: fixed;
+    bottom: 4rem;
+    left: 4rem;}
 
 .thet-admin-notes-floating-icon.is-open {
     left: calc( 5rem + 25vw );   

@@ -255,7 +255,7 @@ function thet_handle_reports_ajax(){
     }
 
     if( $_POST['subaction'] === 'get_application_notes' ){
-        $notes_data = thet_get_notes_by_application_id( intval($_POST['application_id']), wp_get_current_user()->ID, "");
+        $notes_data = thet_only_get_notes_by_application_id( intval($_POST['application_id']) );
         $notes_map = thet_get_notes_map();
 
         $output = "";

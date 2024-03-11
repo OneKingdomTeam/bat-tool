@@ -12,11 +12,15 @@ add_action( 'template_redirect', 'thet_redirect_unauthenticated_users' );
 
 function thet_redirect_unauthenticated_users(){
 
+    $current_post = get_post();
+
+    if ( $current_post->post_type === 'reports' ){
+        return;
+    }
+
     if ( !is_user_logged_in() ){
     // Page generally should not be used by users that aren't logged in.
-
         auth_redirect();
-
     }
 
 }

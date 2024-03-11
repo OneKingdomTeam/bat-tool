@@ -224,7 +224,13 @@ class EditorNotes {
     }
 
     handleShowNotesClick( event ){
+
+        if ( this.UIElements.notesSidebar ){
+            return;
+        }
+
         let wpSideBar = document.querySelector('.interface-interface-skeleton__sidebar');
+        let wpSideBarBounding = wpSideBar.getBoundingClientRect();
         let sideBarWidth;
         if( wpSideBar === null ){
             sideBarWidth = '281px';
@@ -233,13 +239,45 @@ class EditorNotes {
         }
 
         let notesSidebar = document.createElement('div');
-        notesSidebar.setAttribute('style', 'position: fixed; top: 0; right: 0; height: 100vh; padding: 1rem; overflow: scroll; background-color: #ffffff; box-shadow: -10px 0px 15px #0003; z-index: 9999; width: ' + sideBarWidth + ';');
-        notesSidebar.classList.add('content');
-        notesSidebar.innerHTML = this.applicationNotes;
+        notesSidebar.setAttribute('style', 'position: fixed; top: ' + wpSideBarBounding.top.toString() + 'px; right: 0; height: ' + wpSideBarBounding.height.toString() + 'px; padding: 1rem; overflow: scroll; background-color: #ffffff; box-shadow: -10px 0px 15px #0003; z-index: 9999; width: ' + sideBarWidth + ';');
+
+        let notesSideBarShadow = document.createElement('div');
+        notesSidebar.appendChild( notesSideBarShadow );
+        let shadowRoot = notesSideBarShadow.attachShadow({mode: 'open'});
+
+        let bulmaStyles = document.createElement('link');
+        bulmaStyles.setAttribute('rel', 'stylesheet');
+        bulmaStyles.setAttribute('media', 'all');
+        bulmaStyles.setAttribute('href', this.Settings.pluginDirUrl + 'css/bulma.min.css');
+        
+        let buttonWrapper = document.createElement('div');
+        buttonWrapper.classList.add('buttons');
+
+        let closeButton = document.createElement('button');
+        closeButton.setAttribute('class', 'button is-warning is-light is-small');
+        closeButton.innerText = 'Close';
+        closeButton.addEventListener('click', () => {
+            this.handleCloseButtonClick();
+        });
+
+        let notesContent = document.createElement('div');
+        notesContent.setAttribute('class', 'content ');
+        notesContent.innerHTML = this.applicationNotes;
+
+        buttonWrapper.appendChild( closeButton );
+
+        shadowRoot.appendChild( bulmaStyles );
+        shadowRoot.appendChild( buttonWrapper );
+        shadowRoot.appendChild( notesContent );
 
         this.UIElements.notesSidebar = notesSidebar;
         document.body.appendChild( this.UIElements.notesSidebar );
         
+    }
+
+    handleCloseButtonClick(){
+        this.UIElements.notesSidebar.remove();
+        this.UIElements.notesSidebar = undefined;
     }
 
     async handleSelectFromAvailableApplications( select ){

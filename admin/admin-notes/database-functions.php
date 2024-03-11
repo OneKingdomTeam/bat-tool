@@ -27,13 +27,26 @@ function thet_get_notes_by_application_id(int $application_id, int $current_edit
 
 }
 
+
+function thet_only_get_notes_by_application_id(int $application_id)  {
+
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . 'bat_notes';
+
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id);
+
+    return $wpdb->get_row($sql);
+
+}
+
 function thet_update_admin_note($note_data): array {
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'bat_notes';
 
     $application_id = intval( $note_data->application_id );
-    $current_editor_id = intval( $note_data->last_editor_id ) ;
+    $current_editor_id = intval( wp_get_current_user()->ID );
     $current_session_key = $note_data->session_key;
 
     $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE application_id = %d", $application_id));
@@ -45,17 +58,18 @@ function thet_update_admin_note($note_data): array {
         ];
     }
 
-    $is_locked = $row->is_locked;
-    $last_editor_id = $row->last_editor_id;
+    $is_locked = intval( $row->is_locked );
+    $last_editor_id = intval( $row->last_editor_id );
     $last_update = strtotime($row->last_updated);
     $session_key = $row->session_key;
     $five_minutes_ago = time() - (5 * 60);
 
-    if ($is_locked) {
+    /*
+    if ($is_locked === 1 ) {
 
         if ($last_update < $five_minutes_ago) {
             $note_data->is_locked = true;
-        } elseif ($current_editor_id == $last_editor_id && $current_session_key == $session_key) {
+        } elseif ($current_editor_id === $last_editor_id && $current_session_key == $session_key) {
             $note_data->is_locked = true;
         } else {
             return [
@@ -63,8 +77,8 @@ function thet_update_admin_note($note_data): array {
                 'message' => 'Note is being editted by someone else'
             ];
         }
-
     }
+*/
 
     unset($note_data->id);
 
