@@ -29,6 +29,7 @@ function thet_get_applications(){
     $attr = array(
 
         'post_type' => 'applications',
+        'posts_per_page' => -1
      
     );
 
