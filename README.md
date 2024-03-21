@@ -15,7 +15,8 @@ This theme is responsible for loading extra css styles that are used across the 
 ## How to get an instance running
 
 > [!WARNING]
-> Unfortunately this plugin version doesn't follow correct zip file structure. While uploading WP will, since version 6.4-ish complain and won't allow the installation unless the zip structure checking is disallowed.
+> Unfortunately this plugin version doesn't follow correct zip file structure. While uploading WP will, since version 6.4-ish complain and won't allow the installation unless the zip structure checking is disallowed. At the bottom of this document you can find possible solution.
+
 
 From practical point of view getting instance running is fairly easy and requires only few steps.
 
@@ -29,4 +30,14 @@ With those settings and installation in place you should see the tool set up.
 
 For prevention of any unexpected behavior, it's recommended to disable caching on the hosting. App itself isn't any more demanding that demanding, and by disabling caching you always know that users are served with the current data from the server.
 
+## Solving archive incompatibility
 
+Since you cannot upload the theme, nor the plugin. You need to find a way how to add one extra line of PHP to your WP instance.
+
+One of the many ways is to use the `Code Snippets` plugin, that allows you to insert PHP snippets into the instance:
+
+```php
+add_filter( 'unzip_file_use_ziparchive', '__return_false' );
+```
+
+This reverts back to using old way of extracting archives for WordPress. In that case, from what I found, the archive compatibility check doesn't run.
