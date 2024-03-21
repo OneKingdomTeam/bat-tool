@@ -282,7 +282,7 @@ class EditorNotes {
     }
 
     async handleSelectFromAvailableApplications( select ){
-
+        
         if( select.value !== "" ){
 
             await this.fetchSetApplicationforCurrentReport( select.value );
@@ -302,6 +302,9 @@ class EditorNotes {
     }
 
 }
+
+var $j;
+var thetEdex;
 
 jQuery(document).ready( function(){
 

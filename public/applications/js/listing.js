@@ -163,15 +163,13 @@ class ListingController {
 
     handleReportButtonClick( event ){
 
-        let element = event.target;
-
         let overlay = $j('<div>', {
             'style':'z-index: 100; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff33; backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; cursor: pointer;'
         });
 
         let popupWindow = $j('<div>', {
             'class':'box is-flex is-flex-direction-column content has-text-centered',
-            'style':'z-index: 200; max-width: 80%; width: 560px; min-height: 320px; cursor: default; position: fixed; top: 50vh; left: 50vw; transform: translateX(-50%) translatey(-50%)'
+            'style':'max-width: 80%; width: 560px; min-height: 320px; cursor: default; position: fixed; top: 50vh; left: 50vw; transform: translateX(-50%) translatey(-50%)'
         });
 
         let header = $j('<h3>', {
@@ -180,14 +178,20 @@ class ListingController {
         });
 
         let message = $j('<p>', {
-            'html': 'Make sure to copy the password first before you will go to the report page, since the password is always required to view them',
+            'html': 'Make sure to copy the password first before you will go to the report page, since the password is always required to view them.',
+        });
+
+        let label = $j('<label>', {
+            'class': 'label has-text-centered mt-4',
+            'html' : 'Password:'
         });
 
         let input = $j('<input>', {
             'value': $j( event.target ).data().report_password,
-            'class': 'input has-text-centered mx-auto mt-5',
+            'class': 'input has-text-centered mx-auto mb-4',
             'type' : 'text',
-            'style': 'width: 350px; max-width: 75%;'
+            'style': 'width: 350px; max-width: 75%;',
+            'readonly': 'true'
         });
 
         let buttons = $j( '<div>', {
@@ -196,26 +200,39 @@ class ListingController {
 
         let button = $j('<a/>', {
             'class': 'button is-link mx-auto mt-4',
-            'html' : 'Open Report',
+            'html' : 'Open report',
             'href' : $j( event.target ).data().report_url,
             'target': '_blank'
         });
 
         input.click( ()=>{
-            input.select();
-            document.execCommand('copy');
+            navigator.clipboard.writeText( input.val() );
+            let notification = $j('<span>', {
+                'class':'tag is-success',
+                'html' : 'Copied!',
+            });
+            notification.css({
+                'position':'absolute',
+                'top': ( input.position().top + input.outerHeight() ).toString()  + 'px',
+                'left': input.parent().innerWidth() / 2 + 'px',
+                'transform': 'translateX(-50%)',
+                'display': 'none'
+            });
+            input.parent().append( notification );
+            notification.fadeIn(200).delay(1000).fadeOut(400, ()=>{ $j(this).remove() });
         } );
 
         header.appendTo( popupWindow );
         message.appendTo( popupWindow );
+        label.appendTo( popupWindow );
         input.appendTo( popupWindow );
         button.appendTo( buttons );
         buttons.appendTo( popupWindow );
 
+        popupWindow.appendTo( overlay );
         overlay.appendTo('body');
-        popupWindow.appendTo('body');
 
-        overlay.click( ()=>{ overlay.remove(); popupWindow.remove() });
+        overlay.click( (event)=>{ if( overlay.is( $j( event.target ) )){ overlay.remove() }});
 
     }
 
