@@ -5,7 +5,7 @@ Plugin Name:  Benchamrk Assessment Tool - Plugin
 Description:  Creates UI and backend for BAT Tool. Manages users, data, etc.
 Plugin URI:   https://vrubel.online/
 Author:       Petr Vrubel
-Version:      1.2
+Version:      1.2.10
 Text Domain:  team-health-checking-app
 Domain Path:  /languages
 License:      GPL v2 or later
@@ -27,7 +27,6 @@ function thet_set_plugin_environment(){
 
 }
 add_action('init', 'thet_set_plugin_environment', 1);
-
 
 
 // ---------------------- Backend Scripts  ---------------------
