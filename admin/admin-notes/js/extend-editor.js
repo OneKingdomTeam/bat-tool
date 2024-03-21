@@ -194,6 +194,7 @@ class EditorNotes {
         let data = new FormData();
         data.append('action', 'thet_ajax_reports');
         data.append('subaction', 'set_application_id_for_current_report');
+        data.append('post_content', wp.data.select( 'core/editor' ).getEditedPostContent() );
         data.append('application_id', applicationId );
         data.append('report_id', this.Settings.reportId );
 
@@ -302,11 +303,10 @@ class EditorNotes {
 
 }
 
+jQuery(document).ready( function(){
 
-
-let thetEdex;
-window.addEventListener('load', () => {
-
-    thetEdex = new EditorNotes();
+    var $j = jQuery.noConflict();
+    var thetEdex = new EditorNotes();
 
 });
+

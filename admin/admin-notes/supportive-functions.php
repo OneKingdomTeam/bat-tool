@@ -31,3 +31,22 @@ function thet_admin_notes_create_frontend_nonce():string {
 }
 
 
+
+function thet_generate_random_string( int $leght): string {
+
+    $characters = 'qwertyuiopasdfghjklzxcvbnm';
+    $output = '';
+    for( $i = 0; $i < $leght - 1; $i++ ){
+        $output .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $output;
+    
+}
+
+function thet_remove_protected_from_report_title() {
+
+    return __('%s');
+
+}
+
+add_filter( 'protected_title_format', 'thet_remove_protected_from_report_title' );

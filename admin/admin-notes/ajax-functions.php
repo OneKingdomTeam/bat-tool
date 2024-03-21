@@ -243,6 +243,18 @@ function thet_handle_reports_ajax(){
             } else {
                 $result = add_post_meta( $report_id, 'connected_application', $new_application_id);
             }
+            // Update slug to something random
+            $quarter = strval( ceil( date("m")));
+            $year = date("Y");
+            wp_update_post([
+                'ID' => $report_id,
+                'post_title' => get_post( $new_application_id )->post_title . '- Report Q' . $quarter . ' ' . $year,
+                'post_content' => $_POST['post_content'],
+                'post_name' => thet_generate_random_string( 32 ),
+                'post_password' => thet_generate_random_string( 12 ),
+                'post_status' => 'publish'
+            ]);
+
         }
 
         if ( $result !== false ){
@@ -279,7 +291,16 @@ function thet_handle_reports_ajax(){
 
     }
     
-
 }
 
 add_action('wp_ajax_thet_ajax_reports', 'thet_handle_reports_ajax');
+
+
+
+function thet_testing_ajax(){
+
+    wp_send_json( thet_generate_random_string( 32 ) );
+
+}
+
+add_action('wp_ajax_thet_testing_ajax', 'thet_testing_ajax');
