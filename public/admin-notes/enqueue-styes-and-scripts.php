@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function thet_enqueue_admin_notes_fornt_end_js_and_css() {
 
 
-    if ( thet_check_is_user_logged_in_and_admin() && thet_check_is_post_interactive_form_page() ) {
+    if ( thet_is_user_admin() && thet_check_is_post_interactive_form_page() ) {
 
         // If user is logged in, is administrator or form_admin and post ID is interactive form page ID loades the codes
         wp_register_style('admin_notes_frontend_css', plugin_dir_url(__FILE__) . 'css/admin-notes.css', [], false);

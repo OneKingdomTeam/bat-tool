@@ -13,8 +13,8 @@ function  thet_customize_report_enter_password_form() {
         <div class="container mt-6 box p-5 has-text-centered" style="max-width: 560px!important;">
             <form action="<?php echo esc_url(site_url() . '/wp-login.php?action=postpass' )?>" method="post">
                 <h3 class="title is-3">Password protected</h3>
-                <div class="block mx-auto" style="max-width: 80%;;"><p>
-                    If you don't know the password reach out to the person sharing the link with you and ask for it.
+                <div class="block mx-auto" style="max-width: 80%;"><p>
+                    If you don't know the password reach out to the person which shared the link with you and ask for it.
                 </p></div>
                 
                 <div class="field">

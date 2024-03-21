@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-function thet_check_is_user_logged_in_and_admin(): bool {
+function thet_is_user_admin(): bool {
 
     if ( !is_user_logged_in() ){
         return false;

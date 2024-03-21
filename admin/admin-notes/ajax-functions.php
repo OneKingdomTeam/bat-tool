@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 function thet_ajax_get_notes() {
 
     // Check if user is logged in
-    if ( !thet_check_is_user_logged_in_and_admin() ) {
-        wp_send_json_error('Unauthorized: User is not logged in.', 401);
+    if ( !thet_is_user_admin() ) {
+        wp_send_json_error('Unauthorized: Only admin can access', 401);
     }
 
     if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) {
@@ -244,7 +244,7 @@ function thet_handle_reports_ajax(){
                 $result = add_post_meta( $report_id, 'connected_application', $new_application_id);
             }
             // Update slug to something random
-            $quarter = strval( ceil( date("m")));
+            $quarter = strval( ceil( date("m") / 3));
             $year = date("Y");
             wp_update_post([
                 'ID' => $report_id,
