@@ -22,15 +22,12 @@ function thet_populate_note_to_question_map(){
 
 }
 
-
 function thet_admin_notes_create_frontend_nonce():string {
 
     $admin_notes_frontend_nonce = wp_create_nonce('admin_notes_frontend_nonce');
     return $admin_notes_frontend_nonce;
 
 }
-
-
 
 function thet_generate_random_string( int $leght): string {
 
@@ -45,6 +42,8 @@ function thet_generate_random_string( int $leght): string {
 
 function thet_remove_protected_from_report_title() {
 
+    // By default WP attaches "Protected: " to the post title
+    // it looks odd. So we need to get rid of it.
     return __('%s');
 
 }

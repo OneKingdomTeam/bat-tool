@@ -80,7 +80,7 @@ function thet_interactive_form_scripts(){
 
         $dir_url = plugin_dir_url( __FILE__ );
 
-        wp_register_script( 'thet_application_listing_script', $dir_url . 'js/listing.js', [], NULL, true );
+        wp_register_script( 'thet_application_listing_script', $dir_url . 'js/listing.js', ['jquery'], NULL, true );
         wp_enqueue_script( 'thet_application_listing_script' );
 
     }

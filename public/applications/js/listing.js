@@ -46,28 +46,26 @@ class ListingController {
             self.hookTimeCheck( button );
         } );
 
+        this.$reportButtons = $j('a.view-report-btn')
+        this.$reportButtons.on('click', (event) => { this.handleReportButtonClick( event ) });
     }
 
     async updateSaveTime(){
 
         let newData = await this.getLastSaveTimes();
 
-        let self = this;
-        Object.entries( newData ).forEach( function( entry ){
+        Object.entries( newData ).forEach( ( entry ) => {
 
             const[key, value] = entry;
 
             let wrapper = document.querySelector('.application-id-' + key.toString());
-            let timeFieldWrapper = wrapper.querySelector('.thet-last-save-time').setAttribute('data-last-save-time', parseInt( value['last_save_time'] ) );
             let timeField = wrapper.querySelector('.thet-last-save-time span');
 
-            let formattedTime = self.formatUnixTime( parseInt( value['last_save_time'] ) );
+            let formattedTime = this.formatUnixTime( parseInt( value['last_save_time'] ) );
 
             timeField.innerHTML = formattedTime;
 
         } );
-
-    
 
     }
 
@@ -163,7 +161,71 @@ class ListingController {
 
     }
 
+    handleReportButtonClick( event ){
+
+        let element = event.target;
+
+        let overlay = $j('<div>', {
+            'style':'z-index: 100; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff33; backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; cursor: pointer;'
+        });
+
+        let popupWindow = $j('<div>', {
+            'class':'box is-flex is-flex-direction-column content has-text-centered',
+            'style':'z-index: 200; max-width: 80%; width: 560px; min-height: 320px; cursor: default; position: fixed; top: 50vh; left: 50vw; transform: translateX(-50%) translatey(-50%)'
+        });
+
+        let header = $j('<h3>', {
+            'class':'title is-3',
+            'html':'View your report'
+        });
+
+        let message = $j('<p>', {
+            'html': 'Make sure to copy the password first before you will go to the report page, since the password is always required to view them',
+        });
+
+        let input = $j('<input>', {
+            'value': $j( event.target ).data().report_password,
+            'class': 'input has-text-centered mx-auto mt-5',
+            'type' : 'text',
+            'style': 'width: 350px; max-width: 75%;'
+        });
+
+        let buttons = $j( '<div>', {
+            'class': 'buttons'
+        });
+
+        let button = $j('<a/>', {
+            'class': 'button is-link mx-auto mt-4',
+            'html' : 'Open Report',
+            'href' : $j( event.target ).data().report_url,
+            'target': '_blank'
+        });
+
+        input.click( ()=>{
+            input.select();
+            document.execCommand('copy');
+        } );
+
+        header.appendTo( popupWindow );
+        message.appendTo( popupWindow );
+        input.appendTo( popupWindow );
+        button.appendTo( buttons );
+        buttons.appendTo( popupWindow );
+
+        overlay.appendTo('body');
+        popupWindow.appendTo('body');
+
+        overlay.click( ()=>{ overlay.remove(); popupWindow.remove() });
+
+    }
 
 }
 
-const thetListing = new ListingController();
+var $j;
+var thetListing;
+jQuery(document).ready( function() {
+
+    $j = jQuery.noConflict();
+    thetListing = new ListingController();
+
+});
