@@ -14,6 +14,9 @@ This theme is responsible for loading extra css styles that are used across the 
 
 ## How to get an instance running
 
+> [!WARNING]
+> Unfortunately this plugin version doesn't follow correct zip file structure. While uploading WP will, since version 6.4-ish complain and won't allow the installation unless the zip structure checking is disallowed.
+
 From practical point of view getting instance running is fairly easy and requires only few steps.
 
 1) Have a Wordpress instance running. NOT TESTED ON MULTISITE - stand alone instllation recommended
