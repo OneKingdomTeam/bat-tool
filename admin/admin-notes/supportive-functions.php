@@ -9,6 +9,12 @@ function thet_populate_note_to_question_map(){
 
     $current_questions = thet_get_questions_by_menu_order();
     $it = 0;
+
+    $notes_map = thet_get_notes_map();
+
+    if ( count( $notes_map ) !== 0 ){
+        return;
+    }
     
     foreach ($current_questions as $question) {
 
