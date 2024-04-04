@@ -248,7 +248,7 @@ function thet_handle_reports_ajax(){
             $year = date("Y");
             wp_update_post([
                 'ID' => $report_id,
-                'post_title' => get_post( $new_application_id )->post_title . '- Report Q' . $quarter . ' ' . $year,
+                'post_title' => get_post( $new_application_id )->post_title . ' - Report Q' . $quarter . ' ' . $year,
                 'post_content' => $_POST['post_content'],
                 'post_name' => thet_generate_random_string( 32 ),
                 'post_password' => thet_generate_random_string( 12 ),

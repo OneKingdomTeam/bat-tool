@@ -54,7 +54,6 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/register-post-types.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/query-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/rest-rules.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/set-editable-roles.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/restrictions/user-access-level-checker.php';
 
 
 
