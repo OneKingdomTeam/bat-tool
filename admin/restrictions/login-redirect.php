@@ -12,9 +12,9 @@ add_action( 'template_redirect', 'thet_redirect_unauthenticated_users' );
 
 function thet_redirect_unauthenticated_users(){
 
-    $current_post = get_post();
+    global $post;
 
-    if ( $current_post->post_type === 'reports' ){
+    if ( !empty($post) && $post->post_type === 'reports' ){
         return;
     }
 
