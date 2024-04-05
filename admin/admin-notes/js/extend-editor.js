@@ -6,7 +6,6 @@ class EditorNotes {
         this.Settings.grabPostHeaderSettingsMaxAttempts = 5;
         this.Settings.iconCreationMaxAttempts = 10;
 
-
         console.log('Initialized thetEditorExtentnion');
         this.UIElements = {};
 

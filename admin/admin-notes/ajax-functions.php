@@ -165,6 +165,7 @@ function thet_sanitize_notes_data( $notes_data ){
 
 }
 
+
 function thet_ajax_get_notes_map(){
 
     // Check if the request method is POST
@@ -187,8 +188,6 @@ function thet_ajax_get_notes_map(){
     if (!in_array('administrator', $user->roles) && !in_array('form_admin', $user->roles)) {
         wp_send_json_error('Unauthorized: User does not have permission.', 403);
     }
-
-    
 
 }
 
