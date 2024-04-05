@@ -1,50 +1,50 @@
-// Order matters. It is important first to load Quesions data to the thetQuestions object
+// Order matters. It is important first to load Quesions data to the batQuestions object
 // then those data are used to match BEAM to it's propriate question_id
-const thetQuestions = new Questions( thetAjax.questionsData );
-const thetAnswers = new Answers();
-const thetInterface = new Interface();
-const thetConnector = new Connector( thetAjax.nonce );
+const batQuestions = new Questions( batAjax.questionsData );
+const batAnswers = new Answers();
+const batInterface = new Interface();
+const batConnector = new Connector( batAjax.nonce );
 
-thetInterface.showLoading( true );
+batInterface.showLoading( true );
 
 window.addEventListener('load', async function(){
 
-    if ( thetConnector.applicationIdExists === true ){
+    if ( batConnector.applicationIdExists === true ){
 
-        thetAnswers.clearAnswersFromBrowser();
+        batAnswers.clearAnswersFromBrowser();
 
-        await thetConnector.getApplicationData( thetInterface.sessionKey );
+        await batConnector.getApplicationData( batInterface.sessionKey );
 
-        if ( thetConnector.applicationData === false || thetConnector.applicationData === "" ) {
+        if ( batConnector.applicationData === false || batConnector.applicationData === "" ) {
 
-            thetAnswers.saveAnswersToBrowser();
+            batAnswers.saveAnswersToBrowser();
             console.log( 'No data yet stored' );
 
         } else {
 
-            thetAnswers.answers = thetConnector.applicationData;
-            thetAnswers.checkQuestionAnswerAlignment();
-			thetAnswers.saveAnswersToBrowser();
+            batAnswers.answers = batConnector.applicationData;
+            batAnswers.checkQuestionAnswerAlignment();
+			batAnswers.saveAnswersToBrowser();
             console.log( 'Answers configured' );
 
         }
 
-        if ( thetConnector.recentResponseCode !== 200 ) {
+        if ( batConnector.recentResponseCode !== 200 ) {
 
             console.log('Data not loaded...');
-            console.log(thetConnector.applicationData.response);
-            console.log(thetConnector.applicationData.message);
+            console.log(batConnector.applicationData.response);
+            console.log(batConnector.applicationData.message);
             return;
 
         }
 
-        thetInterface.autoSaving( true );
-        thetInterface.updateWheel();
-        thetInterface.showLoading( false );
+        batInterface.autoSaving( true );
+        batInterface.updateWheel();
+        batInterface.showLoading( false );
 
     } else {
 
-        thetInterface.showError( title = 'No application ID found', content = 'Try going to the list of the applications and opening it again' );
+        batInterface.showError( title = 'No application ID found', content = 'Try going to the list of the applications and opening it again' );
 
     }
 

@@ -15,6 +15,25 @@ function bat_interactive_form_scripts(){
 
         $dir_url = bat_get_env()['root_dir_url'] . 'public/';
 
+        if ( current_user_can('edit_report') ) {
+
+            // If user is logged in and have right to edit_report (only administrators and form_admins
+            wp_register_style('admin_notes_frontend_css', bat_get_env()['root_dir_url'] . 'public/css/admin-notes.css', [], false);
+            wp_register_script('admin_notes_frontend_script', bat_get_env()['root_dir_url'] . 'public/js/admin-notes.js', [], false, true);
+
+            wp_localize_script('admin_notes_frontend_script', 'adminNotesLoc', [
+                'nonce' => bat_admin_notes_create_frontend_nonce(),
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'notes_map' => bat_get_notes_map(),
+            ]);
+
+            wp_enqueue_script('wp-tinymce');
+            wp_enqueue_script('wp-editor');
+            wp_enqueue_style('admin_notes_frontend_css');
+            wp_enqueue_script('admin_notes_frontend_script');
+
+        }
+
         // bulma CSS is loaded to front end through the theme
         wp_register_style( 'bat_interactive_form_css', $dir_url . 'css/interactive-form-custom.css', [], NULL );
 
@@ -25,7 +44,7 @@ function bat_interactive_form_scripts(){
 
         wp_register_script(
                 'bat_interactive_form_main',
-                plugin_dir_url( __FILE__ ) . 'js/main.js',
+                $dir_url . 'js/main.js',
                 [
                     'jquery',
                     'bat_interactive_form_questions',

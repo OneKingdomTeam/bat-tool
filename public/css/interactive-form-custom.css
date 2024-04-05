@@ -36,7 +36,7 @@
     line-height: 1.45!important;
 }
 
-.thet-loader {
+.bat-loader {
     position: fixed;
     top: 0px;
     left: 50%;
@@ -49,7 +49,7 @@
     justify-content: center;
 }
 
-.thet-loader svg {
+.bat-loader svg {
     max-width: 100px;
     animation: circle 1s steps(18) infinite;
 }

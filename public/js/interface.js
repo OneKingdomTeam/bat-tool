@@ -2,19 +2,19 @@ class Interface {
 
     constructor() {
 
-        thetAnswers.clearAnswersFromBrowser();
+        batAnswers.clearAnswersFromBrowser();
 
         this.sessionKey = this.generateSessionKey();
 
         this.hoverWindow = null;
 
 
-        this.interactiveCircleClass = 'thet-interactive-circle';
+        this.interactiveCircleClass = 'bat-interactive-circle';
         this.beamClass = 'beam-';
         this.segmentClass = 'segment-';
         this.subsegmentClass = 'subsegment-';
 
-        this.appendQuestionIdClassToBeam(thetQuestions.questions);
+        this.appendQuestionIdClassToBeam(batQuestions.questions);
 
         this.activeBeam = null;
         this.activeSegment = null;
@@ -28,15 +28,15 @@ class Interface {
         this.beams = document.querySelectorAll('.beam');
         this.questions = document.querySelectorAll('.question');
 
-        this.startButton = document.querySelector('.thet-start-assessment');
+        this.startButton = document.querySelector('.bat-start-assessment');
 
         this.answers = document.querySelectorAll('.answer');
-        this.radioBtns = document.querySelectorAll('.thet-radio-option');
-        this.radioBtnClear = document.querySelector('.thet-radio-clear');
-        this.commentTitle = document.querySelector('.thet-comment-title');
-        this.commentDescription = document.querySelector('.thet-comment-description');
-        this.saveButton = document.querySelector('.thet-save-progress-button');
-        this.saveButtonLabel = document.querySelector('.thet-save-progress-label');
+        this.radioBtns = document.querySelectorAll('.bat-radio-option');
+        this.radioBtnClear = document.querySelector('.bat-radio-clear');
+        this.commentTitle = document.querySelector('.bat-comment-title');
+        this.commentDescription = document.querySelector('.bat-comment-description');
+        this.saveButton = document.querySelector('.bat-save-progress-button');
+        this.saveButtonLabel = document.querySelector('.bat-save-progress-label');
 
 
         this.beamTitle = document.querySelector('.beam-title');
@@ -51,7 +51,7 @@ class Interface {
 
         this.lastQuestionWarning = document.querySelector('.last-question-warning');
 
-        this.popupHtmlContent = '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; background-color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;" class="thet-interactive-form-popup-wrapper"> <div class="thet-interactive-form-popup-window is-flex is-flex-direction-column is-justify-content-space-evenly p-5" style="width: 550px; height: 300px; background-color: #fff; border-radius: 0.5rem; box-shadow: 0px 0px 2rem 0px rgba(0,0,0,0.75);"> <div class="container thet-interactive-form-popup-title"> <h3 class="title is-3">Title placeholder</h3> </div><div class="container thet-interactive-form-popup-message"> <div class="content has-text-centered"> Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. </div></div><div class="thet-interactive-form-popup-buttons" style="width: 100%"> <div class="columns"> <div class="column"> <button class="button is-warning is-fullwidth thet-interactive-form-popup-warning-button">Back to listing</button> </div><div class="column"> <button class="button is-success is-fullwidth thet-interactive-form-popup-warning-button">Reload the page</button> </div></div></div></div>';
+        this.popupHtmlContent = '<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999; background-color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;" class="bat-interactive-form-popup-wrapper"> <div class="bat-interactive-form-popup-window is-flex is-flex-direction-column is-justify-content-space-evenly p-5" style="width: 550px; height: 300px; background-color: #fff; border-radius: 0.5rem; box-shadow: 0px 0px 2rem 0px rgba(0,0,0,0.75);"> <div class="container bat-interactive-form-popup-title"> <h3 class="title is-3">Title placeholder</h3> </div><div class="container bat-interactive-form-popup-message"> <div class="content has-text-centered"> Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. </div></div><div class="bat-interactive-form-popup-buttons" style="width: 100%"> <div class="columns"> <div class="column"> <button class="button is-warning is-fullwidth bat-interactive-form-popup-warning-button">Back to listing</button> </div><div class="column"> <button class="button is-success is-fullwidth bat-interactive-form-popup-warning-button">Reload the page</button> </div></div></div></div>';
 
         this.prepareHoverElements();
         this.appendEventListeners();
@@ -75,14 +75,14 @@ class Interface {
 
     updateBeamTitle(){
 
-        let currentQuestionTitle = thetQuestions.getCurrentBeamTitle( this.activeBeam );
+        let currentQuestionTitle = batQuestions.getCurrentBeamTitle( this.activeBeam );
         this.beamTitle.innerText = currentQuestionTitle;
 
     }
     
     updateMainQuestion(){
 
-        let currentQuestionTitle = thetQuestions.getCurrentMainQuestionContent( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let currentQuestionTitle = batQuestions.getCurrentMainQuestionContent( this.activeBeam, this.activeSegment, this.activeQuestion );
         this.beamTitle.innerText = currentQuestionTitle;
 
     }
@@ -105,7 +105,7 @@ class Interface {
     }
 
     updateWheel() {
-        let currentData = thetAnswers.getAnswersFromBrowser();
+        let currentData = batAnswers.getAnswersFromBrowser();
 
 
         // In this version we only have 1 segment in each beam
@@ -154,7 +154,7 @@ class Interface {
         this.hoverWindow.style.position = 'fixed';
         this.hoverWindow.style.zIndex = '9999999';
         this.hoverWindow.innerText = 'Loren Ipsum';
-        this.hoverWindow.classList.add('thet-interactive-form-hover-window');
+        this.hoverWindow.classList.add('bat-interactive-form-hover-window');
         this.hoverWindow.style.display = 'none';
 
         document.body.appendChild( this.hoverWindow );
@@ -165,7 +165,7 @@ class Interface {
     handleBeamMouseEnter( event ){
 
         let hoverBeam = event.target;
-        let hoverBeamTitle = thetQuestions.getCurrentBeamTitle( hoverBeam );
+        let hoverBeamTitle = batQuestions.getCurrentBeamTitle( hoverBeam );
         this.hoverWindow.innerText = hoverBeamTitle;
         this.hoverWindow.style.display = 'block';
 
@@ -296,7 +296,7 @@ class Interface {
 
     callSaveData(){
 
-        thetAnswers.updateAnswers( this.activeBeam, this.activeSegment, this.activeQuestion, this.activeAnswer, this.textarea );
+        batAnswers.updateAnswers( this.activeBeam, this.activeSegment, this.activeQuestion, this.activeAnswer, this.textarea );
         this.updateWheel();
 
     }
@@ -322,7 +322,7 @@ class Interface {
 
     fillInMainquestionAndDecription(){
         
-        let mainQuestionContentAndDescription = thetQuestions.getCurrentMainQuestionContentAndDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let mainQuestionContentAndDescription = batQuestions.getCurrentMainQuestionContentAndDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
         this.mainQuestion.innerText = mainQuestionContentAndDescription['title'];
         this.mainQuestionDescription.innerText = mainQuestionContentAndDescription['description'];
 
@@ -330,7 +330,7 @@ class Interface {
 
     fillInRadioValues(){
 
-        let values = thetQuestions.getCurrentQuestionRadioValues( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let values = batQuestions.getCurrentQuestionRadioValues( this.activeBeam, this.activeSegment, this.activeQuestion );
 
         let i = 0;
         this.radioBtns.forEach( function( radioButton ){
@@ -344,7 +344,7 @@ class Interface {
 
     fillInCommentTitleAndCommentDescription(){
 
-        let commentData = thetQuestions.getCurrentCommentTitleAndCommentDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let commentData = batQuestions.getCurrentCommentTitleAndCommentDescription( this.activeBeam, this.activeSegment, this.activeQuestion );
 
         this.commentTitle.innerText = commentData['commentTitle'];
         this.commentDescription.innerText = commentData['commentDescription'];
@@ -353,7 +353,7 @@ class Interface {
 
     fillInAnswer(){
 
-        let value = thetAnswers.returnStoredAnswerValue( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let value = batAnswers.returnStoredAnswerValue( this.activeBeam, this.activeSegment, this.activeQuestion );
 
         this.answers.forEach( function( answer ){
 
@@ -373,7 +373,7 @@ class Interface {
 
     fillInComment(){
 
-        let value = thetAnswers.returnStoredCommentValue( this.activeBeam, this.activeSegment, this.activeQuestion );
+        let value = batAnswers.returnStoredCommentValue( this.activeBeam, this.activeSegment, this.activeQuestion );
 
         this.textarea.value = "";
         this.textarea.value = value;
@@ -432,7 +432,7 @@ class Interface {
         } );
 
         self.saveButton.addEventListener('click', function( event ){
-            thetConnector.saveApplicationData( thetAnswers.answers, self.sessionKey );
+            batConnector.saveApplicationData( batAnswers.answers, self.sessionKey );
         });
 
     }
@@ -449,24 +449,24 @@ Content: ${ content }`);
 
         if ( show === true ){
 
-            if ( document.querySelector('.thet-loader') === null ) {
+            if ( document.querySelector('.bat-loader') === null ) {
 
-                let loadingScreenString = '<div class="thet-loader" >' + thetAjax.loaderHTML + '</div>';
+                let loadingScreenString = '<div class="bat-loader" >' + batAjax.loaderHTML + '</div>';
                 let parser = new DOMParser();
                 let loadingScreenObj = parser.parseFromString( loadingScreenString, 'text/html' );
-                document.body.appendChild( loadingScreenObj.querySelector('.thet-loader') );
+                document.body.appendChild( loadingScreenObj.querySelector('.bat-loader') );
  
             }
 
-            document.querySelector('.thet-loader').classList.remove('is-hidden');
+            document.querySelector('.bat-loader').classList.remove('is-hidden');
 
         }
 
         if ( show === false ){
 
-            if ( document.querySelector('.thet-loader') !== null ){
+            if ( document.querySelector('.bat-loader') !== null ){
 
-                document.querySelector('.thet-loader').classList.add('is-hidden');
+                document.querySelector('.bat-loader').classList.add('is-hidden');
 
             }
 
@@ -495,13 +495,13 @@ Content: ${ content }`);
             var self = this;
             this.autoSaveInterval = setInterval(() => {
                 console.log( 'Saving to server...' );
-                thetConnector.saveApplicationData( thetAnswers.answers, self.sessionKey );
+                batConnector.saveApplicationData( batAnswers.answers, self.sessionKey );
             }, 15000 );
 
             this.saveNotificationInterval = setInterval( () => {
-                if ( thetConnector.recentSaveTime !== null ) {
+                if ( batConnector.recentSaveTime !== null ) {
                     let timeNow = Math.round( Date.now() / 1000 );
-                    let timeDifference = timeNow - thetConnector.recentSaveTime;
+                    let timeDifference = timeNow - batConnector.recentSaveTime;
                     let timeDifferenceStr = timeDifference.toString();
                     this.saveButtonLabel.innerText = `Last save:  ${timeDifferenceStr}s ago`;
                     this.saveButtonLabel.style.visibility = 'visible';
@@ -521,7 +521,7 @@ Content: ${ content }`);
 
         if ( visible == false ){
 
-            let popupWrapper = document.querySelector('.thet-interactive-form-popup-wrapper');
+            let popupWrapper = document.querySelector('.bat-interactive-form-popup-wrapper');
             if ( popupWrapper !== null ){
                 popupWrapper.outerHTML = "";
             }
@@ -534,10 +534,10 @@ Content: ${ content }`);
 
             const parser = new DOMParser();
             const parsedHtml = parser.parseFromString( this.popupHtmlContent, 'text/html');
-            const actuallContent = parsedHtml.querySelector('.thet-interactive-form-popup-wrapper').cloneNode(true);
+            const actuallContent = parsedHtml.querySelector('.bat-interactive-form-popup-wrapper').cloneNode(true);
 
-            actuallContent.querySelector('.thet-interactive-form-popup-title h3').innerText = title;
-            actuallContent.querySelector('.thet-interactive-form-popup-message .content').innerText = message;
+            actuallContent.querySelector('.bat-interactive-form-popup-title h3').innerText = title;
+            actuallContent.querySelector('.bat-interactive-form-popup-message .content').innerText = message;
             actuallContent.querySelector('.button.is-warning').addEventListener('click', function(){ window.location.href = '/' });
             actuallContent.querySelector('.button.is-success').addEventListener('click', function(){ window.location.reload()});
 

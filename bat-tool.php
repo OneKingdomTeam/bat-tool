@@ -69,3 +69,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     require_once bat_get_env()['root_dir_path'] . 'public/applications/register-applications-scripts-and-styles.php';
     require_once bat_get_env()['root_dir_path'] . 'public/applications/shortcodes.php';
 
+
+    // admin notes files
+    require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/database-functions.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/notes-ajax.php';
+
+    require_once bat_get_env()['root_dir_path'] . 'admin/admin-notes/register-scripts-and-styles.php';
+

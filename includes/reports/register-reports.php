@@ -39,7 +39,7 @@ function bat_register_reports(){
         'supports' => [ 'title', 'editor', 'author', 'revisions', 'thumbnail' ],
         'template' => [
             ['core/group', ['style' => ['spacing' => ['blockGap' => 'var:preset|spacing|40' ]], 'className' => 'content is-medium'], [
-                ['core/image', ['url' => plugin_dir_url(dirname(__FILE__, 1)) . 'media/OK-logo.png', 'align' => 'center', 'width' => '100px' ] ],
+                ['core/image', ['url' => bat_get_env()['root_dir_url'] . 'public/media/OK-logo.png', 'align' => 'center', 'width' => '100px' ] ],
                 ['core/post-title',
                     [ 'level' => '1',
                     'textAlign' => 'center']

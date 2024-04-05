@@ -1,0 +1,120 @@
+.bat-admin-notes-sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 25vw;
+	height: 100vh;
+	background: #ffffffdd;
+	backdrop-filter: blur(10px);
+	box-shadow: 0.2rem 0rem 2rem #f2f2f2;
+    padding: 2rem 1rem;
+    overflow: scroll;
+}
+
+.bat-admin-notes-floating-icon {
+	width: 4rem;
+	height: 4rem;
+	transform: translateX( -50% ) translateY( 50% );
+    background: #0299FFCC;
+    backdrop-filter: blur(10px);
+	box-shadow: 0.2rem 0rem 2rem #f2f2f2;
+    border-radius: 0.8rem;
+    background-image: url('../media/notes-icon.svg');
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: fixed;
+    bottom: 4rem;
+    left: 4rem;
+    opacity: 0.5;
+}
+
+.bat-admin-notes-floating-icon:hover {
+    opacity: 1;
+}
+
+.bat-admin-notes-floating-icon.is-open {
+    left: calc( 5rem + 25vw );   
+    background: #f55;
+    background-image: url('../media/cross.svg');
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+}
+.bat-admin-notes-floating-icon.is-open:hover {
+    opacity: 1;
+}
+
+.is-display-none {
+    display: none;
+}
+
+.bat-admin-notes-topic-wrapper{
+    padding: 1rem 0rem;
+}
+
+.bat-admin-notes-topic-header {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.5rem;
+}
+
+.bat-admin-notes-topic-header-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bat-admin-notes-topic-edit-icon {
+    width: 40px;
+    height: 40px;
+    cursor: edit;
+    background-image: url('../media/notes-icon.svg');
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 0.8rem;
+}
+.bat-admin-notes-topic-edit-icon:hover {
+    background-color: #9bd4fa;
+}
+
+/* EDITOR CSS */
+.bat-admin-notes-topic-editor-button-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.75rem 0rem;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+
+.bat-admin-notes-topic-editor-cancel-btn,
+.bat-admin-notes-topic-editor-save-btn {
+  width: 50%;
+  text-align: center;
+  padding: 0.75rem 0rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bat-admin-notes-topic-editor-cancel-btn {
+  background-color: #FF555577;
+}
+
+.bat-admin-notes-topic-editor-save-btn {
+  background-color: #3EB05D77;  
+}
+
+.bat-admin-notes-topic-editor-cancel-btn:hover {
+  background-color: #FF5555bb;
+}
+
+.bat-admin-notes-topic-editor-save-btn:hover {
+  background-color: #3EB05Dbb;  
+}
+/* END EDITOR CSS */

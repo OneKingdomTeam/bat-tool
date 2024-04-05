@@ -22,7 +22,7 @@ class Connector {
         this.recentResponse =  data;
 
         if( this.recentResponseCode !== 200 ){
-            thetInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
+            batInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
         }
 
         return this.applicationData;
@@ -31,17 +31,17 @@ class Connector {
 
     async saveApplicationData( applicationData, sessionKey ){
 
-        thetInterface.showSavingProgress( true );
+        batInterface.showSavingProgress( true );
         const data = await this.fetchSaveApplicationData( this.applicationId, applicationData, sessionKey).then( (data) => { return data });
         this.recentResponse =  data;
 
         if( this.recentResponseCode !== 200 ){
-            thetInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
-            thetInterface.autoSaving( false );
+            batInterface.showPopup(true, this.recentResponse.response, this.recentResponse.message );
+            batInterface.autoSaving( false );
         }
 
         if( this.recentResponseCode === 200 ){
-            thetInterface.showSavingProgress( false );
+            batInterface.showSavingProgress( false );
         }
 
         this.recentSaveTime = Math.round( Date.now() / 1000 );
@@ -60,7 +60,7 @@ class Connector {
         if ( this.isForceOpen == true ){
             data.append( 'force_open', true );
         }
-        data.append( 'nonce', thetAjax.nonce );
+        data.append( 'nonce', batAjax.nonce );
 
         const response = await fetch( '/wp-admin/admin-ajax.php' , {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -79,7 +79,7 @@ class Connector {
         data.append( 'application_id', parseInt( applicationId ));
         data.append( 'data', JSON.stringify( applicationData ));
         data.append( 'session_key', sessionKey );
-        data.append( 'nonce', thetAjax.nonce );
+        data.append( 'nonce', batAjax.nonce );
 
         const response = await fetch( '/wp-admin/admin-ajax.php' , {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -105,9 +105,9 @@ class Connector {
         let parsedForceOpen = params.get("force_open");
 
         // Expanded for option to do this through the localStorage as well
-        let localStorageForceOpen = window.localStorage.getItem('thet_force_open');
+        let localStorageForceOpen = window.localStorage.getItem('bat_force_open');
 
-        window.localStorage.removeItem('thet_force_open');
+        window.localStorage.removeItem('bat_force_open');
         
         if( parsedForceOpen === "true" || localStorageForceOpen === "true" ){
             return true;

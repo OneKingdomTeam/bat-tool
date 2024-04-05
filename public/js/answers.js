@@ -291,20 +291,20 @@ class Answers {
 
         }
 
-        this.storeQuestionsIDtoBeam( thetQuestions.questions );
+        this.storeQuestionsIDtoBeam( batQuestions.questions );
 
     }
 
     saveAnswersToBrowser(){
 
         let answers = JSON.stringify( this.answers );
-        window.localStorage.setItem( 'thetAnswers', answers );
+        window.localStorage.setItem( 'batAnswers', answers );
 
     }
 
     getAnswersFromBrowser(){
 
-        let answers = JSON.parse( window.localStorage.getItem( 'thetAnswers' ) );
+        let answers = JSON.parse( window.localStorage.getItem( 'batAnswers' ) );
         this.answers = answers;
         return( this.answers );
 
@@ -312,7 +312,7 @@ class Answers {
 
     clearAnswersFromBrowser(){
 
-        window.localStorage.removeItem( 'thetAnswers' );
+        window.localStorage.removeItem( 'batAnswers' );
 
     }
 
@@ -396,7 +396,7 @@ class Answers {
     checkQuestionAnswerAlignment(){
 
         var updatedAnswers = {};
-        for( const [key,value] of Object.entries( thetAjax.questionsData )){
+        for( const [key,value] of Object.entries( batAjax.questionsData )){
             let foundObject = Object.values(this.answers).find(obj => obj.question_id === value.question_id );
             updatedAnswers[key] = foundObject;
         }
