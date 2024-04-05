@@ -42,3 +42,4 @@ add_filter( 'unzip_file_use_ziparchive', '__return_false' );
 
 This reverts back to using old way of extracting archives for WordPress. In that case, from what I found, the archive compatibility check doesn't run.
 
+
