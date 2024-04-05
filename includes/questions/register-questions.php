@@ -34,7 +34,7 @@ function bat_register_questions(){
             'read_private_posts' => 'read_private_questions', 
             'create_posts'       => 'edit_questions', 
         ],
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-quote',
         'supports' => [ 'title', 'author' ],
 

@@ -34,7 +34,7 @@ function bat_register_reports(){
             'read_private_posts' => 'read_private_reports', 
             'create_posts'       => 'edit_reports', 
         ],
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'menu_icon' => 'dashicons-clipboard',
         'supports' => [ 'title', 'editor', 'author', 'revisions', 'thumbnail' ],
         'template' => [

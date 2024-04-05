@@ -8,13 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function bat_create_questions(){
 
-    $questions_attr = array(
-
+    $questions_attr = [
         # post title is inserted dynamically
         'post_type' => 'questions',
         'post_status' => 'publish',
-
-    );
+    ];
     
     $questions_template_data = file_get_contents( bat_get_env()['root_dir_path'] . 'admin/templates/questions-recent.json' );
     $questions_template = json_decode( $questions_template_data, true );

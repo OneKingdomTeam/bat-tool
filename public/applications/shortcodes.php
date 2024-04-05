@@ -25,6 +25,14 @@ function bat_get_applications(){
             
             foreach ($applications as $application) {
 
+                if( !current_user_can('edit_report') ){
+                    
+                    // If current user is not administrator or form_admin
+                    if( !(intval( wp_get_current_user()->ID ) === intval( $application->post_author )) ){
+                        continue;
+                    }
+
+                }
                 ?>
                     <div class="columns mb-5 application-id-<?= $application->ID ?>">
                         <div class="column is-three-fifths is-offset-one-fifth box p-5">
@@ -86,10 +94,7 @@ function bat_get_applications(){
     </div>
     <?php
 
-    $output = ob_get_contents();
-    ob_end_clean();
-
-    return $output;
+    return ob_get_clean();
 
 }
 

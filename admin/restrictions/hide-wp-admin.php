@@ -16,7 +16,7 @@ function bat_restrict_wp_admin(){
     // Editting questions is pretty good way to check if user
     // has elevated privileges. Since those should rarely be changed
     // by only few priviliged users/mentors
-    if ( !current_user_can( 'edit_others_questions' )) {
+    if ( !current_user_can( 'edit_report' )) {
 
         // Hides it for regular users
         show_admin_bar( false );

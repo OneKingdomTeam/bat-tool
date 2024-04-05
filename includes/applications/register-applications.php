@@ -35,7 +35,7 @@ function bat_register_applications() {
             'read_private_posts' => 'read_private_applications', 
             'create_posts'       => 'edit_applications', 
         ],
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'menu_icon' => 'dashicons-format-aside',
         'supports' => [ 'title', 'author' ],
 
