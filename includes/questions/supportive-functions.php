@@ -21,4 +21,3 @@ function bat_get_questions_by_menu_order() {
     return $questions;
 
 }
-

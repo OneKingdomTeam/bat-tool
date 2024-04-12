@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // -----------------------------------------------------------------------------------
 
     // Restriction
-    require_once bat_get_env()['root_dir_path'] . 'admin/restrictions/load-restrictions.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/restrictions/load-restrictions.php';
 
     // Application requirements
     require_once bat_get_env()['root_dir_path'] . 'admin/applications/query-rules.php';
@@ -69,8 +69,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     require_once bat_get_env()['root_dir_path'] . 'public/applications/register-applications-scripts-and-styles.php';
     require_once bat_get_env()['root_dir_path'] . 'public/applications/shortcodes.php';
 
+    // Questions requirements
+    require_once bat_get_env()['root_dir_path'] . 'includes/questions/hide-add-new.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/questions/force-classic-editor.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/questions/customize-query.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/questions/customize-editor.php';
+    require_once bat_get_env()['root_dir_path'] . 'includes/questions/customize-columns.php';
 
-    // admin notes files
+    // Reports notes files
+    require_once bat_get_env()['root_dir_path'] . 'includes/reports/customize-password-enter-page.php';
+
+    // Admin notes files
     require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/database-functions.php';
     require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/notes-ajax.php';
 

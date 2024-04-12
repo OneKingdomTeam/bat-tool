@@ -60,7 +60,7 @@ function bat_get_applications(){
                                     <?php
                                         
                                         $reports_atts = [
-                                            'post_type' => 'reports',
+                                            'post_type' => 'report',
                                             'posts_per_page' => -1,
                                             'meta_query' => [
                                                 [

@@ -1,0 +1,7 @@
+#wp-admin-bar-new-questions {
+    display: none!important;
+}
+
+body.edit-php.post-type-questions a.page-title-action {
+    display: none!important;
+}

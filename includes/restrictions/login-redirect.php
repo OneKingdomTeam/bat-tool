@@ -16,7 +16,7 @@ function bat_redirect_unauthenticated_users(){
 
     // We need to allow reports to be loaded even for unauthenticated users
     // since those are/should be protected by password straight on the post itself
-    if ( !empty($post) && $post->post_type === 'reports' ){
+    if ( !empty($post) && $post->post_type === 'report' ){
         return;
     }
 

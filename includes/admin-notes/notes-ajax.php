@@ -204,6 +204,9 @@ function bat_handle_reports_ajax(){
                 'post_password' => bat_generate_random_string( 12 ),
                 'post_status' => 'publish'
             ]);
+
+            // Update the post template
+
         }
 
         if ( $result !== false ){

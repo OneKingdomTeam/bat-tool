@@ -24,7 +24,7 @@ function bat_remove_capabilities_from_admin( $user_roles_capabilities ){
 
     $admin_role = get_role( 'administrator' );
 
-    $admin_extra_capabilities = $user_roles_capabilities['form_admin_capabilities'];
+    $admin_extra_capabilities = $user_roles_capabilities['administrator_capabilities'];
     foreach( $admin_extra_capabilities as $capability) {
 
         $admin_role->remove_cap( $capability );

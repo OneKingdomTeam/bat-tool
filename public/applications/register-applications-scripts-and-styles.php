@@ -100,9 +100,7 @@ function bat_interactive_form_scripts(){
 
     if ( isset( $post ) && $post->ID === get_option( 'bat_options' )['applications_page_id'] ) {
 
-        $dir_url = plugin_dir_url( __FILE__ );
-
-        wp_register_script( 'bat_application_listing_script', $dir_url . 'js/listing.js', ['jquery'], NULL, true );
+        wp_register_script( 'bat_application_listing_script', bat_get_env()['root_dir_url'] . 'public/js/listing.js', ['jquery'], NULL, true );
         wp_enqueue_script( 'bat_application_listing_script' );
 
     }
