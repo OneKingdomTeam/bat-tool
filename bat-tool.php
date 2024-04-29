@@ -18,14 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-// TODO
-/*
- *  Creation of the questions should only run once at activation! create-questions.php
- *
- *
-*/
-
-
 // -----------------------------------------------------------------------------------
 
     function bat_get_env(){
@@ -78,10 +70,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     // Reports notes files
     require_once bat_get_env()['root_dir_path'] . 'includes/reports/customize-password-enter-page.php';
+    require_once bat_get_env()['root_dir_path'] . 'admin/reports/register-scripts-and-styles.php';
 
     // Admin notes files
     require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/database-functions.php';
     require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/notes-ajax.php';
-
-    require_once bat_get_env()['root_dir_path'] . 'admin/admin-notes/register-scripts-and-styles.php';
 

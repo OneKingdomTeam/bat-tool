@@ -307,8 +307,7 @@ var batEdex;
 
 jQuery(document).ready( function(){
 
-    var $j = jQuery.noConflict();
-    var batEdex = new EditorNotes();
+    $j = jQuery.noConflict();
+    batEdex = new EditorNotes();
 
 });
-

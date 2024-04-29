@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function bat_enqueue_admin_notes_block_editor_scripts_and_styles(){
+function bat_enqueue_reports_block_editor_scripts_and_styles(){
 
     $current_post = get_post();
     
@@ -16,6 +16,7 @@ function bat_enqueue_admin_notes_block_editor_scripts_and_styles(){
             'pluginDirUrl' => bat_get_env()['root_dir_url'],
             'reportId' => get_post()->ID,
             'applicationId' => get_post_meta( get_post()->ID, 'connected_application', true),
+            'bat_ajax_nonce' => wp_create_nonce('bat_ajax'),
         ]); 
         wp_enqueue_script('bat_notes_editor_script');
     
@@ -23,4 +24,4 @@ function bat_enqueue_admin_notes_block_editor_scripts_and_styles(){
 
 }
 
-add_action('enqueue_block_editor_assets', 'bat_enqueue_admin_notes_block_editor_scripts_and_styles');
+add_action('enqueue_block_editor_assets', 'bat_enqueue_reports_block_editor_scripts_and_styles');
