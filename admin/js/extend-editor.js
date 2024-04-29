@@ -223,7 +223,7 @@ class EditorNotes {
         
     }
 
-    handleShowNotesClick( event ){
+    handleShowNotesClick(event){
 
         if ( this.UIElements.notesSidebar ){
             return;
