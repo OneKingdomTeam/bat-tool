@@ -69,8 +69,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     require_once bat_get_env()['root_dir_path'] . 'includes/questions/customize-columns.php';
 
     // Reports notes files
+    require_once bat_get_env()['root_dir_path'] . 'includes/reports/wheel-manipulation.php';
     require_once bat_get_env()['root_dir_path'] . 'includes/reports/customize-password-enter-page.php';
     require_once bat_get_env()['root_dir_path'] . 'admin/reports/register-scripts-and-styles.php';
+    require_once bat_get_env()['root_dir_path'] . 'public/reports/register-scripts-and-styles.php';
 
     // Admin notes files
     require_once bat_get_env()['root_dir_path'] . 'includes/admin-notes/database-functions.php';

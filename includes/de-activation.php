@@ -15,7 +15,13 @@ function bat_tool_activation(){
 
 
     bat_register_new_user_roles();
-    bat_create_pages();
+
+    
+    // If option doesn't exists it calls create pages which creates pages and
+    // sets the option value
+    if( get_option('bat_options') === false ){
+        bat_create_pages();
+    }
 
     // Checks whether the questions already exits, since we don't want
     // to overwrite them for cases of people changing them during the
@@ -25,7 +31,6 @@ function bat_tool_activation(){
     }
 
     bat_set_application_page_as_homepage();
-
 
     // Needs to run after questions are already created to correctly map 
     // note_id to question_id

@@ -47,7 +47,7 @@ function bat_register_reports(){
                 ['core/columns', ['style' => ['spacing' => ['blockGap' => ['left' => 'var:preset|spacing|40' ]]]],
                     [
                         ['core/column', [], [
-                            ['core/html', ['content'=>'<div class="bat-tool-wheel-wrapper"><!--WHEEL-PLACEHOLDER--></div>'], [] ]
+                            ['core/image', ['url' => '{{WHEEL_BASE64_DATA}}', 'align' => 'center', 'width' => '400px','className' => 'bat-report-wheel'] ]
                         ] ],
                         ['core/column', [], [
                             [ 'core/group', ['templateLock' => false, 'layout' => ['type' => 'constrained'], 'style' => ['spacing' => ['blockGap' => '0.7em']]], 

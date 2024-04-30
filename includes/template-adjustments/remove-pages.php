@@ -14,4 +14,3 @@ function bat_remove_pages(){
     wp_delete_post( $bat_options['interactive_form_page_id'] , true );
 
 }
-

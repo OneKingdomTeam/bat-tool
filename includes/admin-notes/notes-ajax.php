@@ -182,12 +182,14 @@ function bat_handle_reports_ajax(){
         $new_application_id = intval( $_POST['application_id'] );
         $report_id = intval( $_POST['report_id'] );
 
-
         $current_val = intval( get_post_meta( $report_id, 'connected_application', true));
 
         if ( $current_val === $new_application_id ){
+
             wp_send_json(['success' => true, 'message' => 'Attempted to store the same value']);
+
         } else {
+
             if( metadata_exists('reports', $report_id, 'connected_application') ){
                 $result = update_post_meta( $report_id, 'connected_application', $new_application_id);
             } else {
@@ -196,16 +198,21 @@ function bat_handle_reports_ajax(){
             // Update slug to something random
             $quarter = strval( ceil( date("m") / 3));
             $year = date("Y");
+            
+            // Inserts the wheel snapshot
+            $application_wheel_raw = bat_get_colored_wheel($new_application_id);
+            $application_wheel_base64 = 'data:image/svg+xml;base64,' . base64_encode($application_wheel_raw);
+
+            $final_post_content = str_replace('{{WHEEL_BASE64_DATA}}', $application_wheel_base64, $_POST['post_content']);
+
             wp_update_post([
                 'ID' => $report_id,
                 'post_title' => get_post( $new_application_id )->post_title . ' - Report Q' . $quarter . ' ' . $year,
-                'post_content' => $_POST['post_content'],
+                'post_content' => $final_post_content,
                 'post_name' => bat_generate_random_string( 32 ),
                 'post_password' => bat_generate_random_string( 12 ),
                 'post_status' => 'publish'
             ]);
-
-            // Update the post template
 
         }
 
@@ -245,12 +252,3 @@ function bat_handle_reports_ajax(){
 }
 
 add_action('wp_ajax_bat_ajax_reports', 'bat_handle_reports_ajax');
-
-
-function bat_testing_ajax(){
-
-    wp_send_json( bat_generate_random_string( 32 ) );
-
-}
-
-add_action('wp_ajax_bat_testing_ajax', 'bat_testing_ajax');
