@@ -46,7 +46,7 @@ class ListingController {
             self.hookTimeCheck( button );
         } );
 
-        this.$reportButtons = $j('a.view-report-btn')
+        this.$reportButtons = $jq('a.view-report-btn')
         this.$reportButtons.on('click', (event) => { this.handleReportButtonClick( event ) });
     }
 
@@ -163,51 +163,51 @@ class ListingController {
 
     handleReportButtonClick( event ){
 
-        let overlay = $j('<div>', {
+        let overlay = $jq('<div>', {
             'style':'z-index: 100; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff33; backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; cursor: pointer;'
         });
 
-        let popupWindow = $j('<div>', {
+        let popupWindow = $jq('<div>', {
             'class':'box is-flex is-flex-direction-column content has-text-centered',
             'style':'max-width: 80%; width: 560px; min-height: 320px; cursor: default; position: fixed; top: 50vh; left: 50vw; transform: translateX(-50%) translatey(-50%)'
         });
 
-        let header = $j('<h3>', {
+        let header = $jq('<h3>', {
             'class':'title is-3',
             'html':'View your report'
         });
 
-        let message = $j('<p>', {
+        let message = $jq('<p>', {
             'html': 'Make sure to copy the password first before you will go to the report page, since the password is always required to view them.',
         });
 
-        let label = $j('<label>', {
+        let label = $jq('<label>', {
             'class': 'label has-text-centered mt-4',
             'html' : 'Password:'
         });
 
-        let input = $j('<input>', {
-            'value': $j( event.target ).data().report_password,
+        let input = $jq('<input>', {
+            'value': $jq( event.target ).data().report_password,
             'class': 'input has-text-centered mx-auto mb-4',
             'type' : 'text',
             'style': 'width: 350px; max-width: 75%;',
             'readonly': 'true'
         });
 
-        let buttons = $j( '<div>', {
+        let buttons = $jq( '<div>', {
             'class': 'buttons'
         });
 
-        let button = $j('<a/>', {
+        let button = $jq('<a/>', {
             'class': 'button is-link mx-auto mt-4',
             'html' : 'Open report',
-            'href' : $j( event.target ).data().report_url,
+            'href' : $jq( event.target ).data().report_url,
             'target': '_blank'
         });
 
         input.click( ()=>{
             navigator.clipboard.writeText( input.val() );
-            let notification = $j('<span>', {
+            let notification = $jq('<span>', {
                 'class':'tag is-success',
                 'html' : 'Copied!',
             });
@@ -219,7 +219,7 @@ class ListingController {
                 'display': 'none'
             });
             input.parent().append( notification );
-            notification.fadeIn(200).delay(1000).fadeOut(400, ()=>{ $j(this).remove() });
+            notification.fadeIn(200).delay(1000).fadeOut(400, ()=>{ $jq(this).remove() });
         } );
 
         header.appendTo( popupWindow );
@@ -232,17 +232,17 @@ class ListingController {
         popupWindow.appendTo( overlay );
         overlay.appendTo('body');
 
-        overlay.click( (event)=>{ if( overlay.is( $j( event.target ) )){ overlay.remove() }});
+        overlay.click( (event)=>{ if( overlay.is( $jq( event.target ) )){ overlay.remove() }});
 
     }
 
 }
 
-var $j;
+var $jq;
 var batListing;
 jQuery(document).ready( function() {
 
-    $j = jQuery.noConflict();
+    $jq = jQuery.noConflict();
     batListing = new ListingController();
 
 });

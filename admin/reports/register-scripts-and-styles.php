@@ -17,6 +17,7 @@ function bat_enqueue_reports_block_editor_scripts_and_styles(){
         wp_localize_script('bat_notes_editor_script', 'batNotesEditorLocalization', [
             'pluginDirUrl' => bat_get_env()['root_dir_url'],
             'reportId' => get_post()->ID,
+            'wheelHtml' => file_get_contents( bat_get_env()['root_dir_path'] . 'public/media/new-circle-core.svg', false),
             'applicationId' => get_post_meta( get_post()->ID, 'connected_application', true),
             'bat_ajax_nonce' => wp_create_nonce('bat_ajax'),
         ]); 

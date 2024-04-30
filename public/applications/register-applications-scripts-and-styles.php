@@ -87,7 +87,7 @@ function bat_interactive_form_scripts(){
 
         wp_localize_script( 'bat_interactive_form_main', 'batAjax', [
 
-                'nonce' => wp_create_nonce( 'bat_ajax'),
+                'nonce' => wp_create_nonce( 'bat_ajax' ),
                 'questionsData' => $output_array,
                 'loaderHTML' => file_get_contents( bat_get_env()['root_dir_path'] . 'public/media/loader-clean.svg' ),
 

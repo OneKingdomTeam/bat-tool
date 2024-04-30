@@ -34,23 +34,30 @@ class EditorNotes {
 
         if ( this.UIElements.postHeaderSettings !== null ){
 
-            let notesIcon = document.createElement('div');
-            notesIcon.classList.add('components-button');
-            notesIcon.setAttribute('style', 'min-width: 30px; border: solid 2px #001540; border-radius: 0.15rem; cursor: pointer; display: flex; justify-content: center; align-items: center;');
-            notesIcon.innerText = 'Show notes';
+            let notesToggleButton = $jq('<div>', {
+                'class': 'components-button button is-warning is-light is-flex is-align-items-center',
+            });
 
-            let innerIcon = document.createElement('img');
-            innerIcon.src = this.Settings.pluginDirUrl + 'public/media/notes-icon.svg';
-            innerIcon.setAttribute('style', 'width: 20px; height: 20px; margin-left: 6px;');
+            let notesToggleButtonText = $jq('<div>', {
+                'html': 'Show notes'
+            });
 
-            notesIcon.appendChild( innerIcon );
+            let innerIcon = $jq('<img>', {
+                'src': this.Settings.pluginDirUrl + 'public/media/notes-icon.svg',
+                'style': 'width: 20px; height: 20px; margin-left: 6px;',
+            });
 
-            notesIcon.addEventListener('click', (event) => {
-                this.handleShowNotesClick(event);
+            notesToggleButton.append(notesToggleButtonText);
+            notesToggleButton.append(innerIcon);
+
+            notesToggleButton.on('click', () => {
+                this.handleShowNotesClick();
             })
 
-            this.UIElements.postHeaderNotesIcon = notesIcon;
-            this.UIElements.postHeaderSettings.insertBefore( this.UIElements.postHeaderNotesIcon, this.UIElements.postHeaderSettings.firstElementChild )
+            notesToggleButton.insertBefore(this.UIElements.postHeaderSettings.firstElementChild);
+
+            this.UIElements.notesToggleButton = notesToggleButton;
+            this.UIElements.notesToggleButtonText = notesToggleButtonText;
 
         } else {
 
@@ -95,10 +102,11 @@ class EditorNotes {
         title.style.fontWeight = 'bold';
         let subTitle = document.createElement('p');
         subTitle.style.fontSize = '1.15rem';
+        subTitle.style.paddingBottom = '2rem';
         subTitle.innerText = 'It will allow you to view the notes and have them right here during the creation of the report';
 
         let select = document.createElement('select');
-        select.setAttribute('style', 'min-width: 19rem; font-size: 1.15rem; padding: 0.35rem; text-align: center; margin-bottom: 18px;');
+        select.setAttribute('style', 'min-width: 19rem; font-size: 1.15rem; padding: 0.35rem; text-align: center; margin-bottom: 2rem;');
         select.id = 'availableApplications';
 
         let defaultOption = document.createElement('option');
@@ -114,7 +122,7 @@ class EditorNotes {
         });
 
         let button = document.createElement('button');
-        button.innerText = 'Save';
+        button.innerText = 'Select';
         button.setAttribute('style', 'font-size: 1.15rem; color: #f2f2f2; padding: 0.5rem 5rem; background-color: #001540; border: solid 2px black; border-radius: 0.3rem; min-width: 19rem; cursor: pointer;');
         button.addEventListener('click', () => {
             this.handleSelectFromAvailableApplications( select );
@@ -223,9 +231,17 @@ class EditorNotes {
         
     }
 
-    handleShowNotesClick(event){
+    handleShowNotesClick(){
 
+        this.UIElements.notesToggleButtonText.text('Hide notes');
+        this.UIElements.notesToggleButton.removeClass('is-warning');
+        this.UIElements.notesToggleButton.addClass('is-danger');
         if ( this.UIElements.notesSidebar ){
+            this.UIElements.notesToggleButtonText.text('Show notes');
+            this.UIElements.notesToggleButton.removeClass('is-danger');
+            this.UIElements.notesToggleButton.addClass('is-warning');
+            $jq(this.UIElements.notesSidebar).remove();
+            this.UIElements.notesSidebar = undefined;
             return;
         }
 
@@ -253,18 +269,9 @@ class EditorNotes {
         let buttonWrapper = document.createElement('div');
         buttonWrapper.classList.add('buttons');
 
-        let closeButton = document.createElement('button');
-        closeButton.setAttribute('class', 'button is-warning is-light is-small');
-        closeButton.innerText = 'Close';
-        closeButton.addEventListener('click', () => {
-            this.handleCloseButtonClick();
-        });
-
         let notesContent = document.createElement('div');
         notesContent.setAttribute('class', 'content ');
         notesContent.innerHTML = this.applicationNotes;
-
-        buttonWrapper.appendChild( closeButton );
 
         shadowRoot.appendChild( bulmaStyles );
         shadowRoot.appendChild( buttonWrapper );
@@ -275,11 +282,7 @@ class EditorNotes {
         
     }
 
-    handleCloseButtonClick(){
-        this.UIElements.notesSidebar.remove();
-        this.UIElements.notesSidebar = undefined;
-    }
-
+    
     async handleSelectFromAvailableApplications( select ){
         
         if( select.value !== "" ){
@@ -302,12 +305,12 @@ class EditorNotes {
 
 }
 
-var $j;
+var $jq;
 var batEdex;
 
 jQuery(document).ready( function(){
 
-    $j = jQuery.noConflict();
+    $jq = jQuery.noConflict();
     batEdex = new EditorNotes();
 
 });
