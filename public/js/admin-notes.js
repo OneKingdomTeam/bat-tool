@@ -112,7 +112,6 @@ class AdminNotes {
 
         if (status === true ){
             this.refreshInterval = setInterval(() => {
-                console.log('batNotes: ', 'Downloading recent notes');
                 this.getAndPrepareDataToSidebar();
             }, 5000);
             return;
@@ -235,7 +234,7 @@ class AdminNotes {
             let noteTopicHeaderWraper = document.createElement( 'div' );
             noteTopicHeaderWraper.classList.add( 'bat-admin-notes-topic-header-wrapper' );
 
-            let noteTopicHeader = document.createElement( 'h3' );
+            let noteTopicHeader = document.createElement( 'h4' );
             noteTopicHeader.classList.add( 'bat-admin-notes-topic-header' );
             noteTopicHeader.innerText = values.title;
 
@@ -314,15 +313,9 @@ class AdminNotes {
 
     destroyTopicEditors() {
 
-        console.log('Current list of editors: ', tinymce.editors );
-
         while( tinymce.editors.length !== 0 ) {
-            console.log('Removing editor: ', tinymce.editors[0] );
             tinymce.editors[0].remove();
         }
-
-        console.log('After deletion: ', tinymce.editors );
-
 
     }
 
@@ -412,7 +405,6 @@ const batNotes = new AdminNotes();
 
 window.addEventListener( 'load', ()=>{
 
-    console.log('This init runned');
     batNotes.init();
 
 });

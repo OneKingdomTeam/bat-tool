@@ -241,7 +241,7 @@ function bat_handle_reports_ajax(){
             
             $notes_data_array = (array) $notes_data;
 
-            $output .= "<h3>{$question_title}</h3>{$notes_data_array['note' . $note_id_formatted]}";
+            $output .= "<h4>{$question_title}</h4>{$notes_data_array['note' . $note_id_formatted]}";
 
         }
 

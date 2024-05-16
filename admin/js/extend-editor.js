@@ -245,17 +245,16 @@ class EditorNotes {
             return;
         }
 
-        let wpSideBar = document.querySelector('.interface-interface-skeleton__sidebar');
-        let wpSideBarBounding = wpSideBar.getBoundingClientRect();
+        let wpSideBar = $jq('.interface-interface-skeleton__sidebar');
         let sideBarWidth;
-        if( wpSideBar === null ){
-            sideBarWidth = '281px';
+        if( wpSideBar.length === 0 ){
+            sideBarWidth = '280px';
         } else {
-            sideBarWidth = wpSideBar.offsetWidth.toString() + 'px';
+            sideBarWidth = wpSideBar.width().toString() + 'px';
         }
 
         let notesSidebar = document.createElement('div');
-        notesSidebar.setAttribute('style', 'position: fixed; top: ' + wpSideBarBounding.top.toString() + 'px; right: 0; height: ' + wpSideBarBounding.height.toString() + 'px; padding: 1rem; overflow: scroll; background-color: #ffffff; box-shadow: -10px 0px 15px #0003; z-index: 9999; width: ' + sideBarWidth + ';');
+        notesSidebar.setAttribute('style', 'position: fixed; top: ' + wpSideBar.position().top.toString() + 'px; right: 0; height: ' + wpSideBar.height().toString() + 'px; padding: 1rem; overflow: scroll; background-color: #ffffff; z-index: 9999; width: ' + sideBarWidth + ';');
 
         let notesSideBarShadow = document.createElement('div');
         notesSidebar.appendChild( notesSideBarShadow );
