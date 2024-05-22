@@ -1,9 +1,12 @@
 class EditorNotes {
-     constructor(){
+
+    constructor(){
+
         this.Settings = {};
         this.Settings.grabPostHeaderSettingsMaxAttempts = 5;
         this.Settings.iconCreationMaxAttempts = 10;
 
+        this.Settings.updateButtonClass = '.editor-post-publish-button';
 
         console.log('Initialized batEditorExtentnion');
         this.UIElements = {};
@@ -15,8 +18,7 @@ class EditorNotes {
         this.selectPostHeaderSettings();
         this.localizeThis();
         this.loadApplicaitonNotes();
-        this.createNotesIconWhenReady();
-
+        this.createIconsWhenReady();
 
     }
 
@@ -30,43 +32,66 @@ class EditorNotes {
         }
     }
 
-    createNotesIcon (){
+    createNotesIcon(){
 
-        if ( this.UIElements.postHeaderSettings !== null ){
+        let notesToggleButton = $jq('<div>', {
+            'class': 'components-button button is-warning is-light is-flex is-align-items-center',
+        });
 
-            let notesToggleButton = $jq('<div>', {
-                'class': 'components-button button is-warning is-light is-flex is-align-items-center',
-            });
+        let notesToggleButtonText = $jq('<div>', {
+            'html': 'Show notes'
+        });
 
-            let notesToggleButtonText = $jq('<div>', {
-                'html': 'Show notes'
-            });
+        let innerIcon = $jq('<img>', {
+            'src': this.Settings.pluginDirUrl + 'public/media/notes-icon.svg',
+            'style': 'width: 20px; height: 20px; margin-left: 6px;',
+        });
 
-            let innerIcon = $jq('<img>', {
-                'src': this.Settings.pluginDirUrl + 'public/media/notes-icon.svg',
-                'style': 'width: 20px; height: 20px; margin-left: 6px;',
-            });
+        notesToggleButton.append(notesToggleButtonText);
+        notesToggleButton.append(innerIcon);
 
-            notesToggleButton.append(notesToggleButtonText);
-            notesToggleButton.append(innerIcon);
+        notesToggleButton.on('click', () => {
+            this.handleShowNotesClick();
+        })
 
-            notesToggleButton.on('click', () => {
-                this.handleShowNotesClick();
-            })
+        notesToggleButton.insertBefore(this.UIElements.postHeaderSettings.firstElementChild);
 
-            notesToggleButton.insertBefore(this.UIElements.postHeaderSettings.firstElementChild);
+        this.UIElements.notesToggleButton = notesToggleButton;
+        this.UIElements.notesToggleButtonText = notesToggleButtonText;
 
-            this.UIElements.notesToggleButton = notesToggleButton;
-            this.UIElements.notesToggleButtonText = notesToggleButtonText;
-
-        } else {
-
-            throw new Error('Unable to locate edit-post-header__settings element');
-
-        }
     }
 
-    createNotesIconWhenReady(){
+    createSendReportButton(){
+
+        let sendReportButton = $jq('<div>', {
+            'class': 'components-button button is-info is-light is-flex is-align-items-center',
+        });
+
+        let sendReportButtonText = $jq('<div>', {
+            'html': 'Send report'
+        });
+
+        let sendReportInnerIcon = $jq('<img>', {
+            'src': this.Settings.pluginDirUrl + 'public/media/mail-icon-report.svg',
+            'style': 'width: 20px; height: 20px; margin-left: 6px;',
+        });
+
+        sendReportButton.append(sendReportButtonText);
+        sendReportButton.append(sendReportInnerIcon);
+
+        sendReportButton.on('click', () => {
+            this.handleSendreportButtonClick();
+        })
+
+        sendReportButton.insertBefore(this.UIElements.postHeaderSettings.firstElementChild);
+
+        this.UIElements.sendReportButton = sendReportButton;
+        this.UIElements.sendReportButtonText = sendReportButtonText;
+
+    }
+
+
+    createIconsWhenReady(){
 
         if ( this.Settings.applicationId === "" ){
             console.log('No application ID set. Going without it');
@@ -77,12 +102,18 @@ class EditorNotes {
             throw new Error('Coudn\'t create an icon.');
         }
 
+        // attempts to create notes icon after the notes are loaded. 
         if ( this.UIElements.postHeaderSettings === undefined || this.UIElements.postHeaderSettings === null ){
             setTimeout(()=>{
-                this.createNotesIconWhenReady();
+                this.createIconsWhenReady();
             }, 250);
         } else {
-            this.createNotesIcon();
+            if ( this.UIElements.postHeaderSettings !== null ){
+                this.createSendReportButton();
+                this.createNotesIcon();
+            } else {
+                throw new Error('Unable to locate edit-post-header__settings element');
+            }
         }
 
     }
@@ -279,6 +310,13 @@ class EditorNotes {
         this.UIElements.notesSidebar = notesSidebar;
         document.body.appendChild( this.UIElements.notesSidebar );
         
+    }
+
+    handleSendreportButtonClick(){
+
+        $jq(this.Settings.updateButtonClass).click();
+
+
     }
 
     

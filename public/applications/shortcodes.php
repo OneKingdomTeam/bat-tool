@@ -81,7 +81,6 @@ function bat_get_applications(){
                                                 </a>
                                             <?php
                                         }
-                                        
                                     ?>
                                 </div>
                             </div>

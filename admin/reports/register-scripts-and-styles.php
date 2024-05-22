@@ -14,7 +14,7 @@ function bat_enqueue_reports_block_editor_scripts_and_styles(){
         wp_register_style('bat_plugin_bulma', bat_get_env()['root_dir_url'] . 'admin/css/bulma.min.css', [], false);
         wp_register_style('bat_reports_styles', bat_get_env()['root_dir_url'] . 'public/css/reports.css', [], false);
 
-        wp_register_script('bat_notes_editor_script', bat_get_env()['root_dir_url'] . 'admin/js/extend-editor.js', ['jquery'], false, true);
+        wp_register_script('bat_notes_editor_script', bat_get_env()['root_dir_url'] . 'admin/js/report-editor.js', ['jquery'], false, true);
         wp_localize_script('bat_notes_editor_script', 'batNotesEditorLocalization', [
             'pluginDirUrl' => bat_get_env()['root_dir_url'],
             'reportId' => get_post()->ID,
@@ -24,7 +24,6 @@ function bat_enqueue_reports_block_editor_scripts_and_styles(){
         wp_enqueue_style('bat_plugin_bulma');
         wp_enqueue_style('bat_reports_styles');
         wp_enqueue_script('bat_notes_editor_script');
-
     
     }
 
