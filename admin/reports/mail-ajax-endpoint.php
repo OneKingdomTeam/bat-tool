@@ -57,3 +57,32 @@ function bat_send_report_to_user_ajax_endpoint(){
 }
 
 add_action('wp_ajax_bat_reports_notification', 'bat_send_report_to_user_ajax_endpoint');
+
+function bat_get_report_owner_and_email(){
+
+    if( $_SERVER['REQUEST_METHOD'] !== 'POST' ||
+        !isset($_POST['bat_ajax_nonce']) || 
+        !wp_verify_nonce($_POST['bat_ajax_nonce'], 'bat_ajax') ) {
+        
+        wp_send_json_error(['success' => false, 'message' => 'Not of POST method or Nonce invalid'], 403);
+        
+    }
+
+    if( !current_user_can('edit_report')){
+        wp_send_json_error(['success'=>false, 'message' => 'I am afraid you can not do that'], 403);
+    }
+
+    if( !isset($_POST['report_id'] )){
+        wp_send_json_error(['success'=>false, 'message' => 'Report ID was not provided. Cannot send message.'], 403);
+    }
+
+    $report_id = intval( sanitize_text_field( $_POST['report_id'] ));
+    $connected_application = get_post_meta( $report_id, 'connected_application', true);
+
+    $to = get_userdata(get_post($connected_application)->post_author)->user_email;
+
+    wp_send_json(['success'=> true, 'email'=>$to]);
+
+}
+
+add_action('wp_ajax_bat_get_report_owner_and_email', 'bat_send_report_to_user_ajax_endpoint');

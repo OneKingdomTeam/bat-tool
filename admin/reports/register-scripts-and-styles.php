@@ -19,6 +19,7 @@ function bat_enqueue_reports_block_editor_scripts_and_styles(){
             'pluginDirUrl' => bat_get_env()['root_dir_url'],
             'reportId' => get_post()->ID,
             'applicationId' => get_post_meta( get_post()->ID, 'connected_application', true),
+            'applicationOwnerEmail' => get_userdata(get_post(get_post_meta( get_post()->ID, 'connected_application', true))->post_author)->user_email,
             'bat_ajax_nonce' => wp_create_nonce('bat_ajax'),
         ]); 
         wp_enqueue_style('bat_plugin_bulma');
@@ -30,3 +31,4 @@ function bat_enqueue_reports_block_editor_scripts_and_styles(){
 }
 
 add_action('enqueue_block_editor_assets', 'bat_enqueue_reports_block_editor_scripts_and_styles');
+

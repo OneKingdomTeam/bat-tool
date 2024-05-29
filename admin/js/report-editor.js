@@ -64,7 +64,7 @@ class EditorNotes {
     createSendReportButton(){
 
         let sendReportButton = $jq('<div>', {
-            'class': 'components-button button is-info is-light is-flex is-align-items-center',
+            'class': 'bat-report-send-report-button components-button button is-info is-light is-flex is-align-items-center',
         });
 
         let sendReportButtonText = $jq('<div>', {
@@ -79,8 +79,8 @@ class EditorNotes {
         sendReportButton.append(sendReportButtonText);
         sendReportButton.append(sendReportInnerIcon);
 
-        sendReportButton.on('click', () => {
-            this.handleSendreportButtonClick();
+        sendReportButton.on('click', (event) => {
+            this.handleSendreportButtonClick(event);
         })
 
         sendReportButton.insertBefore(this.UIElements.postHeaderSettings.firstElementChild);
@@ -168,6 +168,76 @@ class EditorNotes {
 
         this.UIElements.availableApplicationsOverlay = overlay;
         document.body.appendChild( this.UIElements.availableApplicationsOverlay );
+
+    }
+
+    showSendReportModal(){
+
+        let sendReportButton = document.querySelector('.bat-report-send-report-button');
+
+        if($jq('.bat-send-report-modal').length > 0) {
+            $jq(sendReportButton).css({'filter':'hue-rotate(0deg)'});
+            $jq('.bat-send-report-modal').remove();
+            return;
+        }
+
+        $jq(sendReportButton).css({'filter':'hue-rotate(90deg)'});
+
+        let modalWidth = 300;
+        let modalHeight = 100;
+
+        let $sendReportButton = $jq(sendReportButton);
+        let modalPositionTop = ($sendReportButton.position().top + $sendReportButton.outerHeight() + 10).toString() + 'px';
+        let modalPositionLeft = ($sendReportButton.position().left + $sendReportButton.outerWidth() - modalWidth).toString() + 'px';
+
+        let modal = $jq('<div>', {
+            'class': 'bat-send-report-modal p-5',
+        });
+
+        modal.css({
+            'position': 'fixed',
+            'min-height': modalHeight,
+            'width': modalWidth,
+            'left': modalPositionLeft,
+            'top': modalPositionTop,
+            'background-color': '#fff',
+            'box-shadow': '0.5rem 0.5rem 1rem #00000044',
+        });
+
+        let contentColumns = $jq('<div>', {'class': 'columns has-text-centered'});
+        let contentColumn = $jq('<div>', {'class': 'column'});
+        let title = $jq('<h3>', {'html': 'Send report'});
+        let subtitle = $jq('<p>', {'html':'Report will be send to <b>' + this.Settings.applicationOwnerEmail + '</b>'});
+
+        contentColumn.append(title).append(subtitle);
+        contentColumns.append(contentColumn);
+        modal.append(contentColumns);
+
+
+        let buttonColumns = $jq('<div>', {'class': 'columns has-text-centered'});
+        let cancelColumn = $jq('<div>', {'class': 'column'});
+        let sendColumn = $jq('<div>', {'class': 'column'});
+
+        let cancelButton = $jq('<div>', {'class': 'button is-warning is-fullwidth', 'html': 'Cancel'});
+        let sendButton = $jq('<div>', {'class': 'button is-link is-fullwidth', 'html': 'Send'});
+
+        this.UIElements.sendReportButton = sendButton;
+
+        cancelButton.click( () => { this.showSendReportModal() });
+        sendButton.click( () => {
+            sendButton.addClass('is-loading');
+            this.fetchSendReportViaEmail();
+        });
+
+        cancelColumn.append(cancelButton);
+        sendColumn.append(sendButton);
+
+        buttonColumns.append(cancelColumn);
+        buttonColumns.append(sendColumn);
+
+        modal.append(buttonColumns);
+
+        $jq('body').append(modal);
 
     }
 
@@ -262,6 +332,40 @@ class EditorNotes {
         
     }
 
+    async fetchSendReportViaEmail(){
+
+        let data = new FormData();
+        data.append('action', 'bat_reports_notification');
+        data.append('bat_ajax_nonce', this.Settings.bat_ajax_nonce);
+        data.append('report_id', this.Settings.reportId);
+
+        const response = await fetch('/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            body: data
+        });
+
+        this.Temp.recentResponseCode = response.status;
+        this.Temp.recentResponseData = response.json();
+
+        console.log(this.Temp.recentResponseData);
+
+        if ( this.Temp.recentResponseData.success == true ){
+            this.UIElements.sendReportButton.removeClass('is-link');
+            this.UIElements.sendReportButton.removeClass('is-loading');
+            this.UIElements.sendReportButton.addClass('is-success');
+            this.UIElements.sendReportButton.html('Report was sent!');
+            setTimeout(() => {
+                this.showSendReportModal();
+            }, 500);
+        } else {
+            this.UIElements.sendReportButton.removeClass('is-link');
+            this.UIElements.sendReportButton.removeClass('is-loading');
+            this.UIElements.sendReportButton.addClass('is-danger');
+            this.UIElements.sendReportButton.html('Error occured');
+        }
+
+    }
+
     handleShowNotesClick(){
 
         this.UIElements.notesToggleButtonText.text('Hide notes');
@@ -312,10 +416,10 @@ class EditorNotes {
         
     }
 
-    handleSendreportButtonClick(){
+    handleSendreportButtonClick(event){
 
         $jq(this.Settings.updateButtonClass).click();
-
+        this.showSendReportModal(event.target.closest('.bat-report-send-report-button'));
 
     }
 
