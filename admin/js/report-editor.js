@@ -105,7 +105,7 @@ class EditorNotes {
         if ( this.UIElements.postHeaderSettings === undefined || this.UIElements.postHeaderSettings === null ){
             setTimeout(()=>{
                 this.createIconsWhenReady();
-            }, 250);
+            }, 1500);
         } else {
             if ( this.UIElements.postHeaderSettings !== null ){
                 this.createSendReportButton();
