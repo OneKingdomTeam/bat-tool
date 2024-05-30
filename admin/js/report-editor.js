@@ -8,7 +8,6 @@ class EditorNotes {
 
         this.Settings.updateButtonClass = '.editor-post-publish-button';
 
-        console.log('Initialized batEditorExtentnion');
         this.UIElements = {};
 
         this.Temp = {};
@@ -334,35 +333,43 @@ class EditorNotes {
 
     async fetchSendReportViaEmail(){
 
-        let data = new FormData();
-        data.append('action', 'bat_reports_notification');
-        data.append('bat_ajax_nonce', this.Settings.bat_ajax_nonce);
-        data.append('report_id', this.Settings.reportId);
+        $jq.ajax({
+            'url': '/wp-admin/admin-ajax.php',
+            'method': 'POST',
+            'data': {
+                'action': 'bat_reports_notification',
+                'bat_ajax_nonce': this.Settings.bat_ajax_nonce,
+                'report_id': this.Settings.reportId,
+            },
+            'success': (d, s, x)=>{
+                this.Temp.recentResponseCode = s;
+                this.Temp.recentResponseData = d;
 
-        const response = await fetch('/wp-admin/admin-ajax.php', {
-            method: 'POST',
-            body: data
+                if ( this.Temp.recentResponseData.success == true ){
+                    this.UIElements.sendReportButton.removeClass('is-link');
+                    this.UIElements.sendReportButton.removeClass('is-loading');
+                    this.UIElements.sendReportButton.addClass('is-success');
+                    this.UIElements.sendReportButton.html('Report was sent!');
+                    setTimeout(() => {
+                        this.showSendReportModal();
+                    }, 500);
+                } else {
+                    this.UIElements.sendReportButton.removeClass('is-link');
+                    this.UIElements.sendReportButton.removeClass('is-loading');
+                    this.UIElements.sendReportButton.addClass('is-danger');
+                    this.UIElements.sendReportButton.html('Error occured');
+                }
+
+            },
+            'error': (x, s)=>{
+                this.UIElements.sendReportButton.removeClass('is-link');
+                this.UIElements.sendReportButton.removeClass('is-loading');
+                this.UIElements.sendReportButton.addClass('is-danger');
+                this.UIElements.sendReportButton.html('Error occured');
+                throw new Error(x);
+            },
         });
 
-        this.Temp.recentResponseCode = response.status;
-        this.Temp.recentResponseData = response.json();
-
-        console.log(this.Temp.recentResponseData);
-
-        if ( this.Temp.recentResponseData.success == true ){
-            this.UIElements.sendReportButton.removeClass('is-link');
-            this.UIElements.sendReportButton.removeClass('is-loading');
-            this.UIElements.sendReportButton.addClass('is-success');
-            this.UIElements.sendReportButton.html('Report was sent!');
-            setTimeout(() => {
-                this.showSendReportModal();
-            }, 500);
-        } else {
-            this.UIElements.sendReportButton.removeClass('is-link');
-            this.UIElements.sendReportButton.removeClass('is-loading');
-            this.UIElements.sendReportButton.addClass('is-danger');
-            this.UIElements.sendReportButton.html('Error occured');
-        }
 
     }
 
