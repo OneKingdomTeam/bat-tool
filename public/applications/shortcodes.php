@@ -37,7 +37,7 @@ function bat_get_applications(){
                     <div class="columns mb-5 application-id-<?= $application->ID ?>">
                         <div class="column is-three-fifths is-offset-one-fifth box p-5">
                             <div class="columns">
-                                <div class="column is-three-quarters">
+                                <div class="column is-two-thirds">
                                     <div class="wrapper">
                                         <h1 class="title pb-4"><?php echo $application->post_title ?></h1>
                                         <h3 class="subtitle">Owner: <?php echo get_the_author_meta( 'display_name', $application->post_author ) ?></h3>
@@ -53,7 +53,7 @@ function bat_get_applications(){
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column is-one-quarter is-flex is-justify-content-center is-align-items-center is-flex-direction-column" style="gap: 1rem;">
+                                <div class="column is-one-third is-flex is-justify-content-center is-align-items-center is-flex-direction-column" style="gap: 1rem;">
                                     <a class="button is-primary is-fullwidth" href="<?php echo get_permalink( get_option('bat_options')['interactive_form_page_id'] ) . '?application_id=' . $application->ID  ?>">
                                         Edit
                                     </a>
@@ -77,7 +77,14 @@ function bat_get_applications(){
 
                                             ?>
                                                 <a href="#" class="button is-warning is-light is-fullwidth view-report-btn" data-report_url="<?= get_post_permalink( $attached_reports[0]->ID ) ?>" data-report_password="<?= $attached_reports[0]->post_password; ?>">
-                                                    View report
+                                                    <?php
+                                                        $regex_result = preg_match("/[R,r]eport[ ,-][Q,q][1-4] [0-9]{4}/", $attached_reports[0]->post_title, $match);
+                                                        if ( $regex_result == 1 ){
+                                                            echo "View " . $match[0];
+                                                        } else {
+                                                            echo "View report";
+                                                        }
+                                                    ?>
                                                 </a>
                                             <?php
                                         }
