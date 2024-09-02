@@ -34,6 +34,12 @@ This can be fixed in wp-admin -> settings -> permalinks; and hitting the save. N
 
 ### Change log
 
+#### 1.3.5 Reporting updates
+
+- Restricted REST api to the logged in users only
+- Updated block editor header class
+
+
 #### 1.3.4 Reporting updates
 
 - Moved some of the VanillaJS to jQuery calls
