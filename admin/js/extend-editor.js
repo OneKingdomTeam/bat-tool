@@ -3,6 +3,7 @@ class EditorNotes {
         this.Settings = {};
         this.Settings.grabPostHeaderSettingsMaxAttempts = 5;
         this.Settings.iconCreationMaxAttempts = 10;
+        this.Settings.editorHeaderClass = ".editor-header__settings";
 
 
         console.log('Initialized batEditorExtentnion');
@@ -61,7 +62,7 @@ class EditorNotes {
 
         } else {
 
-            throw new Error('Unable to locate edit-post-header__settings element');
+            throw new Error('Unable to locate ' + this.Settings.editorHeaderClass + ' element');
 
         }
     }
@@ -143,12 +144,12 @@ class EditorNotes {
     selectPostHeaderSettings(){
 
         if ( this.Settings.grabPostHeaderSettingsMaxAttempts <= this.Temp.grabPostHeaderSettingsAttempts ){
-            throw new Error('Timeout for grabbing the edit-post-header__settings');
+            throw new Error('Timeout for grabbing the ' + this.Settings.editorHeaderClass);
         }
 
         if (this.UIElements.postHeaderSettings === null || this.UIElements.postHeaderSettings === undefined ){
 
-            this.UIElements.postHeaderSettings = document.querySelector('.edit-post-header__settings');
+            this.UIElements.postHeaderSettings = document.querySelector(this.Settings.editorHeaderClass);
             setTimeout( ()=>{
                 this.selectPostHeaderSettings();
                 this.Temp.grabPostHeaderSettingsAttempts += 1;
